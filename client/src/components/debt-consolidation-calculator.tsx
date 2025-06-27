@@ -65,23 +65,40 @@ export default function DebtConsolidationCalculator({
     };
     const calculationWithExtra = calculateMortgage(inputsWithSavingsAsExtra);
     
-    // Calculate payoff acceleration
-    const standardPayoffMonths = inputs.loanTerm * 12;
-    const acceleratedPayoffMonths = calculationWithExtra.payoffTime;
-    const yearsEarlier = (standardPayoffMonths - acceleratedPayoffMonths) / 12;
-    
-    // Calculate total interest savings by applying monthly savings as extra payment
+    // Calculate interest savings by comparing standard consolidated loan vs accelerated payoff
     const standardTotalInterest = calculation.totalInterest;
     const acceleratedTotalInterest = calculationWithExtra.totalInterest;
     const interestSaved = Math.max(0, standardTotalInterest - acceleratedTotalInterest);
+    
+    // Calculate payoff acceleration - use the actual calculation results
+    const standardPayoffMonths = inputs.loanTerm * 12;
+    const acceleratedPayoffMonths = calculationWithExtra.payoffTime;
+    const yearsEarlier = (standardPayoffMonths - acceleratedPayoffMonths) / 12;
+
+    // Calculate total savings vs current high-interest debt situation
+    // Estimate what they would pay on current debts (using average 18% APR for credit cards)
+    const avgCurrentInterestRate = 0.18; // 18% average for credit cards
+    const avgCurrentMonthlyRate = avgCurrentInterestRate / 12;
+    const currentDebtTermMonths = inputs.loanTerm * 12;
+    
+    // Calculate what current debt would cost over the same term with minimum payments
+    let estimatedCurrentTotalInterest = 0;
+    if (avgCurrentMonthlyRate > 0 && totalMonthlyPayments > 0) {
+      // Estimate remaining balance and interest using current payment structure
+      const estimatedCurrentTotalPayments = totalMonthlyPayments * currentDebtTermMonths;
+      estimatedCurrentTotalInterest = Math.max(0, estimatedCurrentTotalPayments - totalDebtBalance);
+    }
+
+    // Total potential savings: current debt interest vs consolidated loan interest
+    const totalPotentialSavings = Math.max(0, estimatedCurrentTotalInterest - calculation.totalInterest);
 
     setSavingsAnalysis({
       yearsEarlierPayoff: Math.max(0, yearsEarlier),
       interestSaved,
       monthlySavings,
-      totalSavings: interestSaved,
+      totalSavings: totalPotentialSavings,
     });
-  }, [inputs, totalMonthlyPayments]);
+  }, [inputs, totalMonthlyPayments, totalDebtBalance]);
 
   const updateInput = (key: string, value: number) => {
     setInputs(prev => ({ ...prev, [key]: value }));
