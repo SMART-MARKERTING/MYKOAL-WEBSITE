@@ -13,8 +13,8 @@
   --card-foreground: hsl(20, 14.3%, 4.1%);
   --border: hsl(20, 5.9%, 90%);
   --input: hsl(20, 5.9%, 90%);
-  --primary: hsl(220, 87%, 50%);
-  --primary-foreground: hsl(211, 100%, 99%);
+  --primary: hsl(195, 100%, 32%);
+  --primary-foreground: hsl(0, 0%, 100%);
   --secondary: hsl(60, 4.8%, 95.9%);
   --secondary-foreground: hsl(24, 9.8%, 10%);
   --accent: hsl(158, 64%, 52%);
@@ -24,13 +24,13 @@
   --ring: hsl(20, 14.3%, 4.1%);
   --radius: 0.5rem;
   
-  /* Custom mortgage industry colors */
-  --primary-50: hsl(214, 100%, 97%);
-  --primary-100: hsl(214, 95%, 93%);
-  --primary-500: hsl(217, 91%, 60%);
-  --primary-600: hsl(221, 83%, 53%);
-  --primary-700: hsl(224, 76%, 48%);
-  --primary-900: hsl(224, 64%, 33%);
+  /* Saratoga Water Blue color palette */
+  --primary-50: hsl(195, 100%, 97%);
+  --primary-100: hsl(195, 90%, 88%);
+  --primary-500: hsl(195, 85%, 45%);
+  --primary-600: hsl(195, 100%, 32%);
+  --primary-700: hsl(195, 100%, 28%);
+  --primary-900: hsl(195, 100%, 20%);
   
   --accent-50: hsl(152, 76%, 95%);
   --accent-100: hsl(149, 80%, 90%);
@@ -49,8 +49,8 @@
   --card-foreground: hsl(0, 0%, 98%);
   --border: hsl(240, 3.7%, 15.9%);
   --input: hsl(240, 3.7%, 15.9%);
-  --primary: hsl(220, 87%, 50%);
-  --primary-foreground: hsl(211, 100%, 99%);
+  --primary: hsl(195, 100%, 32%);
+  --primary-foreground: hsl(0, 0%, 100%);
   --secondary: hsl(240, 3.7%, 15.9%);
   --secondary-foreground: hsl(0, 0%, 98%);
   --accent: hsl(158, 64%, 52%);
@@ -77,11 +77,11 @@
 
 @layer components {
   .hero-gradient {
-    background: linear-gradient(135deg, hsl(224, 64%, 33%) 0%, hsl(224, 76%, 48%) 100%);
+    background: linear-gradient(135deg, hsl(195, 100%, 20%) 0%, hsl(195, 100%, 28%) 100%);
   }
   
   .primary-gradient {
-    background: linear-gradient(135deg, hsl(221, 83%, 53%) 0%, hsl(224, 76%, 48%) 100%);
+    background: linear-gradient(135deg, hsl(195, 100%, 32%) 0%, hsl(195, 100%, 28%) 100%);
   }
   
   .accent-gradient {

@@ -172,6 +172,7 @@ The application uses four main tables:
 - June 27, 2025. Fixed Resources page navigation buttons - converted non-functional badges to clickable buttons with smooth scrolling to Educational Guides, Financial Calculators, and Market Data sections, updated styling for better visibility on blue background
 - June 27, 2025. Fixed "Calculate Your DSCR" button in DSCR guide page - added proper Link navigation to DSCR purchase page
 - June 27, 2025. Comprehensive Resources page mobile optimization and SEO enhancement - added proper meta tags, improved responsive design for hero section, Quick Links navigation, article cards, calculator cards, loan product guides, and market data sections; enhanced mobile button layouts with proper text sizing and spacing; optimized Equal Housing Opportunity section layout
+- June 27, 2025. Updated website color scheme to Saratoga Water Blue - changed primary blue color from standard blue (hsl 220,87%,50%) to Saratoga Water Blue (hsl 195,100%,32%) across entire website including CSS variables, gradients, and component styling for consistent branding
 
 ## User Preferences
 Preferred communication style: Simple, everyday language.
