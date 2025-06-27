@@ -1,11 +1,25 @@
 import { Facebook, Linkedin, Instagram, Youtube } from "lucide-react";
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 
 export default function Footer() {
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth", block: "start" });
+  const [location, setLocation] = useLocation();
+  
+  const navigateToSection = (sectionId: string) => {
+    if (location === '/') {
+      // Already on home page, just scroll
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    } else {
+      // Navigate to home page and then scroll
+      setLocation('/');
+      setTimeout(() => {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      }, 100);
     }
   };
 
@@ -57,14 +71,20 @@ export default function Footer() {
             <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
             <ul className="space-y-2 text-gray-300">
               <li>
-                <Link href="/#calculator" className="hover:text-blue-400 transition-colors">
+                <button 
+                  onClick={() => navigateToSection("calculator")} 
+                  className="hover:text-blue-400 transition-colors text-left"
+                >
                   Mortgage Calculator
-                </Link>
+                </button>
               </li>
               <li>
-                <Link href="/#loans" className="hover:text-blue-400 transition-colors">
+                <button 
+                  onClick={() => navigateToSection("loans")} 
+                  className="hover:text-blue-400 transition-colors text-left"
+                >
                   Lending Solutions
-                </Link>
+                </button>
               </li>
               <li>
                 <Link href="/about" className="hover:text-blue-400 transition-colors">
@@ -77,9 +97,12 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/#contact" className="hover:text-blue-400 transition-colors">
+                <button 
+                  onClick={() => navigateToSection("contact")} 
+                  className="hover:text-blue-400 transition-colors text-left"
+                >
                   Contact
-                </Link>
+                </button>
               </li>
             </ul>
           </div>
