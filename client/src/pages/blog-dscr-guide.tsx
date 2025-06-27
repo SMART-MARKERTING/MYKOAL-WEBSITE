@@ -238,14 +238,18 @@ export default function DSCRGuidePage() {
                 Let's analyze your investment property and determine the best DSCR loan structure for your goals.
               </p>
               <div className="space-y-4 sm:space-y-0 sm:space-x-4 sm:flex sm:justify-center">
-                <Button size="lg" className="bg-white text-blue-600 hover:bg-gray-100">
-                  Get Free Rate Quote
-                </Button>
-                <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-blue-600">
-                  Call (623) 280-8351
-                </Button>
+                <Link href="/#contact">
+                  <Button size="lg" className="bg-white text-blue-600 hover:bg-gray-100">
+                    Get Free Rate Quote
+                  </Button>
+                </Link>
+                <a href="tel:+16232808351">
+                  <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-blue-600">
+                    Call (623) 280-8351
+                  </Button>
+                </a>
               </div>
-              <p className="text-sm mt-4 opacity-75">
+              <p className="text-sm mt-4 opacity-90 font-medium">
                 Mykoal DeShazo, NMLS #1912347 | Licensed Mortgage Professional
               </p>
             </CardContent>
