@@ -30,7 +30,7 @@ export default function ContactSection() {
                   </div>
                   <div>
                     <div className="font-semibold text-gray-900">Call or Text</div>
-                    <div className="text-blue-600 font-semibold">(555) 123-4567</div>
+                    <div className="text-blue-600 font-semibold">(623) 280-8351</div>
                     <div className="text-sm text-gray-600">Mon-Fri 8am-7pm, Sat 9am-5pm</div>
                   </div>
                 </div>

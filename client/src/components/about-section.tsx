@@ -78,34 +78,7 @@ export default function AboutSection() {
           </div>
         </div>
 
-        {/* Company credentials */}
-        <Card className="mt-16 bg-gray-50">
-          <CardContent className="p-8">
-            <h4 className="text-2xl font-bold text-gray-900 text-center mb-8">Trusted & Licensed</h4>
-            <div className="grid md:grid-cols-4 gap-6 text-center">
-              <div>
-                <div className="text-3xl font-bold text-blue-600">NMLS</div>
-                <div className="text-sm text-gray-600">#987654321</div>
-                <div className="text-sm text-gray-500">Company License</div>
-              </div>
-              <div>
-                <div className="text-3xl font-bold text-blue-600">BBB</div>
-                <div className="text-sm text-gray-600">A+ Rating</div>
-                <div className="text-sm text-gray-500">Better Business Bureau</div>
-              </div>
-              <div>
-                <div className="text-3xl font-bold text-blue-600">Equal</div>
-                <div className="text-sm text-gray-600">Housing</div>
-                <div className="text-sm text-gray-500">Lender</div>
-              </div>
-              <div>
-                <div className="text-3xl font-bold text-blue-600">FDIC</div>
-                <div className="text-sm text-gray-600">Insured</div>
-                <div className="text-sm text-gray-500">Member Bank</div>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
+
       </div>
     </section>
   );

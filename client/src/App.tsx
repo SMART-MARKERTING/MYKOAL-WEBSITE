@@ -10,6 +10,9 @@ import DSCRRefinancePage from "@/pages/dscr-refinance";
 import DSCRHELOCPage from "@/pages/dscr-heloc";
 import StartupBusinessLoanPage from "@/pages/startup-business-loan";
 import PersonalLoanPage from "@/pages/personal-loan";
+import DSCRGuidePage from "@/pages/blog-dscr-guide";
+import BusinessLoansGuidePage from "@/pages/blog-business-loans";
+import PersonalLoansGuidePage from "@/pages/blog-personal-loans";
 
 function Router() {
   return (
@@ -20,6 +23,9 @@ function Router() {
       <Route path="/dscr-heloc" component={DSCRHELOCPage} />
       <Route path="/startup-business-loan" component={StartupBusinessLoanPage} />
       <Route path="/personal-loan" component={PersonalLoanPage} />
+      <Route path="/blog/dscr-guide" component={DSCRGuidePage} />
+      <Route path="/blog/business-loans" component={BusinessLoansGuidePage} />
+      <Route path="/blog/personal-loans" component={PersonalLoansGuidePage} />
       <Route component={NotFound} />
     </Switch>
   );

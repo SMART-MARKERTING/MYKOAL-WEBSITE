@@ -131,8 +131,8 @@ export default function MortgageCalculator() {
                   <Input
                     id="extraPayment"
                     type="number"
-                    value={inputs.extraPayment}
-                    onChange={(e) => updateInput('extraPayment', Number(e.target.value))}
+                    value={inputs.extraPayment || ""}
+                    onChange={(e) => updateInput('extraPayment', Number(e.target.value) || 0)}
                     className="pl-8"
                     placeholder="0"
                   />
