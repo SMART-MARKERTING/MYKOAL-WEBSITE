@@ -12,12 +12,17 @@ export default function MortgageCalculator() {
     interestRate: 6.5,
     loanTerm: 30,
     loanType: "dscr-purchase",
+    extraPayment: 0,
   });
 
   const [results, setResults] = useState({
     monthlyPayment: 0,
     totalPayments: 0,
     totalInterest: 0,
+    effectiveInterestRate: 0,
+    payoffTime: 0,
+    interestSavings: 0,
+    totalPaymentsWithExtra: 0,
   });
 
   useEffect(() => {
@@ -119,6 +124,24 @@ export default function MortgageCalculator() {
                 </Select>
               </div>
 
+              <div>
+                <Label htmlFor="extraPayment">Extra Monthly Payment (Optional)</Label>
+                <div className="relative">
+                  <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">$</span>
+                  <Input
+                    id="extraPayment"
+                    type="number"
+                    value={inputs.extraPayment}
+                    onChange={(e) => updateInput('extraPayment', Number(e.target.value))}
+                    className="pl-8"
+                    placeholder="0"
+                  />
+                </div>
+                <p className="text-sm text-gray-500 mt-1">
+                  Additional payment toward principal to reduce loan term and interest
+                </p>
+              </div>
+
 
             </CardContent>
           </Card>
@@ -137,6 +160,49 @@ export default function MortgageCalculator() {
                   </span>
                 </div>
 
+                {inputs.extraPayment > 0 && (
+                  <>
+                    <div className="flex justify-between items-center py-3 border-b border-gray-200">
+                      <span className="text-gray-700">Extra Payment</span>
+                      <span className="text-lg font-semibold text-green-600">
+                        +${inputs.extraPayment.toLocaleString('en-US', { maximumFractionDigits: 0 })}
+                      </span>
+                    </div>
+                    <div className="flex justify-between items-center py-3 bg-green-50 rounded-lg px-4 border-2 border-green-200">
+                      <span className="text-lg font-semibold text-gray-900">Total Monthly Payment</span>
+                      <span className="text-2xl font-bold text-green-600">
+                        ${(results.monthlyPayment + inputs.extraPayment).toLocaleString('en-US', { maximumFractionDigits: 0 })}
+                      </span>
+                    </div>
+                  </>
+                )}
+
+                {inputs.extraPayment > 0 && (
+                  <div className="bg-yellow-50 rounded-lg p-4 border-2 border-yellow-200">
+                    <h4 className="text-lg font-semibold text-yellow-800 mb-3">Effective Interest Rate Benefits</h4>
+                    <div className="space-y-2 text-sm">
+                      <div className="flex justify-between">
+                        <span className="text-gray-700">Effective Interest Rate:</span>
+                        <span className="font-semibold text-yellow-800">
+                          {results.effectiveInterestRate.toFixed(2)}%
+                        </span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-gray-700">Payoff Time:</span>
+                        <span className="font-semibold text-green-700">
+                          {Math.floor(results.payoffTime / 12)} years, {results.payoffTime % 12} months
+                        </span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-gray-700">Interest Savings:</span>
+                        <span className="font-semibold text-green-700">
+                          ${results.interestSavings.toLocaleString('en-US', { maximumFractionDigits: 0 })}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
                 <div className="mt-8 p-6 bg-white rounded-lg">
                   <h4 className="text-lg font-semibold text-gray-900 mb-4">Loan Summary</h4>
                   <div className="space-y-2 text-sm">
@@ -147,15 +213,21 @@ export default function MortgageCalculator() {
                       </span>
                     </div>
                     <div className="flex justify-between">
+                      <span className="text-gray-600">Standard Interest Rate:</span>
+                      <span className="font-semibold">
+                        {inputs.interestRate.toFixed(2)}%
+                      </span>
+                    </div>
+                    <div className="flex justify-between">
                       <span className="text-gray-600">Total of Payments:</span>
                       <span className="font-semibold">
-                        ${results.totalPayments.toLocaleString('en-US', { maximumFractionDigits: 0 })}
+                        ${(inputs.extraPayment > 0 ? results.totalPaymentsWithExtra : results.totalPayments).toLocaleString('en-US', { maximumFractionDigits: 0 })}
                       </span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-gray-600">Total Interest:</span>
                       <span className="font-semibold">
-                        ${results.totalInterest.toLocaleString('en-US', { maximumFractionDigits: 0 })}
+                        ${(inputs.extraPayment > 0 ? results.totalPayments - results.interestSavings - inputs.loanAmount : results.totalInterest).toLocaleString('en-US', { maximumFractionDigits: 0 })}
                       </span>
                     </div>
                   </div>
