@@ -112,7 +112,7 @@ export default function Footer() {
               </p>
               <div className="flex items-center justify-center md:justify-start gap-2 mt-3">
                 <img 
-                  src="/attached_assets/Equal-Housing-Logo_1751007456918.png" 
+                  src="/equal-housing-logo.png" 
                   alt="Equal Housing Opportunity Logo" 
                   className="w-6 h-6 object-contain filter brightness-75"
                 />

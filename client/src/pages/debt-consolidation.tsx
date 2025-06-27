@@ -408,7 +408,7 @@ export default function DebtConsolidationPage() {
           <div className="mt-12 text-center">
             <div className="flex items-center justify-center gap-3 mb-4">
               <img 
-                src="/attached_assets/Equal-Housing-Logo_1751007456918.png" 
+                src="/equal-housing-logo.png" 
                 alt="Equal Housing Opportunity Logo" 
                 className="w-6 h-6 object-contain filter brightness-0 invert"
               />
