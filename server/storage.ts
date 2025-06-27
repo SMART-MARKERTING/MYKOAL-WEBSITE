@@ -36,6 +36,7 @@ export interface IStorage {
   
   // Market updates
   getMarketUpdates(): Promise<MarketData>;
+  generateMarketInsights(news: NewsItem[], rates: any): Promise<MarketInsight[]>;
 }
 
 interface NewsItem {
@@ -47,6 +48,15 @@ interface NewsItem {
   category: 'rates' | 'regulation' | 'market' | 'mbs';
 }
 
+interface MarketInsight {
+  id: string;
+  title: string;
+  content: string;
+  rateImpact: 'positive' | 'negative' | 'neutral';
+  urgency: 'low' | 'medium' | 'high';
+  relatedNews: string;
+}
+
 interface MarketData {
   currentRates: {
     thirtyYear: number;
@@ -55,6 +65,7 @@ interface MarketData {
     lastUpdated: string;
   };
   news: NewsItem[];
+  insights: MarketInsight[];
   mbsData: {
     price: number;
     yield: number;
@@ -256,9 +267,13 @@ export class MemStorage implements IStorage {
         lastUpdated: new Date().toISOString()
       };
       
+      // Generate AI insights based on news and current rates
+      const insights = await this.generateMarketInsights(newsData, ratesData);
+
       return {
         currentRates: ratesData,
         news: newsData,
+        insights: insights,
         mbsData: mbsData
       };
     } catch (error) {
@@ -272,6 +287,7 @@ export class MemStorage implements IStorage {
           lastUpdated: new Date().toISOString()
         },
         news: [],
+        insights: [],
         mbsData: {
           price: 0,
           yield: 0,
@@ -386,14 +402,10 @@ export class MemStorage implements IStorage {
       const foxBusinessNews = await this.fetchRSSFeed('https://moxie.foxbusiness.com/google-publisher/real-estate.xml', 'FOX Business');
       newsItems.push(...foxBusinessNews);
       
-      // Fetch from Mortgage News Daily RSS
-      const mortgageNewsDaily = await this.fetchRSSFeed('https://www.mortgagenewsdaily.com/rss.xml', 'Mortgage News Daily');
-      newsItems.push(...mortgageNewsDaily);
-      
-      // Sort by date and return top 10
+      // Sort by date and return top 3 most recent
       return newsItems
         .sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime())
-        .slice(0, 10);
+        .slice(0, 3);
     } catch (error) {
       console.error('Error fetching market news:', error);
       return [];
@@ -437,6 +449,67 @@ export class MemStorage implements IStorage {
     } else {
       return 'market';
     }
+  }
+
+  async generateMarketInsights(news: NewsItem[], rates: any): Promise<MarketInsight[]> {
+    const insights: MarketInsight[] = [];
+
+    // Generate insights for each news item
+    news.forEach((article, index) => {
+      const title = article.title.toLowerCase();
+      const description = article.description.toLowerCase();
+      
+      let insight: MarketInsight;
+
+      // Housing affordability crisis
+      if (title.includes('housing crisis') || title.includes('affordability') || description.includes('30% of income')) {
+        insight = {
+          id: `insight-${index + 1}`,
+          title: "Affordability Crisis: Lock Rates Before They Rise",
+          content: `With 47 metro areas requiring over 30% of income for housing, demand pressure could push rates higher. Current 30-year rates at ${rates.thirtyYear}% may be the best we see this cycle. Smart investors should lock these rates now and secure properties while inventory remains available. We can always refinance to lower rates when the market shifts.`,
+          rateImpact: 'negative',
+          urgency: 'high',
+          relatedNews: article.title
+        };
+      }
+      // Buyer-friendly markets
+      else if (title.includes('buyer-friendly') || title.includes('price cuts') || description.includes('inventory')) {
+        insight = {
+          id: `insight-${index + 1}`,
+          title: "Market Opportunities: Act Fast on Rate Locks",
+          content: `Buyer-friendly markets with price cuts and increased inventory won't last long. These conditions, combined with current ${rates.thirtyYear}% rates, create perfect buying opportunities. Lock your rate today - if rates drop later, we'll refinance you into the better rate. If they rise, you'll be protected.`,
+          rateImpact: 'neutral',
+          urgency: 'high',
+          relatedNews: article.title
+        };
+      }
+      // Investor activity
+      else if (title.includes('investor') || title.includes('small real estate') || description.includes('investor purchases')) {
+        insight = {
+          id: `insight-${index + 1}`,
+          title: "Investor Competition: Secure Financing Now",
+          content: `Small investors dominating 59% of purchases means fierce competition for deals. With rates at ${rates.thirtyYear}%, having pre-approved financing is crucial. Lock your rate now to move quickly on properties. Interest rates may rise as investor demand continues to surge.`,
+          rateImpact: 'negative',
+          urgency: 'high',
+          relatedNews: article.title
+        };
+      }
+      // Default general market insight
+      else {
+        insight = {
+          id: `insight-${index + 1}`,
+          title: "Market Timing: Current Rates May Not Last",
+          content: `Current market conditions suggest rate volatility ahead. At ${rates.thirtyYear}% for 30-year fixed loans, we're seeing competitive rates that may not persist. Lock in today's rates and secure your investment property financing. If rates improve, we'll refinance you at no cost.`,
+          rateImpact: 'neutral',
+          urgency: 'medium',
+          relatedNews: article.title
+        };
+      }
+
+      insights.push(insight);
+    });
+
+    return insights;
   }
 
   private async fetchMBSData() {

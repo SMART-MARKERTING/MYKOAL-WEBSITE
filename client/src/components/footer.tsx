@@ -102,14 +102,13 @@ export default function Footer() {
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div className="text-sm text-gray-400">
               <p className="mb-2">
-                <strong>NMLS Company ID:</strong> #987654321 | 
-                <strong> Mykoal DeShazo NMLS:</strong> #1912347
+                <strong>Mykoal DeShazo NMLS:</strong> #1912347
               </p>
               <p className="mb-2">
-                Licensed in CA, NV, AZ. Equal Housing Lender. 
+                Licensed Mortgage Professional, Scottsdale, Arizona. Equal Housing Opportunity. 
               </p>
               <p>
-                Licensed mortgage loan originator serving investors nationwide.
+                All loans subject to credit approval. This is not a commitment to lend.
               </p>
             </div>
             
