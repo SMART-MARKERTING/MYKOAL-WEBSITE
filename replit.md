@@ -146,6 +146,7 @@ The application uses four main tables:
 - June 27, 2025. Redesigned homepage with integrated professional headshot, streamlined mobile-friendly layout, removed unnecessary sections, modernized hero section with personal branding
 - June 27, 2025. Removed all MortgagePro references, updated to use only "Mykoal DeShazo" branding, changed from business loans to investor/property financing focus, updated location to Scottsdale Arizona, standardized phone to 623-280-8351, updated all dates to 2025
 - June 27, 2025. Added optional monthly property tax and property insurance fields to both loan calculator and debt consolidation calculator with accurate total payment calculations
+- June 27, 2025. Removed all sensitive financial information from pre-qualification page - eliminated date of birth, SSN, income, employment, credit score, debt, and assets fields, simplified to 3-step form with only contact info and loan details
 
 ## User Preferences
 Preferred communication style: Simple, everyday language.
