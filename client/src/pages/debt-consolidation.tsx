@@ -474,7 +474,7 @@ export default function DebtConsolidationPage() {
                       id="creditScore"
                       value={creditScore}
                       onChange={(e) => setCreditScore(e.target.value)}
-                      className="w-full p-3 rounded-md bg-white/20 border border-blue-200/30 text-white"
+                      className="w-full p-3 rounded-md bg-white/20 border border-blue-200/30 text-white [&>option]:text-black [&>option]:bg-white"
                       required
                     >
                       <option value="">Select Credit Score Range</option>
