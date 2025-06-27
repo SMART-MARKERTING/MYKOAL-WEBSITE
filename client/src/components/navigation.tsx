@@ -43,6 +43,12 @@ export default function Navigation() {
               >
                 Lending Solutions
               </button>
+              <a
+                href="/pre-qualification"
+                className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors"
+              >
+                Pre-Qualify
+              </a>
               <button
                 onClick={() => scrollToSection("about")}
                 className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors"
@@ -98,6 +104,12 @@ export default function Navigation() {
             >
               Lending Solutions
             </button>
+            <a
+              href="/pre-qualification"
+              className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600 w-full text-left"
+            >
+              Pre-Qualify
+            </a>
             <button
               onClick={() => scrollToSection("about")}
               className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600 w-full text-left"

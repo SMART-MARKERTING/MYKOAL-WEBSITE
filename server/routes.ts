@@ -1,7 +1,7 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import { insertContactSchema, insertQuickQuoteSchema } from "@shared/schema";
+import { insertContactSchema, insertQuickQuoteSchema, insertPreQualificationSchema } from "@shared/schema";
 import { z } from "zod";
 
 export async function registerRoutes(app: Express): Promise<Server> {
@@ -79,6 +79,46 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.json(quotes);
     } catch (error) {
       console.error("Error fetching quick quotes:", error);
+      res.status(500).json({ 
+        success: false, 
+        message: "Internal server error" 
+      });
+    }
+  });
+
+  // Pre-qualification application submission
+  app.post("/api/pre-qualifications", async (req, res) => {
+    try {
+      const validatedData = insertPreQualificationSchema.parse(req.body);
+      const preQualification = await storage.createPreQualification(validatedData);
+      
+      console.log("New pre-qualification submission:", preQualification);
+      
+      res.json({ success: true, preQualification });
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        res.status(400).json({ 
+          success: false, 
+          message: "Validation error", 
+          errors: error.errors 
+        });
+      } else {
+        console.error("Error creating pre-qualification:", error);
+        res.status(500).json({ 
+          success: false, 
+          message: "Internal server error" 
+        });
+      }
+    }
+  });
+
+  // Get all pre-qualifications (for admin purposes)
+  app.get("/api/pre-qualifications", async (req, res) => {
+    try {
+      const preQualifications = await storage.getPreQualifications();
+      res.json(preQualifications);
+    } catch (error) {
+      console.error("Error fetching pre-qualifications:", error);
       res.status(500).json({ 
         success: false, 
         message: "Internal server error" 

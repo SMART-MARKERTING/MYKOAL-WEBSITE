@@ -3,10 +3,13 @@ import {
   quickQuotes, 
   blogPosts, 
   testimonials,
+  preQualifications,
   type Contact, 
   type InsertContact,
   type QuickQuote,
   type InsertQuickQuote,
+  type PreQualification,
+  type InsertPreQualification,
   type BlogPost,
   type Testimonial
 } from "@shared/schema";
@@ -20,6 +23,10 @@ export interface IStorage {
   createQuickQuote(quote: InsertQuickQuote): Promise<QuickQuote>;
   getQuickQuotes(): Promise<QuickQuote[]>;
   
+  // Pre-qualifications
+  createPreQualification(preQual: InsertPreQualification): Promise<PreQualification>;
+  getPreQualifications(): Promise<PreQualification[]>;
+  
   // Blog posts
   getBlogPosts(): Promise<BlogPost[]>;
   getBlogPost(slug: string): Promise<BlogPost | undefined>;
@@ -31,20 +38,24 @@ export interface IStorage {
 export class MemStorage implements IStorage {
   private contacts: Map<number, Contact>;
   private quickQuotes: Map<number, QuickQuote>;
+  private preQualifications: Map<number, PreQualification>;
   private blogPosts: Map<number, BlogPost>;
   private testimonials: Map<number, Testimonial>;
   private currentContactId: number;
   private currentQuoteId: number;
+  private currentPreQualId: number;
   private currentBlogId: number;
   private currentTestimonialId: number;
 
   constructor() {
     this.contacts = new Map();
     this.quickQuotes = new Map();
+    this.preQualifications = new Map();
     this.blogPosts = new Map();
     this.testimonials = new Map();
     this.currentContactId = 1;
     this.currentQuoteId = 1;
+    this.currentPreQualId = 1;
     this.currentBlogId = 1;
     this.currentTestimonialId = 1;
 
@@ -126,6 +137,7 @@ export class MemStorage implements IStorage {
     const id = this.currentContactId++;
     const contact: Contact = {
       ...insertContact,
+      message: insertContact.message || null,
       id,
       createdAt: new Date(),
     };
@@ -152,6 +164,34 @@ export class MemStorage implements IStorage {
 
   async getQuickQuotes(): Promise<QuickQuote[]> {
     return Array.from(this.quickQuotes.values()).sort((a, b) => 
+      b.createdAt.getTime() - a.createdAt.getTime()
+    );
+  }
+
+  async createPreQualification(insertPreQual: InsertPreQualification): Promise<PreQualification> {
+    const id = this.currentPreQualId++;
+    const preQual: PreQualification = {
+      ...insertPreQual,
+      dateOfBirth: insertPreQual.dateOfBirth || null,
+      ssn: insertPreQual.ssn || null,
+      employmentLength: insertPreQual.employmentLength || null,
+      monthlyDebt: insertPreQual.monthlyDebt || null,
+      assets: insertPreQual.assets || null,
+      propertyValue: insertPreQual.propertyValue || null,
+      propertyType: insertPreQual.propertyType || null,
+      downPayment: insertPreQual.downPayment || null,
+      bankruptcyHistory: insertPreQual.bankruptcyHistory || null,
+      notes: insertPreQual.notes || null,
+      estimatedRate: insertPreQual.estimatedRate || null,
+      id,
+      createdAt: new Date(),
+    };
+    this.preQualifications.set(id, preQual);
+    return preQual;
+  }
+
+  async getPreQualifications(): Promise<PreQualification[]> {
+    return Array.from(this.preQualifications.values()).sort((a, b) => 
       b.createdAt.getTime() - a.createdAt.getTime()
     );
   }

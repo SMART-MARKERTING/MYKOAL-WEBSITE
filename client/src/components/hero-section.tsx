@@ -7,6 +7,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Card, CardContent } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
+import { Link } from "wouter";
 import type { InsertQuickQuote } from "@shared/schema";
 
 export default function HeroSection() {
@@ -97,9 +98,15 @@ export default function HeroSection() {
             </p>
             
             <div className="mt-8 flex flex-col sm:flex-row gap-4">
+              <Link href="/pre-qualification">
+                <Button className="w-full sm:w-auto accent-gradient text-white px-8 py-4 rounded-lg font-semibold text-lg hover:opacity-90 transition-opacity shadow-lg">
+                  Get Pre-Qualified Now
+                </Button>
+              </Link>
               <Button
                 onClick={() => scrollToSection("calculator")}
-                className="accent-gradient text-white px-8 py-4 rounded-lg font-semibold text-lg hover:opacity-90 transition-opacity shadow-lg"
+                variant="outline"
+                className="border-2 border-blue-200 bg-blue-100 text-blue-800 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-blue-200 hover:text-blue-900 transition-colors"
               >
                 Calculate Payment
               </Button>
