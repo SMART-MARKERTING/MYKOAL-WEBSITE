@@ -1,4 +1,4 @@
-import type { Express } from "express";
+import type { Express, Request, Response } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { insertContactSchema, insertQuickQuoteSchema, insertPreQualificationSchema, insertMarketSubscriptionSchema } from "@shared/schema";
@@ -235,16 +235,21 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Market subscription
-  app.post("/api/market-subscription", async (req, res) => {
+  // Market subscription (handle both singular and plural routes)
+  const handleMarketSubscription = async (req: Request, res: Response) => {
     try {
       const validatedData = insertMarketSubscriptionSchema.parse(req.body);
       const subscription = await storage.createMarketSubscription(validatedData);
       
       // Send email notification
-      const emailTemplate = emailTemplates.newMarketSubscription(subscription);
-      await sendNotificationEmail(emailTemplate);
-      console.log("New market subscription:", subscription);
+      try {
+        const emailTemplate = emailTemplates.newMarketSubscription(subscription);
+        await sendNotificationEmail(emailTemplate);
+        console.log("New market subscription:", subscription);
+      } catch (emailError) {
+        console.error("Email notification failed:", emailError);
+        // Continue without failing the subscription
+      }
       
       res.json({ success: true, subscription });
     } catch (error) {
@@ -258,11 +263,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
         console.error("Error creating market subscription:", error);
         res.status(500).json({ 
           success: false, 
-          message: "Internal server error" 
+          message: "Failed to create subscription" 
         });
       }
     }
-  });
+  };
+  
+  app.post("/api/market-subscription", handleMarketSubscription);
+  app.post("/api/market-subscriptions", handleMarketSubscription);
 
   // Email debt consolidation quote
   app.post("/api/email-debt-quote", async (req, res) => {
@@ -306,14 +314,19 @@ export async function registerRoutes(app: Express): Promise<Server> {
         `
       };
       
-      await sendNotificationEmail(notificationTemplate);
+      try {
+        await sendNotificationEmail(notificationTemplate);
+      } catch (emailError) {
+        console.error("Email notification failed:", emailError);
+        // Continue without failing the request
+      }
       
-      res.json({ success: true });
-    } catch (error) {
+      res.json({ success: true, message: "Quote sent successfully" });
+    } catch (error: any) {
       console.error("Error sending debt consolidation quote:", error);
       res.status(500).json({ 
         success: false, 
-        message: "Failed to send quote" 
+        message: error.message || "Failed to send quote" 
       });
     }
   });
@@ -365,14 +378,19 @@ export async function registerRoutes(app: Express): Promise<Server> {
         `
       };
       
-      await sendNotificationEmail(notificationTemplate);
+      try {
+        await sendNotificationEmail(notificationTemplate);
+      } catch (emailError) {
+        console.error("Email notification failed:", emailError);
+        // Continue without failing the request
+      }
       
-      res.json({ success: true });
-    } catch (error) {
+      res.json({ success: true, message: "Calculation results sent successfully" });
+    } catch (error: any) {
       console.error("Error sending calculation results:", error);
       res.status(500).json({ 
         success: false, 
-        message: "Failed to send calculation results" 
+        message: error.message || "Failed to send calculation results" 
       });
     }
   });

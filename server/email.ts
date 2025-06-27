@@ -21,6 +21,7 @@ const TO_EMAIL = "mdeshazo@mykoal.com";
 
 export async function sendEmail(params: EmailParams): Promise<boolean> {
   try {
+    console.log(`Sending email to ${params.to}...`);
     await mailService.send({
       to: params.to,
       from: params.from,
@@ -28,10 +29,15 @@ export async function sendEmail(params: EmailParams): Promise<boolean> {
       html: params.html || params.text || '',
       text: params.text || '',
     });
+    console.log(`✓ Email sent successfully to ${params.to}`);
     return true;
-  } catch (error) {
-    console.error('SendGrid email error:', error);
-    return false;
+  } catch (error: any) {
+    console.error('SendGrid email error:', {
+      message: error.message,
+      code: error.code,
+      response: error.response?.body
+    });
+    throw new Error(`Email delivery failed: ${error.message}`);
   }
 }
 
@@ -220,99 +226,106 @@ export const emailTemplates = {
     `
   }),
 
-  calculationResults: (data: any) => ({
-    subject: `Your ${data.calculationType === 'debt-consolidation' ? 'Debt Consolidation' : 'Mortgage'} Calculation Results`,
-    html: `
-      <h2>Your ${data.calculationType === 'debt-consolidation' ? 'Debt Consolidation' : 'Mortgage'} Analysis</h2>
-      <p>Hello,</p>
-      <p>Here are your detailed calculation results:</p>
-      
-      <h3>Loan Details</h3>
-      <ul>
-        <li><strong>Loan Amount:</strong> $${data.inputs.loanAmount.toLocaleString()}</li>
-        <li><strong>Interest Rate:</strong> ${data.inputs.interestRate}%</li>
-        <li><strong>Loan Term:</strong> ${data.inputs.loanTerm} years</li>
-        ${data.inputs.extraPayment > 0 ? `<li><strong>Extra Monthly Payment:</strong> $${data.inputs.extraPayment.toLocaleString()}</li>` : ''}
-      </ul>
-      
-      <h3>Payment Breakdown</h3>
-      <ul>
-        <li><strong>Principal & Interest:</strong> $${data.results.monthlyPayment.toLocaleString()}</li>
-        ${data.inputs.propertyTax > 0 ? `<li><strong>Property Tax:</strong> $${data.inputs.propertyTax.toLocaleString()}</li>` : ''}
-        ${data.inputs.propertyInsurance > 0 ? `<li><strong>Property Insurance:</strong> $${data.inputs.propertyInsurance.toLocaleString()}</li>` : ''}
-        <li><strong>Total Monthly Payment:</strong> $${(data.results.monthlyPayment + (data.inputs.propertyTax || 0) + (data.inputs.propertyInsurance || 0)).toLocaleString()}</li>
-      </ul>
-      
-      <h3>Loan Summary</h3>
-      <ul>
-        <li><strong>Total Interest:</strong> $${data.results.totalInterest.toLocaleString()}</li>
-        <li><strong>Total Payments:</strong> $${data.results.totalPayments.toLocaleString()}</li>
-        ${data.inputs.extraPayment > 0 ? `<li><strong>Payoff Time (with extra payments):</strong> ${Math.round(data.results.payoffTime)} months</li>` : ''}
-        ${data.results.effectiveInterestRate !== data.inputs.interestRate ? `<li><strong>Effective Interest Rate:</strong> ${data.results.effectiveInterestRate.toFixed(2)}%</li>` : ''}
-      </ul>
-      
-      ${data.savingsAnalysis ? `
-      <h3>Savings Analysis</h3>
-      <ul>
-        <li><strong>Monthly Cash Flow Improvement:</strong> $${data.savingsAnalysis.monthlySavings.toLocaleString()}</li>
-        <li><strong>Interest Savings Potential:</strong> $${data.savingsAnalysis.interestSaved.toLocaleString()}</li>
-        ${data.savingsAnalysis.yearsEarlierPayoff > 0 ? `<li><strong>Earlier Payoff:</strong> ${data.savingsAnalysis.yearsEarlierPayoff.toFixed(1)} years</li>` : ''}
-      </ul>
-      ` : ''}
-      
-      <h3>Contact Information</h3>
-      <p>For personalized loan options and next steps, contact Mykoal DeShazo:</p>
-      <ul>
-        <li><strong>Phone:</strong> (623) 280-8351</li>
-        <li><strong>Email:</strong> mdeshazo@mykoal.com</li>
-        <li><strong>NMLS:</strong> #1912347</li>
-      </ul>
-      
-      <p>This calculation was generated on ${new Date().toLocaleString()}</p>
-      <hr>
-      <p style="font-size: 12px; color: #666;">
+  calculationResults: (data: any) => {
+    // Safely extract values with defaults
+    const inputs = data.inputs || {};
+    const results = data.results || {};
+    const savingsAnalysis = data.savingsAnalysis || null;
+    
+    return {
+      subject: `Your ${data.calculationType === 'debt-consolidation' ? 'Debt Consolidation' : 'Mortgage'} Calculation Results`,
+      html: `
+        <h2>Your ${data.calculationType === 'debt-consolidation' ? 'Debt Consolidation' : 'Mortgage'} Analysis</h2>
+        <p>Hello,</p>
+        <p>Here are your detailed calculation results:</p>
+        
+        <h3>Loan Details</h3>
+        <ul>
+          <li><strong>Loan Amount:</strong> $${(inputs.loanAmount || 0).toLocaleString()}</li>
+          <li><strong>Interest Rate:</strong> ${inputs.interestRate || 0}%</li>
+          <li><strong>Loan Term:</strong> ${inputs.loanTerm || 30} years</li>
+          ${inputs.extraPayment && inputs.extraPayment > 0 ? `<li><strong>Extra Monthly Payment:</strong> $${inputs.extraPayment.toLocaleString()}</li>` : ''}
+        </ul>
+        
+        <h3>Payment Breakdown</h3>
+        <ul>
+          <li><strong>Principal & Interest:</strong> $${(results.monthlyPayment || 0).toLocaleString()}</li>
+          ${inputs.propertyTax && inputs.propertyTax > 0 ? `<li><strong>Property Tax:</strong> $${inputs.propertyTax.toLocaleString()}</li>` : ''}
+          ${inputs.propertyInsurance && inputs.propertyInsurance > 0 ? `<li><strong>Property Insurance:</strong> $${inputs.propertyInsurance.toLocaleString()}</li>` : ''}
+          <li><strong>Total Monthly Payment:</strong> $${((results.monthlyPayment || 0) + (inputs.propertyTax || 0) + (inputs.propertyInsurance || 0)).toLocaleString()}</li>
+        </ul>
+        
+        <h3>Loan Summary</h3>
+        <ul>
+          <li><strong>Total Interest:</strong> $${(results.totalInterest || 0).toLocaleString()}</li>
+          <li><strong>Total Payments:</strong> $${(results.totalPayments || 0).toLocaleString()}</li>
+          ${inputs.extraPayment && inputs.extraPayment > 0 && results.payoffTime ? `<li><strong>Payoff Time (with extra payments):</strong> ${Math.round(results.payoffTime)} months</li>` : ''}
+          ${results.effectiveInterestRate && typeof results.effectiveInterestRate === 'number' && results.effectiveInterestRate !== inputs.interestRate ? `<li><strong>Effective Interest Rate:</strong> ${results.effectiveInterestRate.toFixed(2)}%</li>` : ''}
+        </ul>
+        
+        ${savingsAnalysis ? `
+        <h3>Savings Analysis</h3>
+        <ul>
+          <li><strong>Monthly Cash Flow Improvement:</strong> $${(savingsAnalysis.monthlySavings || 0).toLocaleString()}</li>
+          <li><strong>Interest Savings Potential:</strong> $${(savingsAnalysis.interestSaved || 0).toLocaleString()}</li>
+          ${savingsAnalysis.yearsEarlierPayoff && savingsAnalysis.yearsEarlierPayoff > 0 ? `<li><strong>Earlier Payoff:</strong> ${savingsAnalysis.yearsEarlierPayoff.toFixed(1)} years</li>` : ''}
+        </ul>
+        ` : ''}
+        
+        <h3>Contact Information</h3>
+        <p>For personalized loan options and next steps, contact Mykoal DeShazo:</p>
+        <ul>
+          <li><strong>Phone:</strong> (623) 280-8351</li>
+          <li><strong>Email:</strong> mdeshazo@mykoal.com</li>
+          <li><strong>NMLS:</strong> #1912347</li>
+        </ul>
+        
+        <p>This calculation was generated on ${new Date().toLocaleString()}</p>
+        <hr>
+        <p style="font-size: 12px; color: #666;">
+          Equal Housing Opportunity. All loans subject to credit approval. This is not a commitment to lend. 
+          Rates, terms, and conditions are subject to change without notice. Mykoal DeShazo NMLS #1912347.
+        </p>
+      `,
+      text: `
+        Your ${data.calculationType === 'debt-consolidation' ? 'Debt Consolidation' : 'Mortgage'} Analysis
+        
+        Loan Details:
+        • Loan Amount: $${(inputs.loanAmount || 0).toLocaleString()}
+        • Interest Rate: ${inputs.interestRate || 0}%
+        • Loan Term: ${inputs.loanTerm || 30} years
+        ${inputs.extraPayment && inputs.extraPayment > 0 ? `• Extra Monthly Payment: $${inputs.extraPayment.toLocaleString()}` : ''}
+        
+        Payment Breakdown:
+        • Principal & Interest: $${(results.monthlyPayment || 0).toLocaleString()}
+        ${inputs.propertyTax && inputs.propertyTax > 0 ? `• Property Tax: $${inputs.propertyTax.toLocaleString()}` : ''}
+        ${inputs.propertyInsurance && inputs.propertyInsurance > 0 ? `• Property Insurance: $${inputs.propertyInsurance.toLocaleString()}` : ''}
+        • Total Monthly Payment: $${((results.monthlyPayment || 0) + (inputs.propertyTax || 0) + (inputs.propertyInsurance || 0)).toLocaleString()}
+        
+        Loan Summary:
+        • Total Interest: $${(results.totalInterest || 0).toLocaleString()}
+        • Total Payments: $${(results.totalPayments || 0).toLocaleString()}
+        ${inputs.extraPayment && inputs.extraPayment > 0 && results.payoffTime ? `• Payoff Time (with extra payments): ${Math.round(results.payoffTime)} months` : ''}
+        ${results.effectiveInterestRate && typeof results.effectiveInterestRate === 'number' && results.effectiveInterestRate !== inputs.interestRate ? `• Effective Interest Rate: ${results.effectiveInterestRate.toFixed(2)}%` : ''}
+        
+        ${savingsAnalysis ? `
+        Savings Analysis:
+        • Monthly Cash Flow Improvement: $${(savingsAnalysis.monthlySavings || 0).toLocaleString()}
+        • Interest Savings Potential: $${(savingsAnalysis.interestSaved || 0).toLocaleString()}
+        ${savingsAnalysis.yearsEarlierPayoff && savingsAnalysis.yearsEarlierPayoff > 0 ? `• Earlier Payoff: ${savingsAnalysis.yearsEarlierPayoff.toFixed(1)} years` : ''}
+        ` : ''}
+        
+        Contact Information:
+        For personalized loan options and next steps, contact Mykoal DeShazo:
+        Phone: (623) 280-8351
+        Email: mdeshazo@mykoal.com
+        NMLS: #1912347
+        
+        This calculation was generated on ${new Date().toLocaleString()}
+        
         Equal Housing Opportunity. All loans subject to credit approval. This is not a commitment to lend. 
         Rates, terms, and conditions are subject to change without notice. Mykoal DeShazo NMLS #1912347.
-      </p>
-    `,
-    text: `
-      Your ${data.calculationType === 'debt-consolidation' ? 'Debt Consolidation' : 'Mortgage'} Analysis
-      
-      Loan Details:
-      • Loan Amount: $${data.inputs.loanAmount.toLocaleString()}
-      • Interest Rate: ${data.inputs.interestRate}%
-      • Loan Term: ${data.inputs.loanTerm} years
-      ${data.inputs.extraPayment > 0 ? `• Extra Monthly Payment: $${data.inputs.extraPayment.toLocaleString()}` : ''}
-      
-      Payment Breakdown:
-      • Principal & Interest: $${data.results.monthlyPayment.toLocaleString()}
-      ${data.inputs.propertyTax > 0 ? `• Property Tax: $${data.inputs.propertyTax.toLocaleString()}` : ''}
-      ${data.inputs.propertyInsurance > 0 ? `• Property Insurance: $${data.inputs.propertyInsurance.toLocaleString()}` : ''}
-      • Total Monthly Payment: $${(data.results.monthlyPayment + (data.inputs.propertyTax || 0) + (data.inputs.propertyInsurance || 0)).toLocaleString()}
-      
-      Loan Summary:
-      • Total Interest: $${data.results.totalInterest.toLocaleString()}
-      • Total Payments: $${data.results.totalPayments.toLocaleString()}
-      ${data.inputs.extraPayment > 0 ? `• Payoff Time (with extra payments): ${Math.round(data.results.payoffTime)} months` : ''}
-      ${data.results.effectiveInterestRate !== data.inputs.interestRate ? `• Effective Interest Rate: ${data.results.effectiveInterestRate.toFixed(2)}%` : ''}
-      
-      ${data.savingsAnalysis ? `
-      Savings Analysis:
-      • Monthly Cash Flow Improvement: $${data.savingsAnalysis.monthlySavings.toLocaleString()}
-      • Interest Savings Potential: $${data.savingsAnalysis.interestSaved.toLocaleString()}
-      ${data.savingsAnalysis.yearsEarlierPayoff > 0 ? `• Earlier Payoff: ${data.savingsAnalysis.yearsEarlierPayoff.toFixed(1)} years` : ''}
-      ` : ''}
-      
-      Contact Information:
-      For personalized loan options and next steps, contact Mykoal DeShazo:
-      Phone: (623) 280-8351
-      Email: mdeshazo@mykoal.com
-      NMLS: #1912347
-      
-      This calculation was generated on ${new Date().toLocaleString()}
-      
-      Equal Housing Opportunity. All loans subject to credit approval. This is not a commitment to lend. 
-      Rates, terms, and conditions are subject to change without notice. Mykoal DeShazo NMLS #1912347.
-    `
-  })
+      `
+    };
+  }
 };
