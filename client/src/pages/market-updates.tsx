@@ -134,41 +134,13 @@ export default function MarketUpdatesPage() {
             </p>
           </div>
 
-          {/* Mykoal's Market Insights */}
-          {marketData.insights && marketData.insights.length > 0 && (
-            <div className="mb-8">
-              <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6 text-center">
-                Mykoal's Market Insights
-              </h2>
-              <div className="grid gap-4 md:gap-6">
-                {marketData.insights.map((insight) => (
-                  <Card key={insight.id} className={`shadow-lg hover:shadow-xl transition-all duration-300 border-l-4 ${getRateImpactColor(insight.rateImpact)}`}>
-                    <CardHeader className="pb-3">
-                      <div className="flex items-center justify-between flex-wrap gap-2">
-                        <CardTitle className="text-lg md:text-xl text-gray-900 flex-1">
-                          {insight.title}
-                        </CardTitle>
-                        <div className="flex items-center gap-2">
-                          {getUrgencyIcon(insight.urgency)}
-                          <Badge variant="outline" className="text-xs">
-                            {insight.urgency.toUpperCase()} PRIORITY
-                          </Badge>
-                        </div>
-                      </div>
-                    </CardHeader>
-                    <CardContent className="pt-0">
-                      <p className="text-gray-700 leading-relaxed mb-4 text-sm md:text-base">
-                        {insight.content}
-                      </p>
-                      <div className="text-xs md:text-sm text-gray-500 italic">
-                        Related to: {insight.relatedNews}
-                      </div>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
-            </div>
-          )}
+          {/* Rate Disclaimer */}
+          <Alert className="mb-8 bg-gray-50 border-gray-200">
+            <AlertCircle className="h-4 w-4" />
+            <AlertDescription className="text-sm leading-relaxed">
+              <strong>Rate Disclaimer:</strong> The mortgage rates displayed are pulled live from the Federal Reserve Economic Data (FRED) system hosted by the Economic Research Division of the Federal Reserve Bank of St. Louis. These rates do not represent a loan offer and are provided for informational purposes only. Actual rates may vary based on credit profile, loan-to-value ratio, property type, and market conditions. Contact Mykoal DeShazo (NMLS #1912347) for personalized rate quotes and loan terms.
+            </AlertDescription>
+          </Alert>
 
           {/* Current Rates */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-8">
@@ -220,6 +192,42 @@ export default function MarketUpdatesPage() {
               </CardContent>
             </Card>
           </div>
+
+          {/* Mykoal's Market Insights */}
+          {marketData.insights && marketData.insights.length > 0 && (
+            <div className="mb-8">
+              <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6 text-center">
+                Mykoal's Market Insights
+              </h2>
+              <div className="grid gap-4 md:gap-6">
+                {marketData.insights.map((insight) => (
+                  <Card key={insight.id} className={`shadow-lg hover:shadow-xl transition-all duration-300 border-l-4 ${getRateImpactColor(insight.rateImpact)}`}>
+                    <CardHeader className="pb-3">
+                      <div className="flex items-center justify-between flex-wrap gap-2">
+                        <CardTitle className="text-lg md:text-xl text-gray-900 flex-1">
+                          {insight.title}
+                        </CardTitle>
+                        <div className="flex items-center gap-2">
+                          {getUrgencyIcon(insight.urgency)}
+                          <Badge variant="outline" className="text-xs">
+                            {insight.urgency.toUpperCase()} PRIORITY
+                          </Badge>
+                        </div>
+                      </div>
+                    </CardHeader>
+                    <CardContent className="pt-0">
+                      <p className="text-gray-700 leading-relaxed mb-4 text-sm md:text-base">
+                        {insight.content}
+                      </p>
+                      <div className="text-xs md:text-sm text-gray-500 italic">
+                        Related to: {insight.relatedNews}
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </div>
+          )}
 
           {/* Market News */}
           <div className="mb-8">
