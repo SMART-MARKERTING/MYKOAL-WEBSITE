@@ -183,6 +183,7 @@ The application uses four main tables:
 - June 27, 2025. Fixed email template errors causing undefined property access issues - resolved .toFixed() method errors in calculation email templates by implementing safe property extraction with fallback defaults; email templates now handle missing properties gracefully; only remaining issue is SendGrid API key returning 403 Forbidden error requiring updated credentials
 - June 27, 2025. Fixed market updates page navigation and subscription handling - added Home and Back navigation buttons to market updates page; implemented proper duplicate email handling for market subscriptions with user-friendly "already subscribed" message; both email calculation and market subscription functionality now working correctly with comprehensive error handling
 - June 27, 2025. Fixed pre-qualification form submission error - resolved data transformation issue between frontend form and backend schema by adding all required optional fields with null values; pre-qualification form now completes successfully from start to finish without validation errors
+- June 27, 2025. Fixed API request parameter order in email calculation functions - corrected apiRequest method calls in mortgage calculator and debt consolidation calculator components; enhanced error handling with console logging for better debugging; improved form validation with specific field error messages
 
 ## User Preferences
 Preferred communication style: Simple, everyday language.

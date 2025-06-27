@@ -36,8 +36,8 @@ export default function DebtConsolidationCalculator({
 
   const emailCalculationMutation = useMutation({
     mutationFn: async (data: any) => {
-      const response = await apiRequest("/api/email-calculation", "POST", data);
-      return response;
+      const response = await apiRequest("POST", "/api/email-calculation", data);
+      return response.json();
     },
     onSuccess: () => {
       toast({
@@ -47,10 +47,11 @@ export default function DebtConsolidationCalculator({
       setShowEmailForm(false);
       setEmailAddress("");
     },
-    onError: () => {
+    onError: (error: any) => {
+      console.error("Email calculation error:", error);
       toast({
-        title: "Error",
-        description: "Failed to email calculation. Please try again.",
+        title: "Email Failed",
+        description: "Unable to send calculation. Please try again or contact us directly.",
         variant: "destructive",
       });
     },

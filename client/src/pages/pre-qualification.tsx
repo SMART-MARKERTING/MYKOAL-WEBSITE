@@ -145,23 +145,41 @@ export default function PreQualificationPage() {
       });
     },
     onError: (error: any) => {
+      console.error("Pre-qualification submission error:", error);
       toast({
-        title: "Error",
-        description: error.message || "Failed to submit pre-qualification.",
+        title: "Submission Error",
+        description: "Unable to submit pre-qualification. Please try again or contact us directly.",
         variant: "destructive",
       });
     },
   });
 
   const handleSubmit = () => {
+    console.log("Pre-qualification form data:", formData);
+    
     // Basic validation
     const requiredFields = ['firstName', 'lastName', 'email', 'phone', 'loanType', 'loanAmount'];
-    const missingFields = requiredFields.filter(field => !formData[field as keyof PreQualificationData]);
+    const missingFields = requiredFields.filter(field => {
+      const value = formData[field as keyof PreQualificationData];
+      return !value || value.toString().trim() === '';
+    });
     
     if (missingFields.length > 0) {
+      console.log("Missing required fields:", missingFields);
       toast({
         title: "Missing Information",
-        description: "Please fill in all required fields.",
+        description: `Please fill in: ${missingFields.join(', ')}`,
+        variant: "destructive",
+      });
+      return;
+    }
+
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      toast({
+        title: "Invalid Email",
+        description: "Please enter a valid email address.",
         variant: "destructive",
       });
       return;
