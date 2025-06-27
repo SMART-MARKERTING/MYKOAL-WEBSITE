@@ -42,7 +42,7 @@ export default function AboutSection() {
             </div>
 
             <p className="text-gray-700 text-lg leading-relaxed mb-6">
-              With over 15 years in the lending industry, Mykoal specializes in business purpose DSCR loans, investment property financing, and alternative lending solutions. He has helped over 500 investors and business owners secure the capital they need to grow their portfolios and businesses.
+              With 20+ combined team experience years in the lending industry, Mykoal specializes in business purpose DSCR loans, investment property financing, and alternative lending solutions. He has helped over 500 investors and business owners secure the capital they need to grow their portfolios and businesses.
             </p>
 
             {/* Credentials */}
