@@ -5,21 +5,26 @@ export default function Footer() {
   const [location, setLocation] = useLocation();
   
   const navigateToSection = (sectionId: string) => {
+    console.log('Navigating to section:', sectionId, 'Current location:', location);
+    
     if (location === '/') {
       // Already on home page, just scroll
       const element = document.getElementById(sectionId);
+      console.log('Element found:', element);
       if (element) {
         element.scrollIntoView({ behavior: "smooth", block: "start" });
       }
     } else {
       // Navigate to home page and then scroll
+      console.log('Navigating to home page first');
       setLocation('/');
       setTimeout(() => {
         const element = document.getElementById(sectionId);
+        console.log('Element found after navigation:', element);
         if (element) {
           element.scrollIntoView({ behavior: "smooth", block: "start" });
         }
-      }, 100);
+      }, 300);
     }
   };
 
@@ -73,7 +78,7 @@ export default function Footer() {
               <li>
                 <button 
                   onClick={() => navigateToSection("calculator")} 
-                  className="hover:text-blue-400 transition-colors text-left"
+                  className="hover:text-blue-400 transition-colors text-left cursor-pointer bg-transparent border-none p-0 text-gray-300 underline-offset-2 hover:underline"
                 >
                   Mortgage Calculator
                 </button>
@@ -81,25 +86,25 @@ export default function Footer() {
               <li>
                 <button 
                   onClick={() => navigateToSection("loans")} 
-                  className="hover:text-blue-400 transition-colors text-left"
+                  className="hover:text-blue-400 transition-colors text-left cursor-pointer bg-transparent border-none p-0 text-gray-300 underline-offset-2 hover:underline"
                 >
                   Lending Solutions
                 </button>
               </li>
               <li>
-                <Link href="/about" className="hover:text-blue-400 transition-colors">
+                <Link href="/about" className="hover:text-blue-400 transition-colors cursor-pointer underline-offset-2 hover:underline">
                   About Us
                 </Link>
               </li>
               <li>
-                <Link href="/resources" className="hover:text-blue-400 transition-colors">
+                <Link href="/resources" className="hover:text-blue-400 transition-colors cursor-pointer underline-offset-2 hover:underline">
                   Resources
                 </Link>
               </li>
               <li>
                 <button 
                   onClick={() => navigateToSection("contact")} 
-                  className="hover:text-blue-400 transition-colors text-left"
+                  className="hover:text-blue-400 transition-colors text-left cursor-pointer bg-transparent border-none p-0 text-gray-300 underline-offset-2 hover:underline"
                 >
                   Contact
                 </button>
