@@ -78,10 +78,15 @@ export default function DebtConsolidationCalculator({
       interestSaved = Math.max(0, standardTotalInterest - acceleratedTotalInterest);
     }
     
-    // Calculate payoff acceleration - use the actual calculation results
-    const standardPayoffMonths = inputs.loanTerm * 12;
-    const acceleratedPayoffMonths = calculationWithExtra.payoffTime;
-    const yearsEarlier = (standardPayoffMonths - acceleratedPayoffMonths) / 12;
+    // Calculate payoff acceleration - only when extra payments are actually applied
+    let yearsEarlier = 0;
+    
+    if (inputs.extraPayment > 0) {
+      // Only calculate acceleration if user has applied extra payments
+      const standardPayoffMonths = inputs.loanTerm * 12;
+      const acceleratedPayoffMonths = calculation.payoffTime; // Use current calculation, not the potential one
+      yearsEarlier = Math.max(0, (standardPayoffMonths - acceleratedPayoffMonths) / 12);
+    }
 
     // Calculate total savings vs current high-interest debt situation
     // Estimate what they would pay on current debts (using average 18% APR for credit cards)
@@ -273,21 +278,25 @@ export default function DebtConsolidationCalculator({
           </p>
         </CardHeader>
         <CardContent className="space-y-6">
-          <div className="grid md:grid-cols-3 gap-6">
-            <div className="text-center p-4 bg-white rounded-lg shadow-sm">
-              <Clock className="w-8 h-8 mx-auto text-green-600 mb-2" />
-              <div className="text-2xl font-bold text-green-800">
-                {savingsAnalysis.yearsEarlierPayoff.toFixed(1)} years
+          <div className={`grid gap-6 ${inputs.extraPayment > 0 ? 'md:grid-cols-3' : 'md:grid-cols-2'}`}>
+            {inputs.extraPayment > 0 && (
+              <div className="text-center p-4 bg-white rounded-lg shadow-sm">
+                <Clock className="w-8 h-8 mx-auto text-green-600 mb-2" />
+                <div className="text-2xl font-bold text-green-800">
+                  {savingsAnalysis.yearsEarlierPayoff.toFixed(1)} years
+                </div>
+                <div className="text-sm text-green-600">Earlier Payoff</div>
               </div>
-              <div className="text-sm text-green-600">Earlier Payoff</div>
-            </div>
+            )}
             
             <div className="text-center p-4 bg-white rounded-lg shadow-sm">
               <DollarSign className="w-8 h-8 mx-auto text-blue-600 mb-2" />
               <div className="text-2xl font-bold text-blue-800">
                 ${savingsAnalysis.interestSaved.toLocaleString()}
               </div>
-              <div className="text-sm text-blue-600">Interest Saved</div>
+              <div className="text-sm text-blue-600">
+                {inputs.extraPayment > 0 ? 'Interest Saved' : 'Potential Interest Savings'}
+              </div>
             </div>
             
             <div className="text-center p-4 bg-white rounded-lg shadow-sm">

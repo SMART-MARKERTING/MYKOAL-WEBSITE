@@ -139,6 +139,7 @@ The application uses four main tables:
 - June 27, 2025. Enhanced debt consolidation calculator to properly calculate monthly savings (current payments minus new loan payment) with option to apply savings as extra payment for accelerated payoff and interest savings
 - June 27, 2025. Fixed pre-qualification form submission validation errors by properly transforming form data to match backend schema requirements and handling optional fields
 - June 27, 2025. Fixed debt consolidation calculator interest savings displaying zero - now properly calculates and shows actual interest savings when extra payments are applied
+- June 27, 2025. Fixed debt consolidation calculator years saved display - now only shows payoff acceleration when extra payments are actually applied, not potential savings
 
 ## User Preferences
 Preferred communication style: Simple, everyday language.
