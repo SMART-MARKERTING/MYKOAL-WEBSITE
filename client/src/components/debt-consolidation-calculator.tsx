@@ -211,12 +211,25 @@ export default function DebtConsolidationCalculator({
                     type="number"
                     value={inputs.extraPayment || ""}
                     onChange={(e) => updateInput('extraPayment', Number(e.target.value) || 0)}
-                    className="pl-8"
+                    className="pl-8 pr-16"
                     placeholder="0"
                   />
+                  {inputs.extraPayment > 0 && (
+                    <Button
+                      onClick={() => updateInput('extraPayment', 0)}
+                      size="sm"
+                      variant="ghost"
+                      className="absolute right-1 top-1/2 transform -translate-y-1/2 h-8 px-2 text-gray-500 hover:text-red-600"
+                    >
+                      Clear
+                    </Button>
+                  )}
                 </div>
                 <p className="text-sm text-gray-500 mt-1">
-                  Add extra payments to pay off the loan faster
+                  {inputs.extraPayment > 0 
+                    ? "Adjust the extra payment amount as needed" 
+                    : "Add extra payments to pay off the loan faster"
+                  }
                 </p>
               </div>
             </div>
@@ -238,7 +251,7 @@ export default function DebtConsolidationCalculator({
                     <span className="text-green-700 font-medium">Monthly Savings:</span>
                     <span className="font-bold text-green-800">${savingsAnalysis.monthlySavings.toLocaleString()}</span>
                   </div>
-                  {savingsAnalysis.monthlySavings > 0 && (
+                  {savingsAnalysis.monthlySavings > 0 && inputs.extraPayment !== savingsAnalysis.monthlySavings && (
                     <Button
                       onClick={() => updateInput('extraPayment', savingsAnalysis.monthlySavings)}
                       size="sm"
@@ -246,6 +259,11 @@ export default function DebtConsolidationCalculator({
                     >
                       Apply Savings as Extra Payment
                     </Button>
+                  )}
+                  {inputs.extraPayment === savingsAnalysis.monthlySavings && (
+                    <div className="text-center text-sm text-green-700 bg-green-50 p-2 rounded">
+                      ✓ Monthly savings applied as extra payment. You can adjust the amount above.
+                    </div>
                   )}
                 </div>
                 {inputs.extraPayment > 0 && (

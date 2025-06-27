@@ -140,6 +140,7 @@ The application uses four main tables:
 - June 27, 2025. Fixed pre-qualification form submission validation errors by properly transforming form data to match backend schema requirements and handling optional fields
 - June 27, 2025. Fixed debt consolidation calculator interest savings displaying zero - now properly calculates and shows actual interest savings when extra payments are applied
 - June 27, 2025. Fixed debt consolidation calculator years saved display - now only shows payoff acceleration when extra payments are actually applied, not potential savings
+- June 27, 2025. Enhanced debt consolidation calculator extra payment interactivity - added clear button, confirmation message, and dynamic help text for better user experience
 
 ## User Preferences
 Preferred communication style: Simple, everyday language.
