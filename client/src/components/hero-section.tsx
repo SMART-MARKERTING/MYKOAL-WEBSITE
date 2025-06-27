@@ -216,7 +216,7 @@ export default function HeroSection() {
                   </div>
                 </form>
                 <p className="text-xs text-gray-500 mt-4 text-center">
-                  No obligation. Rate quotes in 60 seconds.
+                  No obligation. Quick and confidential.
                 </p>
               </CardContent>
             </Card>

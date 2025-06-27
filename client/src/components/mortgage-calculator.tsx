@@ -15,6 +15,7 @@ export default function MortgageCalculator() {
     loanTerm: 30,
     propertyTax: 5000,
     homeInsurance: 1200,
+    loanType: "dscr-purchase",
   });
 
   const [results, setResults] = useState({
@@ -139,6 +140,26 @@ export default function MortgageCalculator() {
                     </SelectContent>
                   </Select>
                 </div>
+              </div>
+
+              <div>
+                <Label>Loan Type</Label>
+                <Select
+                  value={inputs.loanType}
+                  onValueChange={(value) => setInputs(prev => ({ ...prev, loanType: value }))}
+                >
+                  <SelectTrigger>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="dscr-purchase">Business Purpose DSCR - Purchase</SelectItem>
+                    <SelectItem value="dscr-rate-term">Business Purpose DSCR - Rate/Term Refinance</SelectItem>
+                    <SelectItem value="dscr-cash-out">Business Purpose DSCR - Cash-Out Refinance</SelectItem>
+                    <SelectItem value="dscr-heloc">DSCR HELOC</SelectItem>
+                    <SelectItem value="startup-business">Startup Business Loan</SelectItem>
+                    <SelectItem value="personal-loan">Personal Loan</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
 
               <div className="border-t pt-6">
