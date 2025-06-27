@@ -1,6 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Building2, CreditCard, TrendingUp, DollarSign, Check } from "lucide-react";
+import { Building2, CreditCard, TrendingUp, DollarSign, Check, Calculator } from "lucide-react";
 import { Link } from "wouter";
 
 const loanProducts = [
@@ -58,10 +58,25 @@ const loanProducts = [
     buttonColor: "bg-orange-600 hover:bg-orange-700",
     link: "/personal-loan",
     features: [
-      "Debt consolidation",
       "Home improvements",
       "Personal expenses",
+      "Medical bills",
       "Fixed rate options"
+    ]
+  },
+  {
+    name: "Debt Consolidation",
+    subtitle: "Simplify Your Payments",
+    icon: Calculator,
+    iconBg: "bg-teal-100",
+    iconColor: "text-teal-600",
+    buttonColor: "bg-teal-600 hover:bg-teal-700",
+    link: "/debt-consolidation",
+    features: [
+      "Combine multiple debts",
+      "One monthly payment",
+      "Potentially lower rates",
+      "Improved cash flow"
     ]
   }
 ];
@@ -77,7 +92,7 @@ export default function LoanProducts() {
           <p className="text-xl text-gray-600">Specialized financing for investors and business owners</p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8 mb-16">
           {loanProducts.map((product) => {
             const IconComponent = product.icon;
             return (

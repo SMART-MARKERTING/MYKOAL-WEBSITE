@@ -13,6 +13,7 @@ import PersonalLoanPage from "@/pages/personal-loan";
 import DSCRGuidePage from "@/pages/blog-dscr-guide";
 import BusinessLoansGuidePage from "@/pages/blog-business-loans";
 import PersonalLoansGuidePage from "@/pages/blog-personal-loans";
+import DebtConsolidationPage from "@/pages/debt-consolidation";
 
 function Router() {
   return (
@@ -23,6 +24,7 @@ function Router() {
       <Route path="/dscr-heloc" component={DSCRHELOCPage} />
       <Route path="/startup-business-loan" component={StartupBusinessLoanPage} />
       <Route path="/personal-loan" component={PersonalLoanPage} />
+      <Route path="/debt-consolidation" component={DebtConsolidationPage} />
       <Route path="/blog/dscr-guide" component={DSCRGuidePage} />
       <Route path="/blog/business-loans" component={BusinessLoansGuidePage} />
       <Route path="/blog/personal-loans" component={PersonalLoansGuidePage} />

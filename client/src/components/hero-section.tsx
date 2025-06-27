@@ -185,6 +185,7 @@ export default function HeroSection() {
                             <SelectItem value="dscr-heloc">DSCR HELOC</SelectItem>
                             <SelectItem value="startup-business">Startup Business Loan</SelectItem>
                             <SelectItem value="personal-loan">Personal Loan</SelectItem>
+                            <SelectItem value="debt-consolidation">Debt Consolidation</SelectItem>
                           </SelectContent>
                         </Select>
                       </div>

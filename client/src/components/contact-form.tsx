@@ -148,6 +148,7 @@ export default function ContactForm() {
                   <SelectItem value="DSCR HELOC">DSCR HELOC</SelectItem>
                   <SelectItem value="Startup Business Loan">Startup Business Loan</SelectItem>
                   <SelectItem value="Personal Loan">Personal Loan</SelectItem>
+                  <SelectItem value="Debt Consolidation">Debt Consolidation</SelectItem>
                   <SelectItem value="Other">Other</SelectItem>
                 </SelectContent>
               </Select>
