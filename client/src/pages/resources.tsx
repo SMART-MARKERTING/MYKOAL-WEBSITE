@@ -362,7 +362,7 @@ export default function ResourcesPage() {
             <img 
               src="/equal-housing-logo.png" 
               alt="Equal Housing Opportunity Logo" 
-              className="w-6 h-6 object-contain filter brightness-0 invert"
+              className="w-6 h-6 object-contain"
             />
             <span className="text-sm font-semibold text-gray-700">Equal Housing Opportunity</span>
           </div>

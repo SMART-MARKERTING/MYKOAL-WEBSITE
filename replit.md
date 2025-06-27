@@ -164,6 +164,7 @@ The application uses four main tables:
 - June 27, 2025. Added social media links across website - Instagram: https://www.instagram.com/realmykoal/, Facebook: https://www.facebook.com/61577360476457, LinkedIn: https://www.linkedin.com/in/mykoal-deshazo-48134616a integrated into footer and contact sections with proper branding colors
 - June 27, 2025. Enhanced Privacy Policy and Terms of Service pages with full navigation headers, footers, home buttons, cross-page navigation, comprehensive compliance content, NMLS licensing verification links, and proper Equal Housing Opportunity sections
 - June 27, 2025. Fixed all "Get Started Today" buttons across website - updated goToContact functions in all landing pages (DSCR purchase, refinance, HELOC, personal loans, startup business loans, debt consolidation) and contact section to properly navigate to contact form with smooth scrolling functionality
+- June 27, 2025. Fixed Equal Housing Opportunity logo colors - removed invert filters from white background pages (Resources, Privacy Policy, Terms of Service, Market Updates, Pre-qualification) to display black logo, kept white logo on dark backgrounds (footer, debt consolidation page)
 
 ## User Preferences
 Preferred communication style: Simple, everyday language.
