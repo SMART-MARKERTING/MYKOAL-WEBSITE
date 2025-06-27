@@ -15,6 +15,7 @@ import BusinessLoansGuidePage from "@/pages/blog-business-loans";
 import PersonalLoansGuidePage from "@/pages/blog-personal-loans";
 import DebtConsolidationPage from "@/pages/debt-consolidation";
 import PreQualificationPage from "@/pages/pre-qualification";
+import MarketUpdatesPage from "@/pages/market-updates";
 
 function Router() {
   return (
@@ -27,6 +28,7 @@ function Router() {
       <Route path="/personal-loan" component={PersonalLoanPage} />
       <Route path="/debt-consolidation" component={DebtConsolidationPage} />
       <Route path="/pre-qualification" component={PreQualificationPage} />
+      <Route path="/market-updates" component={MarketUpdatesPage} />
       <Route path="/blog/dscr-guide" component={DSCRGuidePage} />
       <Route path="/blog/business-loans" component={BusinessLoansGuidePage} />
       <Route path="/blog/personal-loans" component={PersonalLoansGuidePage} />

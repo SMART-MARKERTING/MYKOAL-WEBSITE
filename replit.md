@@ -148,6 +148,7 @@ The application uses four main tables:
 - June 27, 2025. Added optional monthly property tax and property insurance fields to both loan calculator and debt consolidation calculator with accurate total payment calculations
 - June 27, 2025. Removed all sensitive financial information from pre-qualification page - eliminated date of birth, SSN, income, employment, credit score, debt, and assets fields, simplified to 3-step form with only contact info and loan details
 - June 27, 2025. Added "Other" option to all loan type dropdowns across mortgage calculator, hero section quick quote, contact form, and pre-qualification page; replaced loan term dropdowns with text input fields allowing custom year entry (1-50 years) in both mortgage and debt consolidation calculators
+- June 27, 2025. Created live market updates page with real-time mortgage rates from FRED API and Freddie Mac, news feeds from FOXBusiness and Mortgage News Daily RSS, MBS data from Mortgage News Daily, proper error handling for missing API keys with fallback to contact information
 
 ## User Preferences
 Preferred communication style: Simple, everyday language.

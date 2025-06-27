@@ -175,6 +175,20 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Market updates
+  app.get("/api/market-updates", async (req, res) => {
+    try {
+      const marketData = await storage.getMarketUpdates();
+      res.json(marketData);
+    } catch (error) {
+      console.error("Market updates error:", error);
+      res.status(503).json({ 
+        error: "Market data sources temporarily unavailable",
+        message: "Please check back in a few minutes for the latest rates and news"
+      });
+    }
+  });
+
   const httpServer = createServer(app);
   return httpServer;
 }

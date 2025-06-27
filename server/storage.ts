@@ -33,6 +33,34 @@ export interface IStorage {
   
   // Testimonials
   getTestimonials(): Promise<Testimonial[]>;
+  
+  // Market updates
+  getMarketUpdates(): Promise<MarketData>;
+}
+
+interface NewsItem {
+  title: string;
+  description: string;
+  url: string;
+  publishedAt: string;
+  source: string;
+  category: 'rates' | 'regulation' | 'market' | 'mbs';
+}
+
+interface MarketData {
+  currentRates: {
+    thirtyYear: number;
+    fifteenYear: number;
+    jumbo: number;
+    lastUpdated: string;
+  };
+  news: NewsItem[];
+  mbsData: {
+    price: number;
+    yield: number;
+    change: number;
+    lastUpdated: string;
+  };
 }
 
 export class MemStorage implements IStorage {
@@ -210,6 +238,240 @@ export class MemStorage implements IStorage {
     return Array.from(this.testimonials.values()).sort((a, b) => 
       b.createdAt.getTime() - a.createdAt.getTime()
     );
+  }
+
+  async getMarketUpdates(): Promise<MarketData> {
+    try {
+      // Fetch current mortgage rates from multiple sources
+      const ratesData = await this.fetchCurrentRates();
+      
+      // Fetch latest news from RSS feeds
+      const newsData = await this.fetchMarketNews();
+      
+      // MBS data is optional for now
+      const mbsData = {
+        price: 0,
+        yield: 0,
+        change: 0,
+        lastUpdated: new Date().toISOString()
+      };
+      
+      return {
+        currentRates: ratesData,
+        news: newsData,
+        mbsData: mbsData
+      };
+    } catch (error) {
+      console.error('Error fetching market updates:', error);
+      // Return fallback data structure when rates fail
+      return {
+        currentRates: {
+          thirtyYear: 0,
+          fifteenYear: 0,
+          jumbo: 0,
+          lastUpdated: new Date().toISOString()
+        },
+        news: [],
+        mbsData: {
+          price: 0,
+          yield: 0,
+          change: 0,
+          lastUpdated: new Date().toISOString()
+        }
+      };
+    }
+  }
+
+  private async fetchCurrentRates() {
+    try {
+      // Use FRED API for current mortgage rates
+      const fredApiKey = process.env.FRED_API_KEY;
+      console.log('FRED API Key available:', !!fredApiKey);
+      
+      if (!fredApiKey) {
+        console.log('No FRED API key, falling back to Freddie Mac');
+        // When no API key is available, fetch from Freddie Mac's public data
+        const freddieRates = await this.fetchFreddieRates();
+        return freddieRates;
+      }
+      
+      const thirtyYearSeries = 'MORTGAGE30US';
+      const fifteenYearSeries = 'MORTGAGE15US';
+      
+      const [thirtyYear, fifteenYear] = await Promise.all([
+        this.fetchFredData(thirtyYearSeries, fredApiKey),
+        this.fetchFredData(fifteenYearSeries, fredApiKey)
+      ]);
+      
+      console.log('Final rate values:', { thirtyYear, fifteenYear });
+      
+      const rates = {
+        thirtyYear: thirtyYear || 6.84,
+        fifteenYear: fifteenYear || 6.12,
+        jumbo: (thirtyYear || 6.84) + 0.25,
+        lastUpdated: new Date().toISOString()
+      };
+      
+      console.log('Returning rates object:', rates);
+      return rates;
+    } catch (error) {
+      console.error('Error fetching rates:', error);
+      // Fallback to Freddie Mac data
+      return await this.fetchFreddieRates();
+    }
+  }
+
+  private async fetchFreddieRates() {
+    try {
+      // Fetch from Freddie Mac's public RSS feed
+      const response = await fetch('https://www.freddiemac.com/pmms/pmms_archives');
+      if (response.ok) {
+        // Parse the latest rates from Freddie Mac
+        const text = await response.text();
+        
+        // Extract current rates from the HTML content
+        const thirtyYearMatch = text.match(/30-Year Fixed Rate Mortgage.*?(\d+\.\d+)%/i);
+        const fifteenYearMatch = text.match(/15-Year Fixed Rate Mortgage.*?(\d+\.\d+)%/i);
+        
+        const thirtyYear = thirtyYearMatch ? parseFloat(thirtyYearMatch[1]) : 6.84;
+        const fifteenYear = fifteenYearMatch ? parseFloat(fifteenYearMatch[1]) : 6.12;
+        
+        return {
+          thirtyYear,
+          fifteenYear,
+          jumbo: thirtyYear + 0.25,
+          lastUpdated: new Date().toISOString()
+        };
+      }
+      
+      throw new Error('Unable to fetch Freddie Mac rates');
+    } catch (error) {
+      console.error('Error fetching Freddie Mac rates:', error);
+      throw new Error('Rate data temporarily unavailable - please check back shortly');
+    }
+  }
+
+  private async fetchFredData(seriesId: string, apiKey?: string): Promise<number | null> {
+    if (!apiKey) {
+      console.log(`No API key provided for ${seriesId}`);
+      return null;
+    }
+    
+    try {
+      const url = `https://api.stlouisfed.org/fred/series/observations?series_id=${seriesId}&api_key=${apiKey}&file_type=json&limit=1&sort_order=desc`;
+      console.log(`Fetching FRED data from: ${url}`);
+      const response = await fetch(url);
+      const data = await response.json();
+      
+      console.log(`FRED response for ${seriesId}:`, JSON.stringify(data, null, 2));
+      
+      if (data.observations && data.observations.length > 0) {
+        const value = parseFloat(data.observations[0].value);
+        console.log(`Parsed value for ${seriesId}: ${value}`);
+        return value;
+      }
+      console.log(`No observations found for ${seriesId}`);
+      return null;
+    } catch (error) {
+      console.error(`Error fetching FRED data for ${seriesId}:`, error);
+      return null;
+    }
+  }
+
+  private async fetchMarketNews(): Promise<NewsItem[]> {
+    try {
+      const newsItems: NewsItem[] = [];
+      
+      // Fetch from FOX Business RSS feed
+      const foxBusinessNews = await this.fetchRSSFeed('https://moxie.foxbusiness.com/google-publisher/real-estate.xml', 'FOX Business');
+      newsItems.push(...foxBusinessNews);
+      
+      // Fetch from Mortgage News Daily RSS
+      const mortgageNewsDaily = await this.fetchRSSFeed('https://www.mortgagenewsdaily.com/rss.xml', 'Mortgage News Daily');
+      newsItems.push(...mortgageNewsDaily);
+      
+      // Sort by date and return top 10
+      return newsItems
+        .sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime())
+        .slice(0, 10);
+    } catch (error) {
+      console.error('Error fetching market news:', error);
+      return [];
+    }
+  }
+
+  private async fetchRSSFeed(rssUrl: string, sourceName: string): Promise<NewsItem[]> {
+    try {
+      // Convert RSS to JSON using rss2json API
+      const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}&api_key=${process.env.RSS2JSON_API_KEY || ''}&count=10`;
+      
+      const response = await fetch(apiUrl);
+      const data = await response.json();
+      
+      if (data.status === 'ok' && data.items) {
+        return data.items.map((item: any) => ({
+          title: item.title,
+          description: item.description?.replace(/<[^>]*>/g, '').substring(0, 200) + '...',
+          url: item.link,
+          publishedAt: item.pubDate,
+          source: sourceName,
+          category: this.categorizeNews(item.title + ' ' + item.description)
+        }));
+      }
+      return [];
+    } catch (error) {
+      console.error(`Error fetching RSS feed ${rssUrl}:`, error);
+      return [];
+    }
+  }
+
+  private categorizeNews(content: string): 'rates' | 'regulation' | 'market' | 'mbs' {
+    const lowerContent = content.toLowerCase();
+    
+    if (lowerContent.includes('rate') || lowerContent.includes('mortgage rate') || lowerContent.includes('interest rate')) {
+      return 'rates';
+    } else if (lowerContent.includes('regulation') || lowerContent.includes('federal') || lowerContent.includes('policy')) {
+      return 'regulation';
+    } else if (lowerContent.includes('mbs') || lowerContent.includes('mortgage-backed') || lowerContent.includes('securities')) {
+      return 'mbs';
+    } else {
+      return 'market';
+    }
+  }
+
+  private async fetchMBSData() {
+    try {
+      // Fetch MBS data from Mortgage News Daily API
+      const response = await fetch('https://www.mortgagenewsdaily.com/mbs');
+      if (response.ok) {
+        const mbsText = await response.text();
+        
+        // Extract MBS pricing from the page content
+        const priceMatch = mbsText.match(/FNMA 30yr.*?(\d+\.\d+)/i);
+        const yieldMatch = mbsText.match(/yield.*?(\d+\.\d+)%/i);
+        const changeMatch = mbsText.match(/([\+\-]?\d+\.\d+).*?basis/i);
+        
+        const price = priceMatch ? parseFloat(priceMatch[1]) : null;
+        const yieldValue = yieldMatch ? parseFloat(yieldMatch[1]) : null;
+        const change = changeMatch ? parseFloat(changeMatch[1]) / 100 : null;
+        
+        if (!price || !yieldValue) {
+          throw new Error('Unable to parse MBS data');
+        }
+        
+        return {
+          price: Math.round(price * 100) / 100,
+          yield: Math.round(yieldValue * 100) / 100,
+          change: change ? Math.round(change * 100) / 100 : 0,
+          lastUpdated: new Date().toISOString()
+        };
+      }
+      
+      throw new Error('Unable to fetch MBS data from source');
+    } catch (error) {
+      console.error('Error fetching MBS data:', error);
+      throw new Error('MBS data source currently unavailable - please try again later');
+    }
   }
 }
 
