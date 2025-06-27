@@ -68,6 +68,16 @@ export default function BlogSection() {
             </Card>
           ))}
         </div>
+
+        {/* View All Resources Button */}
+        <div className="text-center mt-12">
+          <Link href="/resources">
+            <Button size="lg" className="accent-gradient text-white hover:opacity-90 px-8 py-3">
+              View All Resources
+              <ArrowRight className="h-5 w-5 ml-2" />
+            </Button>
+          </Link>
+        </div>
       </div>
     </section>
   );

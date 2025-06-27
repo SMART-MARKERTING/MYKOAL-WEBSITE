@@ -61,12 +61,12 @@ export default function Navigation() {
               >
                 About
               </button>
-              <button
-                onClick={() => scrollToSection("blog")}
+              <a
+                href="/resources"
                 className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors"
               >
                 Resources
-              </button>
+              </a>
               <Button
                 onClick={() => scrollToSection("contact")}
                 className="bg-blue-600 text-white hover:bg-blue-700"
@@ -128,12 +128,12 @@ export default function Navigation() {
             >
               About
             </button>
-            <button
-              onClick={() => scrollToSection("blog")}
+            <a
+              href="/resources"
               className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600 w-full text-left"
             >
               Resources
-            </button>
+            </a>
             <Button
               onClick={() => scrollToSection("contact")}
               className="block px-3 py-2 text-base font-medium bg-blue-600 text-white rounded-md w-full"

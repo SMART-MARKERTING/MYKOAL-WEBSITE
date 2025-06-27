@@ -18,6 +18,7 @@ import PreQualificationPage from "@/pages/pre-qualification";
 import MarketUpdatesPage from "@/pages/market-updates";
 import PrivacyPolicyPage from "@/pages/privacy-policy";
 import TermsOfServicePage from "@/pages/terms-of-service";
+import ResourcesPage from "@/pages/resources";
 
 function Router() {
   return (
@@ -36,6 +37,7 @@ function Router() {
       <Route path="/blog/personal-loans" component={PersonalLoansGuidePage} />
       <Route path="/privacy-policy" component={PrivacyPolicyPage} />
       <Route path="/terms-of-service" component={TermsOfServicePage} />
+      <Route path="/resources" component={ResourcesPage} />
       <Route component={NotFound} />
     </Switch>
   );
