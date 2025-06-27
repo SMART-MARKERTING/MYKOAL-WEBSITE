@@ -91,15 +91,7 @@ export default function ContactSection() {
               </CardContent>
             </Card>
 
-            {/* Emergency contact */}
-            <Card className="primary-gradient shadow-lg text-white">
-              <CardContent className="p-8">
-                <h3 className="text-2xl font-bold mb-4">Need Help After Hours?</h3>
-                <p className="mb-4">For urgent mortgage questions or time-sensitive situations.</p>
-                <div className="font-semibold text-xl">(555) 123-4567</div>
-                <div className="text-blue-200 text-sm">Emergency line available 24/7</div>
-              </CardContent>
-            </Card>
+
           </div>
         </div>
       </div>
