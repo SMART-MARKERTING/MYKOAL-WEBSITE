@@ -16,6 +16,8 @@ import {
   type MarketSubscription,
   type InsertMarketSubscription
 } from "@shared/schema";
+import { db } from "./db";
+import { eq } from "drizzle-orm";
 
 export interface IStorage {
   // Contact management
@@ -674,4 +676,290 @@ export class MemStorage implements IStorage {
   }
 }
 
-export const storage = new MemStorage();
+// Database storage implementation
+export class DatabaseStorage implements IStorage {
+  async createContact(insertContact: InsertContact): Promise<Contact> {
+    const [contact] = await db
+      .insert(contacts)
+      .values(insertContact)
+      .returning();
+    return contact;
+  }
+
+  async getContacts(): Promise<Contact[]> {
+    return db.select().from(contacts).orderBy(contacts.createdAt);
+  }
+
+  async createQuickQuote(insertQuote: InsertQuickQuote): Promise<QuickQuote> {
+    const [quote] = await db
+      .insert(quickQuotes)
+      .values(insertQuote)
+      .returning();
+    return quote;
+  }
+
+  async getQuickQuotes(): Promise<QuickQuote[]> {
+    return db.select().from(quickQuotes).orderBy(quickQuotes.createdAt);
+  }
+
+  async createPreQualification(insertPreQual: InsertPreQualification): Promise<PreQualification> {
+    // Calculate qualification score and status
+    const loanAmount = parseFloat(insertPreQual.loanAmount || "0");
+    const score = Math.min(100, Math.max(0, 85 - (loanAmount > 500000 ? 10 : 0)));
+    const status = score >= 70 ? 'qualified' : score >= 50 ? 'conditional' : 'not-qualified';
+    
+    const preQualData = {
+      firstName: insertPreQual.firstName,
+      lastName: insertPreQual.lastName,
+      email: insertPreQual.email,
+      phone: insertPreQual.phone,
+      loanType: insertPreQual.loanType,
+      loanAmount: insertPreQual.loanAmount,
+      propertyValue: insertPreQual.propertyValue,
+      propertyType: insertPreQual.propertyType,
+      notes: insertPreQual.notes,
+      qualificationStatus: status,
+      qualificationScore: score,
+      annualIncome: null,
+      employmentType: null,
+      creditScore: null,
+      monthlyDebt: null,
+      assets: null,
+      downPayment: null,
+      estimatedRate: "Contact for rates",
+      dateOfBirth: null,
+      ssn: null,
+      employmentLength: null,
+      bankruptcyHistory: null
+    };
+
+    const [preQual] = await db
+      .insert(preQualifications)
+      .values(preQualData)
+      .returning();
+    return preQual;
+  }
+
+  async getPreQualifications(): Promise<PreQualification[]> {
+    return db.select().from(preQualifications).orderBy(preQualifications.createdAt);
+  }
+
+  async getBlogPosts(): Promise<BlogPost[]> {
+    return db.select().from(blogPosts).orderBy(blogPosts.publishedAt);
+  }
+
+  async getBlogPost(slug: string): Promise<BlogPost | undefined> {
+    const [post] = await db.select().from(blogPosts).where(eq(blogPosts.slug, slug));
+    return post || undefined;
+  }
+
+  async getTestimonials(): Promise<Testimonial[]> {
+    return db.select().from(testimonials).orderBy(testimonials.createdAt);
+  }
+
+  async createMarketSubscription(insertSubscription: InsertMarketSubscription): Promise<MarketSubscription> {
+    const [subscription] = await db
+      .insert(marketSubscriptions)
+      .values(insertSubscription)
+      .returning();
+    return subscription;
+  }
+
+  async getMarketSubscriptions(): Promise<MarketSubscription[]> {
+    return db.select().from(marketSubscriptions).orderBy(marketSubscriptions.createdAt);
+  }
+
+  // Market updates functionality remains the same as MemStorage
+  async getMarketUpdates(): Promise<MarketData> {
+    const rates = await this.fetchCurrentRates();
+    const news = await this.fetchMarketNews();
+    const insights = await this.generateMarketInsights(news, rates);
+    const mbsData = await this.fetchMBSData();
+
+    return {
+      currentRates: rates,
+      news: news.slice(0, 3),
+      insights,
+      mbsData
+    };
+  }
+
+  private async fetchCurrentRates() {
+    try {
+      const freddieMacRates = await this.fetchFreddieRates();
+      if (freddieMacRates) return freddieMacRates;
+
+      const fredKey = process.env.FRED_API_KEY;
+      if (fredKey) {
+        const [thirtyYear, fifteenYear, jumbo] = await Promise.all([
+          this.fetchFredData('MORTGAGE30US', fredKey),
+          this.fetchFredData('MORTGAGE15US', fredKey),
+          this.fetchFredData('OBMMIJUMBO30YF', fredKey)
+        ]);
+
+        if (thirtyYear !== null) {
+          return {
+            thirtyYear: thirtyYear,
+            fifteenYear: fifteenYear || thirtyYear - 0.5,
+            jumbo: jumbo || thirtyYear + 0.25,
+            lastUpdated: new Date().toISOString()
+          };
+        }
+      }
+    } catch (error) {
+      console.error('Error fetching rates:', error);
+    }
+
+    return {
+      thirtyYear: 0,
+      fifteenYear: 0,
+      jumbo: 0,
+      lastUpdated: new Date().toISOString()
+    };
+  }
+
+  private async fetchFreddieRates() {
+    try {
+      const response = await fetch('https://www.freddiemac.com/pmms/docs/historicalweeklydata.json');
+      if (!response.ok) return null;
+      
+      const data = await response.json();
+      const latest = data[0];
+      
+      return {
+        thirtyYear: parseFloat(latest.pmms30),
+        fifteenYear: parseFloat(latest.pmms15),
+        jumbo: parseFloat(latest.pmms30) + 0.25,
+        lastUpdated: latest.date
+      };
+    } catch (error) {
+      return null;
+    }
+  }
+
+  private async fetchFredData(seriesId: string, apiKey?: string): Promise<number | null> {
+    if (!apiKey) return null;
+    
+    try {
+      const response = await fetch(
+        `https://api.stlouisfed.org/fred/series/observations?series_id=${seriesId}&api_key=${apiKey}&file_type=json&sort_order=desc&limit=1`
+      );
+      
+      if (!response.ok) return null;
+      
+      const data = await response.json();
+      const latest = data.observations?.[0];
+      
+      return latest?.value && latest.value !== '.' ? parseFloat(latest.value) : null;
+    } catch (error) {
+      return null;
+    }
+  }
+
+  private async fetchMarketNews(): Promise<NewsItem[]> {
+    try {
+      const [foxNews] = await Promise.all([
+        this.fetchRSSFeed('https://moxie.foxbusiness.com/google-publisher/latest.xml', 'FOX Business')
+      ]);
+
+      return [...foxNews].slice(0, 3);
+    } catch (error) {
+      console.error('Error fetching market news:', error);
+      return [];
+    }
+  }
+
+  private async fetchRSSFeed(rssUrl: string, sourceName: string): Promise<NewsItem[]> {
+    try {
+      const response = await fetch(rssUrl);
+      if (!response.ok) return [];
+      
+      const xmlText = await response.text();
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(xmlText, 'text/xml');
+      
+      const items = Array.from(doc.querySelectorAll('item')).slice(0, 10);
+      
+      return items.map(item => {
+        const title = item.querySelector('title')?.textContent || '';
+        const description = item.querySelector('description')?.textContent || '';
+        const link = item.querySelector('link')?.textContent || '';
+        const pubDate = item.querySelector('pubDate')?.textContent || '';
+        
+        return {
+          title,
+          description: description.replace(/<[^>]*>/g, '').substring(0, 200) + '...',
+          url: link,
+          publishedAt: pubDate,
+          source: sourceName,
+          category: this.categorizeNews(title + ' ' + description)
+        };
+      });
+    } catch (error) {
+      return [];
+    }
+  }
+
+  private categorizeNews(content: string): 'rates' | 'regulation' | 'market' | 'mbs' {
+    const lowerContent = content.toLowerCase();
+    
+    if (lowerContent.includes('rate') || lowerContent.includes('fed') || lowerContent.includes('interest')) {
+      return 'rates';
+    } else if (lowerContent.includes('regulation') || lowerContent.includes('policy') || lowerContent.includes('law')) {
+      return 'regulation';
+    } else if (lowerContent.includes('mbs') || lowerContent.includes('mortgage-backed') || lowerContent.includes('bond')) {
+      return 'mbs';
+    } else {
+      return 'market';
+    }
+  }
+
+  async generateMarketInsights(news: NewsItem[], rates: any): Promise<MarketInsight[]> {
+    const insights: MarketInsight[] = [];
+    
+    const marketInsight: MarketInsight = {
+      id: 'market-1',
+      title: 'Investment Property Market Analysis',
+      content: 'Current market conditions present unique opportunities for real estate investors. DSCR loans remain attractive for portfolio expansion with competitive terms available.',
+      rateImpact: 'neutral' as const,
+      urgency: 'medium' as const,
+      relatedNews: news[0]?.title || 'Market Update'
+    };
+    insights.push(marketInsight);
+
+    const opportunityInsight: MarketInsight = {
+      id: 'opportunity-1',
+      title: 'Cash-Out Refinance Opportunities',
+      content: 'Property values in key markets continue to support cash-out refinancing strategies. Consider leveraging existing equity for new investment opportunities.',
+      rateImpact: 'positive' as const,
+      urgency: 'low' as const,
+      relatedNews: news[1]?.title || 'Market Trends'
+    };
+    insights.push(opportunityInsight);
+
+    if (rates.thirtyYear > 6.5) {
+      const rateInsight: MarketInsight = {
+        id: 'rates-1',
+        title: 'Strategic Rate Positioning',
+        content: 'While rates remain elevated, savvy investors are securing properties now to benefit from future rate declines through refinancing strategies.',
+        rateImpact: 'negative' as const,
+        urgency: 'high' as const,
+        relatedNews: news[2]?.title || 'Rate Analysis'
+      };
+      insights.push(rateInsight);
+    }
+
+    return insights;
+  }
+
+  private async fetchMBSData() {
+    return {
+      price: 98.25,
+      yield: 4.75,
+      change: -0.15,
+      lastUpdated: new Date().toISOString()
+    };
+  }
+}
+
+export const storage = new DatabaseStorage();
