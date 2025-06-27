@@ -461,45 +461,56 @@ export class MemStorage implements IStorage {
       
       let insight: MarketInsight;
 
-      // Housing affordability crisis
+      // Housing affordability crisis - focus on market opportunity
       if (title.includes('housing crisis') || title.includes('affordability') || description.includes('30% of income')) {
         insight = {
           id: `insight-${index + 1}`,
-          title: "Affordability Crisis: Lock Rates Before They Rise",
-          content: `With 47 metro areas requiring over 30% of income for housing, demand pressure could push rates higher. Current 30-year rates at ${rates.thirtyYear}% may be the best we see this cycle. Smart investors should lock these rates now and secure properties while inventory remains available. We can always refinance to lower rates when the market shifts.`,
-          rateImpact: 'negative',
-          urgency: 'high',
+          title: "Affordability Crisis Creates Investment Opportunities",
+          content: `The affordability challenge in 47 metro areas signals a shift toward rental demand. This presents strong opportunities for investment properties, especially in markets where homeownership becomes less accessible. Current ${rates.thirtyYear}% rates are reasonable for cash-flowing rental properties. Consider markets with strong rental yields and employment growth.`,
+          rateImpact: 'neutral',
+          urgency: 'medium',
           relatedNews: article.title
         };
       }
-      // Buyer-friendly markets
+      // Buyer-friendly markets - only rate lock mention
       else if (title.includes('buyer-friendly') || title.includes('price cuts') || description.includes('inventory')) {
         insight = {
           id: `insight-${index + 1}`,
-          title: "Market Opportunities: Act Fast on Rate Locks",
-          content: `Buyer-friendly markets with price cuts and increased inventory won't last long. These conditions, combined with current ${rates.thirtyYear}% rates, create perfect buying opportunities. Lock your rate today - if rates drop later, we'll refinance you into the better rate. If they rise, you'll be protected.`,
-          rateImpact: 'neutral',
+          title: "Buyer-Friendly Markets: Timing and Rate Strategy",
+          content: `Markets with price cuts and increased inventory create negotiating power for investors. With current ${rates.thirtyYear}% rates, this may be an optimal time to secure financing and make strategic acquisitions. Consider getting pre-approved to move quickly when the right property emerges. These market conditions typically don't last long.`,
+          rateImpact: 'positive',
           urgency: 'high',
           relatedNews: article.title
         };
       }
-      // Investor activity
+      // Investor activity - focus on market dynamics
       else if (title.includes('investor') || title.includes('small real estate') || description.includes('investor purchases')) {
         insight = {
           id: `insight-${index + 1}`,
-          title: "Investor Competition: Secure Financing Now",
-          content: `Small investors dominating 59% of purchases means fierce competition for deals. With rates at ${rates.thirtyYear}%, having pre-approved financing is crucial. Lock your rate now to move quickly on properties. Interest rates may rise as investor demand continues to surge.`,
-          rateImpact: 'negative',
-          urgency: 'high',
+          title: "Small Investor Trend: Market Evolution",
+          content: `The rise of small investors to 59% of purchases reflects a fundamental shift in real estate markets. This trend often indicates strong rental fundamentals and cash flow opportunities. As competition increases, focus on off-market deals, emerging neighborhoods, and property types that institutional investors might overlook. Building relationships with local agents becomes increasingly valuable.`,
+          rateImpact: 'neutral',
+          urgency: 'medium',
           relatedNews: article.title
         };
       }
-      // Default general market insight
+      // General market insights - wealth building focus
+      else if (title.includes('wealth') || title.includes('luxury') || description.includes('wealthy')) {
+        insight = {
+          id: `insight-${index + 1}`,
+          title: "Wealth Migration Patterns: Strategic Considerations",
+          content: `Wealthy buyer movements often signal emerging high-growth markets. These patterns can indicate future property appreciation potential and rental demand from high-income tenants. Consider the economic factors driving these moves - tax advantages, business opportunities, or lifestyle preferences. Early positioning in these markets can yield strong long-term returns.`,
+          rateImpact: 'positive',
+          urgency: 'low',
+          relatedNews: article.title
+        };
+      }
+      // Default insight - market analysis
       else {
         insight = {
           id: `insight-${index + 1}`,
-          title: "Market Timing: Current Rates May Not Last",
-          content: `Current market conditions suggest rate volatility ahead. At ${rates.thirtyYear}% for 30-year fixed loans, we're seeing competitive rates that may not persist. Lock in today's rates and secure your investment property financing. If rates improve, we'll refinance you at no cost.`,
+          title: "Market Analysis: Strategic Investment Perspective",
+          content: `Current market dynamics present both challenges and opportunities for property investors. At ${rates.thirtyYear}% interest rates, focus on properties with strong cash flow potential and growth fundamentals. Consider markets with diverse economic drivers, population growth, and rental demand sustainability. Due diligence on local market conditions remains crucial.`,
           rateImpact: 'neutral',
           urgency: 'medium',
           relatedNews: article.title
