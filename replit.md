@@ -165,6 +165,7 @@ The application uses four main tables:
 - June 27, 2025. Enhanced Privacy Policy and Terms of Service pages with full navigation headers, footers, home buttons, cross-page navigation, comprehensive compliance content, NMLS licensing verification links, and proper Equal Housing Opportunity sections
 - June 27, 2025. Fixed all "Get Started Today" buttons across website - updated goToContact functions in all landing pages (DSCR purchase, refinance, HELOC, personal loans, startup business loans, debt consolidation) and contact section to properly navigate to contact form with smooth scrolling functionality
 - June 27, 2025. Fixed Equal Housing Opportunity logo colors - removed invert filters from white background pages (Resources, Privacy Policy, Terms of Service, Market Updates, Pre-qualification) to display black logo, kept white logo on dark backgrounds (footer, debt consolidation page)
+- June 27, 2025. Added market updates email subscription feature - created subscription form on Market Updates page with email validation, backend API endpoint, database schema for market subscriptions, duplicate email handling, and success/error notifications for user feedback
 
 ## User Preferences
 Preferred communication style: Simple, everyday language.

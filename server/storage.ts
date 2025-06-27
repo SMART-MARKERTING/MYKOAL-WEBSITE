@@ -4,6 +4,7 @@ import {
   blogPosts, 
   testimonials,
   preQualifications,
+  marketSubscriptions,
   type Contact, 
   type InsertContact,
   type QuickQuote,
@@ -11,7 +12,9 @@ import {
   type PreQualification,
   type InsertPreQualification,
   type BlogPost,
-  type Testimonial
+  type Testimonial,
+  type MarketSubscription,
+  type InsertMarketSubscription
 } from "@shared/schema";
 
 export interface IStorage {
@@ -37,6 +40,10 @@ export interface IStorage {
   // Market updates
   getMarketUpdates(): Promise<MarketData>;
   generateMarketInsights(news: NewsItem[], rates: any): Promise<MarketInsight[]>;
+  
+  // Market subscriptions
+  createMarketSubscription(subscription: InsertMarketSubscription): Promise<MarketSubscription>;
+  getMarketSubscriptions(): Promise<MarketSubscription[]>;
 }
 
 interface NewsItem {
@@ -80,11 +87,13 @@ export class MemStorage implements IStorage {
   private preQualifications: Map<number, PreQualification>;
   private blogPosts: Map<number, BlogPost>;
   private testimonials: Map<number, Testimonial>;
+  private marketSubscriptions: Map<number, MarketSubscription>;
   private currentContactId: number;
   private currentQuoteId: number;
   private currentPreQualId: number;
   private currentBlogId: number;
   private currentTestimonialId: number;
+  private currentSubscriptionId: number;
 
   constructor() {
     this.contacts = new Map();
@@ -92,11 +101,13 @@ export class MemStorage implements IStorage {
     this.preQualifications = new Map();
     this.blogPosts = new Map();
     this.testimonials = new Map();
+    this.marketSubscriptions = new Map();
     this.currentContactId = 1;
     this.currentQuoteId = 1;
     this.currentPreQualId = 1;
     this.currentBlogId = 1;
     this.currentTestimonialId = 1;
+    this.currentSubscriptionId = 1;
 
     // Initialize with sample data
     this.initializeSampleData();
@@ -573,6 +584,39 @@ export class MemStorage implements IStorage {
       console.error('Error fetching MBS data:', error);
       throw new Error('MBS data source currently unavailable - please try again later');
     }
+  }
+
+  // Market subscription methods
+  async createMarketSubscription(insertSubscription: InsertMarketSubscription): Promise<MarketSubscription> {
+    // Check for existing subscription with same email
+    const existingSubscription = Array.from(this.marketSubscriptions.values())
+      .find(sub => sub.email === insertSubscription.email);
+    
+    if (existingSubscription) {
+      // Reactivate if inactive
+      if (existingSubscription.status === 'unsubscribed') {
+        existingSubscription.status = 'active';
+        existingSubscription.updatedAt = new Date();
+        return existingSubscription;
+      }
+      // Return existing active subscription
+      return existingSubscription;
+    }
+
+    const subscription: MarketSubscription = {
+      id: this.currentSubscriptionId++,
+      email: insertSubscription.email,
+      status: insertSubscription.status || 'active',
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    };
+
+    this.marketSubscriptions.set(subscription.id, subscription);
+    return subscription;
+  }
+
+  async getMarketSubscriptions(): Promise<MarketSubscription[]> {
+    return Array.from(this.marketSubscriptions.values());
   }
 }
 

@@ -1,7 +1,7 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import { insertContactSchema, insertQuickQuoteSchema, insertPreQualificationSchema } from "@shared/schema";
+import { insertContactSchema, insertQuickQuoteSchema, insertPreQualificationSchema, insertMarketSubscriptionSchema } from "@shared/schema";
 import { z } from "zod";
 
 export async function registerRoutes(app: Express): Promise<Server> {
@@ -195,6 +195,32 @@ export async function registerRoutes(app: Express): Promise<Server> {
         error: "Market data sources temporarily unavailable",
         message: "Please check back in a few minutes for the latest rates and news"
       });
+    }
+  });
+
+  // Market subscription
+  app.post("/api/market-subscription", async (req, res) => {
+    try {
+      const validatedData = insertMarketSubscriptionSchema.parse(req.body);
+      const subscription = await storage.createMarketSubscription(validatedData);
+      
+      console.log("New market subscription:", subscription);
+      
+      res.json({ success: true, subscription });
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        res.status(400).json({ 
+          success: false, 
+          message: "Validation error", 
+          errors: error.errors 
+        });
+      } else {
+        console.error("Error creating market subscription:", error);
+        res.status(500).json({ 
+          success: false, 
+          message: "Internal server error" 
+        });
+      }
     }
   });
 

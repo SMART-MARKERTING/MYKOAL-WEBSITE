@@ -71,6 +71,14 @@ export const preQualifications = pgTable("pre_qualifications", {
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 
+export const marketSubscriptions = pgTable("market_subscriptions", {
+  id: serial("id").primaryKey(),
+  email: text("email").notNull().unique(),
+  status: text("status").notNull().default("active"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
+});
+
 export const insertContactSchema = createInsertSchema(contacts).omit({
   id: true,
   createdAt: true,
@@ -105,6 +113,12 @@ export const insertPreQualificationSchema = z.object({
   estimatedRate: z.string().optional().nullable(),
 });
 
+export const insertMarketSubscriptionSchema = createInsertSchema(marketSubscriptions).omit({
+  id: true,
+  createdAt: true,
+  updatedAt: true,
+});
+
 export type Contact = typeof contacts.$inferSelect;
 export type InsertContact = z.infer<typeof insertContactSchema>;
 export type QuickQuote = typeof quickQuotes.$inferSelect;
@@ -113,3 +127,5 @@ export type PreQualification = typeof preQualifications.$inferSelect;
 export type InsertPreQualification = z.infer<typeof insertPreQualificationSchema>;
 export type BlogPost = typeof blogPosts.$inferSelect;
 export type Testimonial = typeof testimonials.$inferSelect;
+export type MarketSubscription = typeof marketSubscriptions.$inferSelect;
+export type InsertMarketSubscription = z.infer<typeof insertMarketSubscriptionSchema>;

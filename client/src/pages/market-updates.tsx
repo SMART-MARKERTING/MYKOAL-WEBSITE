@@ -1,8 +1,14 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useMutation } from '@tanstack/react-query';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { TrendingUp, TrendingDown, Clock, ExternalLink, Building2, DollarSign, Calendar, AlertTriangle, CheckCircle, AlertCircle } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { useToast } from '@/hooks/use-toast';
+import { apiRequest } from '@/lib/queryClient';
+import { TrendingUp, TrendingDown, Clock, ExternalLink, Building2, DollarSign, Calendar, AlertTriangle, CheckCircle, AlertCircle, Mail } from 'lucide-react';
+import { useState } from 'react';
 
 interface NewsItem {
   title: string;
@@ -40,10 +46,69 @@ interface MarketData {
 }
 
 export default function MarketUpdatesPage() {
+  const [email, setEmail] = useState('');
+  const { toast } = useToast();
+  
   const { data: marketData, isLoading, error } = useQuery<MarketData>({
     queryKey: ['/api/market-updates'],
     refetchInterval: 30 * 60 * 1000, // Refetch every 30 minutes
   });
+
+  const subscriptionMutation = useMutation({
+    mutationFn: async (subscriptionData: { email: string }) => {
+      const response = await fetch('/api/market-subscription', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(subscriptionData),
+      });
+      
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.message || 'Subscription failed');
+      }
+      
+      return response.json();
+    },
+    onSuccess: () => {
+      toast({
+        title: "Subscription Successful!",
+        description: "You'll receive weekly market updates and insights from Mykoal DeShazo.",
+      });
+      setEmail('');
+    },
+    onError: (error: any) => {
+      toast({
+        title: "Subscription Failed",
+        description: error.message || "Please try again or contact us directly.",
+        variant: "destructive",
+      });
+    },
+  });
+
+  const handleSubscribe = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email.trim()) {
+      toast({
+        title: "Email Required",
+        description: "Please enter your email address to subscribe.",
+        variant: "destructive",
+      });
+      return;
+    }
+    
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      toast({
+        title: "Invalid Email",
+        description: "Please enter a valid email address.",
+        variant: "destructive",
+      });
+      return;
+    }
+    
+    subscriptionMutation.mutate({ email });
+  };
 
   if (isLoading) {
     return (
@@ -296,6 +361,68 @@ export default function MarketUpdatesPage() {
               <p className="text-xs md:text-sm mt-4 opacity-75">
                 Licensed Mortgage Professional • Scottsdale, Arizona
               </p>
+            </CardContent>
+          </Card>
+
+          {/* Market Updates Subscription */}
+          <Card className="my-8 shadow-lg border-0 bg-gradient-to-r from-green-50 to-blue-50">
+            <CardHeader className="text-center">
+              <div className="flex items-center justify-center mb-4">
+                <Mail className="w-8 h-8 text-blue-600 mr-3" />
+                <CardTitle className="text-2xl md:text-3xl text-gray-900">
+                  Stay Ahead of Market Changes
+                </CardTitle>
+              </div>
+              <CardDescription className="text-lg text-gray-600 max-w-2xl mx-auto">
+                Get weekly market insights and rate alerts delivered to your inbox. 
+                Be the first to know about investment opportunities and market shifts.
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <form onSubmit={handleSubscribe} className="max-w-md mx-auto">
+                <div className="space-y-4">
+                  <div>
+                    <Label htmlFor="subscription-email" className="text-sm font-semibold text-gray-700">
+                      Email Address
+                    </Label>
+                    <Input
+                      id="subscription-email"
+                      type="email"
+                      placeholder="Enter your email address"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      className="mt-1"
+                      required
+                    />
+                  </div>
+                  <Button 
+                    type="submit" 
+                    className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 text-lg font-semibold"
+                    disabled={subscriptionMutation.isPending}
+                  >
+                    {subscriptionMutation.isPending ? (
+                      "Subscribing..."
+                    ) : (
+                      "Subscribe to Market Updates"
+                    )}
+                  </Button>
+                </div>
+              </form>
+              
+              <div className="mt-6 text-center">
+                <div className="flex items-center justify-center gap-2 text-sm text-gray-600">
+                  <CheckCircle className="w-4 h-4 text-green-500" />
+                  <span>Weekly market insights from Mykoal DeShazo</span>
+                </div>
+                <div className="flex items-center justify-center gap-2 text-sm text-gray-600 mt-2">
+                  <CheckCircle className="w-4 h-4 text-green-500" />
+                  <span>Rate alerts and investment opportunities</span>
+                </div>
+                <div className="flex items-center justify-center gap-2 text-sm text-gray-600 mt-2">
+                  <CheckCircle className="w-4 h-4 text-green-500" />
+                  <span>Unsubscribe anytime • No spam guaranteed</span>
+                </div>
+              </div>
             </CardContent>
           </Card>
 
