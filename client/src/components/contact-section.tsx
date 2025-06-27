@@ -5,11 +5,11 @@ import { Phone, Mail, Calendar, Clock } from "lucide-react";
 
 export default function ContactSection() {
   return (
-    <section id="contact" className="py-20 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">Get Started Today</h2>
-          <p className="text-xl text-gray-600">Multiple ways to connect with our mortgage experts</p>
+    <section id="contact" className="py-16 bg-white">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-10">
+          <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">Ready to Get Started?</h2>
+          <p className="text-lg text-gray-600">Let's discuss your financing needs</p>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-12">

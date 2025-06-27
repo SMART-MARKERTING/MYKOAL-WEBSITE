@@ -8,6 +8,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
 import { Link } from "wouter";
+import { Phone, Mail, Star, CheckCircle } from "lucide-react";
+import headshotImage from "@assets/IMG_0016_1751000995747.jpeg";
 import type { InsertQuickQuote } from "@shared/schema";
 
 export default function HeroSection() {
@@ -74,69 +76,80 @@ export default function HeroSection() {
   };
 
   return (
-    <section id="home" className="relative overflow-hidden">
-      {/* Background gradient and image */}
-      <div className="absolute inset-0 hero-gradient"></div>
-      <div 
-        className="absolute inset-0" 
-        style={{
-          backgroundImage: "url('https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080')",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          opacity: 0.3
-        }}
-      ></div>
-      
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32">
-        <div className="lg:grid lg:grid-cols-2 lg:gap-8 items-center">
-          <div>
-            <h1 className="text-4xl lg:text-6xl font-bold text-white leading-tight">
-              Welcome to <span className="text-blue-200">My Website</span>
-            </h1>
-            <p className="mt-6 text-xl text-blue-100 leading-relaxed">
-              We have many options and programs that we work with. Take a look around my website and submit your information when you're ready to begin. Let me know if you have any special requests or unique scenarios.
-            </p>
-            
-            <div className="mt-8 flex flex-col sm:flex-row gap-4">
-              <Link href="/pre-qualification">
-                <Button className="w-full sm:w-auto accent-gradient text-white px-8 py-4 rounded-lg font-semibold text-lg hover:opacity-90 transition-opacity shadow-lg">
-                  Get Pre-Qualified Now
-                </Button>
-              </Link>
-              <Button
-                onClick={() => scrollToSection("calculator")}
-                variant="outline"
-                className="border-2 border-blue-200 bg-blue-100 text-blue-800 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-blue-200 hover:text-blue-900 transition-colors"
-              >
-                Calculate Payment
-              </Button>
-              <Button
-                onClick={() => scrollToSection("contact")}
-                variant="outline"
-                className="border-2 border-blue-200 bg-blue-100 text-blue-800 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-blue-200 hover:text-blue-900 transition-colors"
-              >
-                Get Free Quote
-              </Button>
-            </div>
-
-            {/* Trust indicators */}
-            <div className="mt-12 flex items-center space-x-8">
-              <div className="text-center">
-                <div className="text-2xl font-bold text-white">500+</div>
-                <div className="text-sm text-blue-200">Happy Clients</div>
+    <section id="home" className="relative bg-gradient-to-br from-blue-900 via-blue-800 to-blue-700 min-h-screen flex items-center">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          
+          {/* Left side - Professional intro with headshot */}
+          <div className="text-center lg:text-left">
+            <div className="flex flex-col lg:flex-row items-center lg:items-start gap-8">
+              <div className="flex-shrink-0">
+                <img 
+                  src={headshotImage} 
+                  alt="Mykoal DeShazo - Mortgage Professional" 
+                  className="w-32 h-32 lg:w-40 lg:h-40 rounded-full object-cover shadow-2xl border-4 border-white/20"
+                />
               </div>
-              <div className="text-center">
-                <div className="text-2xl font-bold text-white">15+</div>
-                <div className="text-sm text-blue-200">Years Experience</div>
+              
+              <div className="flex-1">
+                <h1 className="text-3xl lg:text-5xl font-bold text-white leading-tight mb-4">
+                  Hi, I'm <span className="text-blue-200">Mykoal DeShazo</span>
+                </h1>
+                
+                <div className="flex items-center justify-center lg:justify-start gap-2 mb-4">
+                  <div className="flex text-yellow-400">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} className="h-4 w-4 fill-current" />
+                    ))}
+                  </div>
+                  <span className="text-blue-200 text-sm">NMLS #1912347</span>
+                </div>
+                
+                <p className="text-lg text-blue-100 leading-relaxed mb-6">
+                  Specializing in business lending, DSCR loans, and investment property financing. 
+                  I help entrepreneurs and investors secure the capital they need to grow.
+                </p>
+                
+                <div className="flex flex-col sm:flex-row gap-3 mb-8">
+                  <Link href="/pre-qualification" className="flex-1">
+                    <Button className="w-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white px-6 py-3 rounded-lg font-semibold shadow-lg transition-all">
+                      Get Pre-Qualified
+                    </Button>
+                  </Link>
+                  
+                  <Button
+                    onClick={() => scrollToSection("contact")}
+                    variant="outline"
+                    className="flex-1 border-2 border-white/30 bg-white/10 text-white hover:bg-white/20 px-6 py-3 rounded-lg font-semibold backdrop-blur-sm"
+                  >
+                    <Phone className="h-4 w-4 mr-2" />
+                    Call Now
+                  </Button>
+                </div>
+                
+                {/* Quick stats */}
+                <div className="grid grid-cols-2 gap-4 text-center lg:text-left">
+                  <div>
+                    <div className="text-2xl font-bold text-white">20+</div>
+                    <div className="text-sm text-blue-200">Years Experience</div>
+                  </div>
+                  <div>
+                    <div className="text-2xl font-bold text-white">500+</div>
+                    <div className="text-sm text-blue-200">Loans Funded</div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
 
-          {/* Quick quote form */}
-          <div className="mt-12 lg:mt-0">
-            <Card className="shadow-2xl">
-              <CardContent className="p-8">
-                <h3 className="text-2xl font-bold text-gray-900 mb-6">Get Your Rate Quote</h3>
+          {/* Right side - Streamlined contact form */}
+          <div>
+            <Card className="shadow-2xl border-0 bg-white/95 backdrop-blur-sm">
+              <CardContent className="p-6 lg:p-8">
+                <div className="text-center mb-6">
+                  <h3 className="text-2xl font-bold text-gray-900 mb-2">Get Your Free Quote</h3>
+                  <p className="text-gray-600">Quick response guaranteed</p>
+                </div>
                 <form onSubmit={handleQuickQuoteSubmit}>
                   <div className="space-y-4">
                     <div>

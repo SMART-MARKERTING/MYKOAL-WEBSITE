@@ -143,6 +143,7 @@ The application uses four main tables:
 - June 27, 2025. Enhanced debt consolidation calculator extra payment interactivity - added clear button, confirmation message, and dynamic help text for better user experience
 - June 27, 2025. Fixed debt consolidation calculator to dynamically update all calculations (total payments, interest savings, years saved) when extra payment amount is manually adjusted
 - June 27, 2025. Fixed mortgage calculation library to properly return actual total interest paid when extra payments are applied, resolving interest savings calculation showing zero
+- June 27, 2025. Redesigned homepage with integrated professional headshot, streamlined mobile-friendly layout, removed unnecessary sections, modernized hero section with personal branding
 
 ## User Preferences
 Preferred communication style: Simple, everyday language.

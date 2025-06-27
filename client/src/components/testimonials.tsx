@@ -36,14 +36,14 @@ export default function Testimonials() {
   }
 
   return (
-    <section className="py-20 bg-blue-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">What Our Clients Say</h2>
-          <p className="text-xl text-gray-600">Real stories from satisfied homeowners</p>
+    <section className="py-16 bg-blue-50">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-10">
+          <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">Client Success Stories</h2>
+          <p className="text-lg text-gray-600">Real results from satisfied clients</p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {testimonials?.map((testimonial) => (
             <Card key={testimonial.id} className="hover:shadow-xl transition-shadow">
               <CardContent className="p-8">

@@ -42,11 +42,11 @@ export default function MortgageCalculator() {
   };
 
   return (
-    <section id="calculator" className="py-20 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">Loan Calculator</h2>
-          <p className="text-xl text-gray-600">Calculate your monthly payments and see what you can afford</p>
+    <section id="calculator" className="py-16 bg-gray-50">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-10">
+          <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">Loan Calculator</h2>
+          <p className="text-lg text-gray-600">Calculate your monthly payments and explore loan options</p>
         </div>
 
         <div className="lg:grid lg:grid-cols-2 lg:gap-12 items-start">

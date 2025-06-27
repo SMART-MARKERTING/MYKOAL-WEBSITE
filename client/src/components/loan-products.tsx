@@ -85,39 +85,39 @@ const loanProducts = [
 
 export default function LoanProducts() {
   return (
-    <section id="loans" className="py-20 bg-gray-50">
+    <section id="loans" className="py-16 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">Lending Solutions</h2>
-          <p className="text-xl text-gray-600">Specialized financing for investors and business owners</p>
+          <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">Lending Solutions</h2>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">Specialized financing for investors and business owners</p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8 mb-16">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
           {loanProducts.map((product) => {
             const IconComponent = product.icon;
             return (
-              <Card key={product.name} className="hover:shadow-xl transition-shadow">
-                <CardContent className="p-8">
-                  <div className="text-center mb-6">
-                    <div className={`${product.iconBg} w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4`}>
-                      <IconComponent className={`${product.iconColor} h-8 w-8`} />
+              <Card key={product.name} className="hover:shadow-lg transition-all duration-300 border-0 shadow-md">
+                <CardContent className="p-6">
+                  <div className="text-center mb-4">
+                    <div className={`${product.iconBg} w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3`}>
+                      <IconComponent className={`${product.iconColor} h-6 w-6`} />
                     </div>
-                    <h3 className="text-2xl font-bold text-gray-900">{product.name}</h3>
-                    <p className={`${product.iconColor} font-semibold`}>{product.subtitle}</p>
+                    <h3 className="text-lg font-bold text-gray-900 mb-1">{product.name}</h3>
+                    <p className={`${product.iconColor} text-sm font-medium`}>{product.subtitle}</p>
                   </div>
                   
-                  <div className="space-y-4 mb-8">
-                    {product.features.map((feature, index) => (
-                      <div key={index} className="flex items-center">
-                        <Check className="text-green-500 mr-3 h-5 w-5 flex-shrink-0" />
-                        <span className="text-gray-700">{feature}</span>
+                  <div className="space-y-2 mb-6">
+                    {product.features.slice(0, 3).map((feature, index) => (
+                      <div key={index} className="flex items-start">
+                        <Check className="text-green-500 mr-2 h-4 w-4 flex-shrink-0 mt-0.5" />
+                        <span className="text-gray-600 text-sm leading-tight">{feature}</span>
                       </div>
                     ))}
                   </div>
                   
-                  <div className="space-y-3">
+                  <div className="space-y-2">
                     <Link href={product.link}>
-                      <Button variant="outline" className="w-full border-gray-300 text-gray-700 hover:bg-gray-50">
+                      <Button variant="outline" className="w-full text-sm border-gray-200 hover:bg-gray-50">
                         Learn More
                       </Button>
                     </Link>
