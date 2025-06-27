@@ -1,7 +1,7 @@
 import ContactForm from "./contact-form";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Phone, Mail, Calendar, Clock } from "lucide-react";
+import { Phone, Mail, Calendar, Clock, Facebook, Linkedin, Instagram } from "lucide-react";
 
 export default function ContactSection() {
   return (
@@ -91,6 +91,44 @@ export default function ContactSection() {
               </CardContent>
             </Card>
 
+            {/* Social Media Section */}
+            <Card className="shadow-lg">
+              <CardHeader>
+                <CardTitle className="text-xl font-bold text-gray-900">Connect With Me</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-gray-600 mb-4">Follow for market updates and financing tips</p>
+                <div className="flex space-x-4">
+                  <a 
+                    href="https://www.facebook.com/61577360476457" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="bg-blue-600 w-12 h-12 rounded-lg flex items-center justify-center hover:bg-blue-700 transition-colors"
+                    aria-label="Follow Mykoal on Facebook"
+                  >
+                    <Facebook className="h-6 w-6 text-white" />
+                  </a>
+                  <a 
+                    href="https://www.linkedin.com/in/mykoal-deshazo-48134616a" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="bg-blue-700 w-12 h-12 rounded-lg flex items-center justify-center hover:bg-blue-800 transition-colors"
+                    aria-label="Connect with Mykoal on LinkedIn"
+                  >
+                    <Linkedin className="h-6 w-6 text-white" />
+                  </a>
+                  <a 
+                    href="https://www.instagram.com/realmykoal/" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="bg-gradient-to-r from-purple-500 to-pink-500 w-12 h-12 rounded-lg flex items-center justify-center hover:from-purple-600 hover:to-pink-600 transition-colors"
+                    aria-label="Follow Mykoal on Instagram"
+                  >
+                    <Instagram className="h-6 w-6 text-white" />
+                  </a>
+                </div>
+              </CardContent>
+            </Card>
 
           </div>
         </div>

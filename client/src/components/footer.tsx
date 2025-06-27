@@ -22,17 +22,32 @@ export default function Footer() {
             
             {/* Social media */}
             <div className="flex space-x-4">
-              <a href="#" className="bg-gray-800 w-10 h-10 rounded-full flex items-center justify-center hover:bg-blue-600 transition-colors">
+              <a 
+                href="https://www.facebook.com/61577360476457" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="bg-gray-800 w-10 h-10 rounded-full flex items-center justify-center hover:bg-blue-600 transition-colors"
+                aria-label="Follow Mykoal on Facebook"
+              >
                 <Facebook className="h-5 w-5" />
               </a>
-              <a href="#" className="bg-gray-800 w-10 h-10 rounded-full flex items-center justify-center hover:bg-blue-600 transition-colors">
+              <a 
+                href="https://www.linkedin.com/in/mykoal-deshazo-48134616a" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="bg-gray-800 w-10 h-10 rounded-full flex items-center justify-center hover:bg-blue-600 transition-colors"
+                aria-label="Connect with Mykoal on LinkedIn"
+              >
                 <Linkedin className="h-5 w-5" />
               </a>
-              <a href="#" className="bg-gray-800 w-10 h-10 rounded-full flex items-center justify-center hover:bg-blue-600 transition-colors">
+              <a 
+                href="https://www.instagram.com/realmykoal/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="bg-gray-800 w-10 h-10 rounded-full flex items-center justify-center hover:bg-blue-600 transition-colors"
+                aria-label="Follow Mykoal on Instagram"
+              >
                 <Instagram className="h-5 w-5" />
-              </a>
-              <a href="#" className="bg-gray-800 w-10 h-10 rounded-full flex items-center justify-center hover:bg-blue-600 transition-colors">
-                <Youtube className="h-5 w-5" />
               </a>
             </div>
           </div>

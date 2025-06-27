@@ -161,6 +161,7 @@ The application uses four main tables:
 - June 27, 2025. Created comprehensive Privacy Policy and Terms of Service pages with NMLS #1912347 licensing integration, direct link to NMLS Consumer Access verification, regulatory compliance sections, and updated footer with proper navigation links
 - June 27, 2025. Removed consultation scheduling references - changed "Free 30-minute consultation" to "Same-day rate quotes" and "Schedule Free Consultation" buttons to "Get Quote Today" and "Get Started Today"
 - June 27, 2025. Created comprehensive Resources page with featured articles, financial calculators, loan product guides, market intelligence tools, and online pre-qualification tools; updated navigation to link to dedicated Resources page instead of blog section scroll
+- June 27, 2025. Added social media links across website - Instagram: https://www.instagram.com/realmykoal/, Facebook: https://www.facebook.com/61577360476457, LinkedIn: https://www.linkedin.com/in/mykoal-deshazo-48134616a integrated into footer and contact sections with proper branding colors
 
 ## User Preferences
 Preferred communication style: Simple, everyday language.
