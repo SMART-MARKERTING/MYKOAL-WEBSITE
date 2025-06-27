@@ -125,6 +125,7 @@ The application uses four main tables:
 - June 27, 2025. Updated to business lending focus - DSCR loans, HELOC, startup business loans, personal loans
 - June 27, 2025. Removed "Rate quotes in 60 seconds" text, added loan type selector to calculator with business lending options
 - June 27, 2025. Simplified loan calculator - removed down payment and additional costs, changed to direct loan amount input, updated hero section loan type dropdown
+- June 27, 2025. Updated hero section with personalized welcome message emphasizing various lending options and unique scenarios
 
 ## User Preferences
 Preferred communication style: Simple, everyday language.

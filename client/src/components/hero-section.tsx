@@ -90,10 +90,10 @@ export default function HeroSection() {
         <div className="lg:grid lg:grid-cols-2 lg:gap-8 items-center">
           <div>
             <h1 className="text-4xl lg:text-6xl font-bold text-white leading-tight">
-              Your Dream Home <span className="text-blue-200">Starts Here</span>
+              Welcome to <span className="text-blue-200">My Website</span>
             </h1>
             <p className="mt-6 text-xl text-blue-100 leading-relaxed">
-              Professional mortgage solutions with competitive rates and expert guidance. Get pre-approved in minutes, not days.
+              We have many options and programs that we work with. Take a look around my website and submit your information when you're ready to begin. Let me know if you have any special requests or unique scenarios.
             </p>
             
             <div className="mt-8 flex flex-col sm:flex-row gap-4">
