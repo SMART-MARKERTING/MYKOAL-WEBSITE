@@ -25,7 +25,7 @@ interface PreQualificationData {
   loanAmount: string;
   propertyValue: string;
   propertyType: string;
-  downPayment: string;
+  loanTerm: string;
   
   // Additional Information
   notes: string;
@@ -51,7 +51,7 @@ export default function PreQualificationPage() {
     loanAmount: "",
     propertyValue: "",
     propertyType: "",
-    downPayment: "",
+    loanTerm: "",
     notes: ""
   });
 
@@ -117,7 +117,7 @@ export default function PreQualificationPage() {
         loanAmount: data.loanAmount,
         propertyValue: data.propertyValue || "",
         propertyType: data.propertyType,
-        downPayment: data.downPayment || "",
+        downPayment: data.loanTerm || "", // Using downPayment field to store loan term for backend compatibility
         notes: data.notes || ""
       };
 
@@ -271,6 +271,7 @@ export default function PreQualificationPage() {
                     <SelectItem value="DSCR HELOC">DSCR HELOC</SelectItem>
                     <SelectItem value="Personal Loan">Personal Loan</SelectItem>
                     <SelectItem value="Debt Consolidation">Debt Consolidation</SelectItem>
+                    <SelectItem value="Other">Other</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -326,18 +327,14 @@ export default function PreQualificationPage() {
                   </Select>
                 </div>
                 <div>
-                  <Label htmlFor="downPayment">Down Payment</Label>
-                  <div className="relative">
-                    <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">$</span>
-                    <Input
-                      id="downPayment"
-                      type="number"
-                      value={formData.downPayment}
-                      onChange={(e) => updateFormData('downPayment', e.target.value)}
-                      className="pl-8"
-                      placeholder="100000"
-                    />
-                  </div>
+                  <Label htmlFor="loanTerm">Loan Term</Label>
+                  <Input
+                    id="loanTerm"
+                    type="text"
+                    value={formData.loanTerm}
+                    onChange={(e) => updateFormData('loanTerm', e.target.value)}
+                    placeholder="30 years"
+                  />
                 </div>
               </div>
             </CardContent>
@@ -373,7 +370,7 @@ export default function PreQualificationPage() {
                     <div><strong>Loan Amount:</strong> ${formData.loanAmount ? Number(formData.loanAmount).toLocaleString() : ''}</div>
                     {formData.propertyValue && <div><strong>Property Value:</strong> ${Number(formData.propertyValue).toLocaleString()}</div>}
                     {formData.propertyType && <div><strong>Property Type:</strong> {formData.propertyType}</div>}
-                    {formData.downPayment && <div><strong>Down Payment:</strong> ${Number(formData.downPayment).toLocaleString()}</div>}
+                    {formData.loanTerm && <div><strong>Loan Term:</strong> {formData.loanTerm}</div>}
                   </div>
                 </div>
               </div>
