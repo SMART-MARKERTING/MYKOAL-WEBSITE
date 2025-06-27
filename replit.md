@@ -145,6 +145,7 @@ The application uses four main tables:
 - June 27, 2025. Fixed mortgage calculation library to properly return actual total interest paid when extra payments are applied, resolving interest savings calculation showing zero
 - June 27, 2025. Redesigned homepage with integrated professional headshot, streamlined mobile-friendly layout, removed unnecessary sections, modernized hero section with personal branding
 - June 27, 2025. Removed all MortgagePro references, updated to use only "Mykoal DeShazo" branding, changed from business loans to investor/property financing focus, updated location to Scottsdale Arizona, standardized phone to 623-280-8351, updated all dates to 2025
+- June 27, 2025. Added optional monthly property tax and property insurance fields to both loan calculator and debt consolidation calculator with accurate total payment calculations
 
 ## User Preferences
 Preferred communication style: Simple, everyday language.

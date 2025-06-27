@@ -22,6 +22,8 @@ export default function DebtConsolidationCalculator({
     interestRate: 7.5,
     loanTerm: 30,
     extraPayment: 0,
+    propertyTax: 0,
+    propertyInsurance: 0,
   });
 
   const [useExtraPayment, setUseExtraPayment] = useState(false);
@@ -209,6 +211,38 @@ export default function DebtConsolidationCalculator({
                 </div>
               </div>
 
+              {/* Optional Tax and Insurance Fields */}
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <Label htmlFor="propertyTax">Monthly Property Tax (Optional)</Label>
+                  <div className="relative">
+                    <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">$</span>
+                    <Input
+                      id="propertyTax"
+                      type="number"
+                      placeholder="0"
+                      value={inputs.propertyTax || ''}
+                      onChange={(e) => updateInput('propertyTax', Number(e.target.value) || 0)}
+                      className="pl-8"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <Label htmlFor="propertyInsurance">Monthly Property Insurance (Optional)</Label>
+                  <div className="relative">
+                    <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">$</span>
+                    <Input
+                      id="propertyInsurance"
+                      type="number"
+                      placeholder="0"
+                      value={inputs.propertyInsurance || ''}
+                      onChange={(e) => updateInput('propertyInsurance', Number(e.target.value) || 0)}
+                      className="pl-8"
+                    />
+                  </div>
+                </div>
+              </div>
+
               <div>
                 <Label htmlFor="extraPayment">Extra Monthly Payment (Optional)</Label>
                 <div className="relative">
@@ -246,9 +280,30 @@ export default function DebtConsolidationCalculator({
               <h3 className="font-semibold text-blue-900 mb-4">Consolidation Loan Results</h3>
               <div className="space-y-3">
                 <div className="flex justify-between">
-                  <span className="text-blue-700">New Monthly Payment:</span>
+                  <span className="text-blue-700">Principal & Interest:</span>
                   <span className="font-bold text-blue-900">${results.monthlyPayment.toLocaleString()}</span>
                 </div>
+                
+                {(inputs.propertyTax > 0 || inputs.propertyInsurance > 0) && (
+                  <>
+                    {inputs.propertyTax > 0 && (
+                      <div className="flex justify-between text-sm">
+                        <span className="text-gray-600">+ Property Tax:</span>
+                        <span className="font-semibold text-gray-700">${inputs.propertyTax.toLocaleString()}</span>
+                      </div>
+                    )}
+                    {inputs.propertyInsurance > 0 && (
+                      <div className="flex justify-between text-sm">
+                        <span className="text-gray-600">+ Property Insurance:</span>
+                        <span className="font-semibold text-gray-700">${inputs.propertyInsurance.toLocaleString()}</span>
+                      </div>
+                    )}
+                    <div className="flex justify-between border-t pt-2">
+                      <span className="text-blue-700 font-medium">Total Monthly Payment:</span>
+                      <span className="font-bold text-blue-900">${(results.monthlyPayment + inputs.propertyTax + inputs.propertyInsurance).toLocaleString()}</span>
+                    </div>
+                  </>
+                )}
                 <div className="flex justify-between border-t pt-2">
                   <span className="text-blue-700">Current Total Payments:</span>
                   <span className="font-bold text-blue-900">${totalMonthlyPayments.toLocaleString()}</span>

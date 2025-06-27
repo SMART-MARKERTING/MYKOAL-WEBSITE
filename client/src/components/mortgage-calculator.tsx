@@ -13,6 +13,8 @@ export default function MortgageCalculator() {
     loanTerm: 30,
     loanType: "dscr-purchase",
     extraPayment: 0,
+    propertyTax: 0,
+    propertyInsurance: 0,
   });
 
   const [results, setResults] = useState({
@@ -124,6 +126,38 @@ export default function MortgageCalculator() {
                 </Select>
               </div>
 
+              {/* Optional Tax and Insurance Fields */}
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <Label htmlFor="propertyTax">Monthly Property Tax (Optional)</Label>
+                  <div className="relative">
+                    <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">$</span>
+                    <Input
+                      id="propertyTax"
+                      type="number"
+                      placeholder="0"
+                      value={inputs.propertyTax || ''}
+                      onChange={(e) => updateInput('propertyTax', Number(e.target.value) || 0)}
+                      className="pl-8"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <Label htmlFor="propertyInsurance">Monthly Property Insurance (Optional)</Label>
+                  <div className="relative">
+                    <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">$</span>
+                    <Input
+                      id="propertyInsurance"
+                      type="number"
+                      placeholder="0"
+                      value={inputs.propertyInsurance || ''}
+                      onChange={(e) => updateInput('propertyInsurance', Number(e.target.value) || 0)}
+                      className="pl-8"
+                    />
+                  </div>
+                </div>
+              </div>
+
               <div>
                 <Label htmlFor="extraPayment">Extra Monthly Payment (Optional)</Label>
                 <div className="relative">
@@ -154,11 +188,38 @@ export default function MortgageCalculator() {
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="flex justify-between items-center py-4 bg-blue-50 rounded-lg px-4 border-2 border-blue-200">
-                  <span className="text-lg font-semibold text-gray-900">Monthly Payment</span>
+                  <span className="text-lg font-semibold text-gray-900">Principal & Interest</span>
                   <span className="text-3xl font-bold text-blue-600">
                     ${results.monthlyPayment.toLocaleString('en-US', { maximumFractionDigits: 0 })}
                   </span>
                 </div>
+
+                {(inputs.propertyTax > 0 || inputs.propertyInsurance > 0) && (
+                  <>
+                    {inputs.propertyTax > 0 && (
+                      <div className="flex justify-between items-center py-2 border-b border-gray-200">
+                        <span className="text-gray-700">Property Tax</span>
+                        <span className="text-lg font-semibold text-gray-600">
+                          +${inputs.propertyTax.toLocaleString('en-US', { maximumFractionDigits: 0 })}
+                        </span>
+                      </div>
+                    )}
+                    {inputs.propertyInsurance > 0 && (
+                      <div className="flex justify-between items-center py-2 border-b border-gray-200">
+                        <span className="text-gray-700">Property Insurance</span>
+                        <span className="text-lg font-semibold text-gray-600">
+                          +${inputs.propertyInsurance.toLocaleString('en-US', { maximumFractionDigits: 0 })}
+                        </span>
+                      </div>
+                    )}
+                    <div className="flex justify-between items-center py-3 bg-blue-100 rounded-lg px-4 border-2 border-blue-300">
+                      <span className="text-lg font-semibold text-gray-900">Total Monthly Payment</span>
+                      <span className="text-2xl font-bold text-blue-700">
+                        ${(results.monthlyPayment + inputs.propertyTax + inputs.propertyInsurance).toLocaleString('en-US', { maximumFractionDigits: 0 })}
+                      </span>
+                    </div>
+                  </>
+                )}
 
                 {inputs.extraPayment > 0 && (
                   <>
