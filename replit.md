@@ -1,7 +1,7 @@
-# MortgagePro - Full-Stack Mortgage Application
+# Mykoal DeShazo - Investor Property Financing Platform
 
 ## Overview
-This is a modern full-stack mortgage broker website built with React, Express, and PostgreSQL. The application provides mortgage calculation tools, loan product information, contact forms, and quote request functionality. It's designed to help mortgage professionals showcase their services and capture leads from potential clients.
+This is a modern full-stack investor property financing website built with React, Express, and PostgreSQL. The application provides loan calculation tools, property financing information, contact forms, and quote request functionality. It's designed to help Mykoal DeShazo showcase his investor financing services and capture leads from potential clients.
 
 ## System Architecture
 
@@ -122,8 +122,8 @@ The application uses four main tables:
 ## Changelog
 - June 27, 2025. Initial setup
 - June 27, 2025. Personalized website for Mykoal DeShazo with NMLS #1912347, removed interest rate section
-- June 27, 2025. Updated to business lending focus - DSCR loans, HELOC, startup business loans, personal loans
-- June 27, 2025. Removed "Rate quotes in 60 seconds" text, added loan type selector to calculator with business lending options
+- June 27, 2025. Updated to investor financing focus - DSCR loans, HELOC, investment property loans, personal loans
+- June 27, 2025. Removed "Rate quotes in 60 seconds" text, added loan type selector to calculator with investor financing options
 - June 27, 2025. Simplified loan calculator - removed down payment and additional costs, changed to direct loan amount input, updated hero section loan type dropdown
 - June 27, 2025. Updated hero section with personalized welcome message emphasizing various lending options and unique scenarios
 - June 27, 2025. Fixed white button visibility with blue background and removed starting rate section
@@ -144,9 +144,12 @@ The application uses four main tables:
 - June 27, 2025. Fixed debt consolidation calculator to dynamically update all calculations (total payments, interest savings, years saved) when extra payment amount is manually adjusted
 - June 27, 2025. Fixed mortgage calculation library to properly return actual total interest paid when extra payments are applied, resolving interest savings calculation showing zero
 - June 27, 2025. Redesigned homepage with integrated professional headshot, streamlined mobile-friendly layout, removed unnecessary sections, modernized hero section with personal branding
+- June 27, 2025. Removed all MortgagePro references, updated to use only "Mykoal DeShazo" branding, changed from business loans to investor/property financing focus, updated location to Scottsdale Arizona, standardized phone to 623-280-8351, updated all dates to 2025
 
 ## User Preferences
 Preferred communication style: Simple, everyday language.
 Business owner: Mykoal DeShazo, NMLS #1912347
 Email: mdeshazo@mykoal.com
-Specialization: Business purpose DSCR loans, investment property financing, alternative lending
+Phone: (623) 280-8351
+Location: Scottsdale, Arizona
+Specialization: Investor loans, DSCR financing, investment property financing - many more options available

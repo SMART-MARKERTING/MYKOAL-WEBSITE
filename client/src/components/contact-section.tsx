@@ -66,14 +66,14 @@ export default function ContactSection() {
             {/* Office location */}
             <Card className="shadow-lg">
               <CardHeader>
-                <CardTitle className="text-2xl font-bold text-gray-900">Office Location</CardTitle>
+                <CardTitle className="text-2xl font-bold text-gray-900">Service Area</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div>
-                  <div className="font-semibold text-gray-900">MortgagePro Financial</div>
+                  <div className="font-semibold text-gray-900">Mykoal DeShazo</div>
                   <div className="text-gray-600">
-                    123 Main Street, Suite 450<br />
-                    San Francisco, CA 94102
+                    Serving Scottsdale, Arizona<br />
+                    and nationwide investors
                   </div>
                 </div>
                 

@@ -144,9 +144,8 @@ export default function ContactForm() {
                   <SelectValue placeholder="Select loan type" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="Business Purpose DSCR">Business Purpose DSCR</SelectItem>
+                  <SelectItem value="Investment Purpose DSCR">Investment Purpose DSCR</SelectItem>
                   <SelectItem value="DSCR HELOC">DSCR HELOC</SelectItem>
-                  <SelectItem value="Startup Business Loan">Startup Business Loan</SelectItem>
                   <SelectItem value="Personal Loan">Personal Loan</SelectItem>
                   <SelectItem value="Debt Consolidation">Debt Consolidation</SelectItem>
                   <SelectItem value="Other">Other</SelectItem>

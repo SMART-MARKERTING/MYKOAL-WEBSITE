@@ -5,7 +5,7 @@ import { Link } from "wouter";
 
 const loanProducts = [
   {
-    name: "Business Purpose DSCR",
+    name: "Investment Purpose DSCR",
     subtitle: "Investment Properties",
     icon: Building2,
     iconBg: "bg-blue-100",
@@ -34,21 +34,7 @@ const loanProducts = [
       "No personal income docs"
     ]
   },
-  {
-    name: "Startup Business Loan",
-    subtitle: "New Business Funding",
-    icon: CreditCard,
-    iconBg: "bg-purple-100",
-    iconColor: "text-purple-600",
-    buttonColor: "bg-purple-600 hover:bg-purple-700",
-    link: "/startup-business-loan",
-    features: [
-      "New business funding",
-      "Equipment & working capital",
-      "Flexible qualification",
-      "Quick approval process"
-    ]
-  },
+
   {
     name: "Personal Loan",
     subtitle: "Individual Financing",
@@ -88,8 +74,8 @@ export default function LoanProducts() {
     <section id="loans" className="py-16 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">Lending Solutions</h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">Specialized financing for investors and business owners</p>
+          <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">Investor Financing Solutions</h2>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">Specialized property financing for investors - we also have many more options available</p>
         </div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">

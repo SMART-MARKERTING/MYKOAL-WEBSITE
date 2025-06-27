@@ -114,11 +114,10 @@ export default function MortgageCalculator() {
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="dscr-purchase">Business Purpose DSCR - Purchase</SelectItem>
-                    <SelectItem value="dscr-rate-term">Business Purpose DSCR - Rate/Term Refinance</SelectItem>
-                    <SelectItem value="dscr-cash-out">Business Purpose DSCR - Cash-Out Refinance</SelectItem>
+                    <SelectItem value="dscr-purchase">Investment DSCR - Purchase</SelectItem>
+                    <SelectItem value="dscr-rate-term">Investment DSCR - Rate/Term Refinance</SelectItem>
+                    <SelectItem value="dscr-cash-out">Investment DSCR - Cash-Out Refinance</SelectItem>
                     <SelectItem value="dscr-heloc">DSCR HELOC</SelectItem>
-                    <SelectItem value="startup-business">Startup Business Loan</SelectItem>
                     <SelectItem value="personal-loan">Personal Loan</SelectItem>
                     <SelectItem value="debt-consolidation">Debt Consolidation</SelectItem>
                   </SelectContent>

@@ -16,7 +16,7 @@ export default function Footer() {
           <div className="md:col-span-2">
             <h3 className="text-2xl font-bold mb-4">Mykoal DeShazo</h3>
             <p className="text-gray-300 mb-6 max-w-md">
-              Your trusted mortgage advisor, helping families achieve homeownership dreams with personalized service and competitive rates.
+              Your trusted investor financing specialist, helping investors grow their portfolios with personalized service and competitive rates.
             </p>
             
             {/* Social media */}
@@ -87,11 +87,11 @@ export default function Footer() {
           <div>
             <h4 className="text-lg font-semibold mb-4">Contact</h4>
             <ul className="space-y-2 text-gray-300">
-              <li>(555) 123-4567</li>
+              <li>(623) 280-8351</li>
               <li>mdeshazo@mykoal.com</li>
               <li>
-                123 Main Street, Suite 450<br />
-                San Francisco, CA 94102
+                Scottsdale, Arizona<br />
+                Serving nationwide investors
               </li>
             </ul>
           </div>
@@ -109,7 +109,7 @@ export default function Footer() {
                 Licensed in CA, NV, AZ. Equal Housing Lender. 
               </p>
               <p>
-                MortgagePro Financial is a division of Example Bank, Member FDIC.
+                Licensed mortgage loan originator serving investors nationwide.
               </p>
             </div>
             
@@ -119,7 +119,7 @@ export default function Footer() {
                 <a href="#" className="hover:text-blue-400 transition-colors">Terms of Service</a>
                 <a href="#" className="hover:text-blue-400 transition-colors">Licensing</a>
               </div>
-              <p className="mt-4">© 2024 MortgagePro Financial. All rights reserved.</p>
+              <p className="mt-4">© 2025 Mykoal DeShazo. All rights reserved.</p>
             </div>
           </div>
         </div>

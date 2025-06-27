@@ -106,8 +106,8 @@ export default function HeroSection() {
                 </div>
                 
                 <p className="text-lg text-blue-100 leading-relaxed mb-6">
-                  Specializing in business lending, DSCR loans, and investment property financing. 
-                  I help entrepreneurs and investors secure the capital they need to grow.
+                  Specializing in investor loans, DSCR financing, and investment property financing. 
+                  I help investors secure the capital they need to grow their portfolios. We also have many more options available.
                 </p>
                 
                 <div className="flex flex-col sm:flex-row gap-3 mb-8">
@@ -199,11 +199,10 @@ export default function HeroSection() {
                             <SelectValue placeholder="Select" />
                           </SelectTrigger>
                           <SelectContent>
-                            <SelectItem value="dscr-purchase">Business Purpose DSCR - Purchase</SelectItem>
-                            <SelectItem value="dscr-rate-term">Business Purpose DSCR - Rate/Term Refinance</SelectItem>
-                            <SelectItem value="dscr-cash-out">Business Purpose DSCR - Cash-Out Refinance</SelectItem>
+                            <SelectItem value="dscr-purchase">Investment DSCR - Purchase</SelectItem>
+                            <SelectItem value="dscr-rate-term">Investment DSCR - Rate/Term Refinance</SelectItem>
+                            <SelectItem value="dscr-cash-out">Investment DSCR - Cash-Out Refinance</SelectItem>
                             <SelectItem value="dscr-heloc">DSCR HELOC</SelectItem>
-                            <SelectItem value="startup-business">Startup Business Loan</SelectItem>
                             <SelectItem value="personal-loan">Personal Loan</SelectItem>
                             <SelectItem value="debt-consolidation">Debt Consolidation</SelectItem>
                           </SelectContent>
