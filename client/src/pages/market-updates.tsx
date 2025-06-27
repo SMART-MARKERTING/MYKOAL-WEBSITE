@@ -7,8 +7,9 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
 import { apiRequest } from '@/lib/queryClient';
-import { TrendingUp, TrendingDown, Clock, ExternalLink, Building2, DollarSign, Calendar, AlertTriangle, CheckCircle, AlertCircle, Mail } from 'lucide-react';
+import { TrendingUp, TrendingDown, Clock, ExternalLink, Building2, DollarSign, Calendar, AlertTriangle, CheckCircle, AlertCircle, Mail, ArrowLeft, Home } from 'lucide-react';
 import { useState } from 'react';
+import { Link } from 'wouter';
 import equalHousingLogo from "@assets/Equal-Housing-Logo_1751007456918.png";
 
 interface NewsItem {
@@ -190,6 +191,22 @@ export default function MarketUpdatesPage() {
 
       <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 py-8">
         <div className="container mx-auto px-4 max-w-7xl">
+          {/* Navigation */}
+          <div className="flex items-center justify-between mb-6">
+            <Link href="/">
+              <Button variant="outline" className="flex items-center gap-2 hover:bg-blue-50">
+                <Home className="w-4 h-4" />
+                Home
+              </Button>
+            </Link>
+            <Link href="/">
+              <Button variant="ghost" className="flex items-center gap-2 text-gray-600 hover:text-gray-900">
+                <ArrowLeft className="w-4 h-4" />
+                Back
+              </Button>
+            </Link>
+          </div>
+
           {/* Header */}
           <div className="text-center mb-8">
             <h1 className="text-3xl md:text-5xl font-bold text-gray-900 mb-4">

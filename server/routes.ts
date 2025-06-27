@@ -261,10 +261,28 @@ export async function registerRoutes(app: Express): Promise<Server> {
         });
       } else {
         console.error("Error creating market subscription:", error);
-        res.status(500).json({ 
-          success: false, 
-          message: "Failed to create subscription" 
-        });
+        
+        // Handle duplicate email error specifically
+        const errorString = JSON.stringify(error);
+        const errorCode = (error as any)?.code;
+        const errorMessage = (error as any)?.message || '';
+        
+        if (errorCode === '23505' || 
+            errorString.includes('23505') || 
+            errorString.includes('duplicate key') || 
+            errorString.includes('already exists') ||
+            errorMessage.includes('duplicate key') || 
+            errorMessage.includes('already exists')) {
+          res.status(200).json({ 
+            success: true, 
+            message: "You're already subscribed to market updates!" 
+          });
+        } else {
+          res.status(500).json({ 
+            success: false, 
+            message: "Failed to create subscription" 
+          });
+        }
       }
     }
   };
