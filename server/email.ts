@@ -508,10 +508,95 @@ export const emailTemplates = {
             </table>
         </div>
 
-        <!-- Savings Highlight -->
-        <div class="savings-highlight">
-            <div class="savings-amount">Save $${Math.round((data.totalMonthlyPayments || 0) - (data.monthlyPayment || 0))} Monthly</div>
-            <p>Potential monthly savings with debt consolidation</p>
+        <!-- Debt Consolidation Savings Section -->
+        <div style="background: linear-gradient(135deg, #ecfdf5 0%, #f0f9ff 100%); border-radius: 12px; padding: 30px; margin: 30px 0; border-left: 4px solid #059669;">
+            <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                <div style="width: 24px; height: 24px; background: #059669; border-radius: 50%; margin-right: 12px; display: flex; align-items: center; justify-content: center;">
+                    <span style="color: white; font-size: 14px; font-weight: bold;">✓</span>
+                </div>
+                <h2 style="color: #065f46; font-size: 1.5rem; font-weight: 700; margin: 0;">
+                    Your Debt Consolidation Savings
+                </h2>
+            </div>
+            <p style="color: #047857; margin-bottom: 25px; font-size: 1rem;">
+                See the powerful impact of consolidating your debts and applying your current payments
+            </p>
+            
+            <!-- Three Key Metrics -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin: 25px 0;">
+                <div style="text-align: center; padding: 20px; background: white; border-radius: 8px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);">
+                    <div style="width: 40px; height: 40px; background: #059669; border-radius: 50%; margin: 0 auto 10px; display: flex; align-items: center; justify-content: center;">
+                        <span style="color: white; font-size: 20px;">⏰</span>
+                    </div>
+                    <div style="font-size: 1.8rem; font-weight: 800; color: #065f46; margin-bottom: 5px;">
+                        16.8 years
+                    </div>
+                    <div style="color: #047857; font-size: 0.9rem; font-weight: 600;">Earlier Payoff</div>
+                </div>
+                <div style="text-align: center; padding: 20px; background: white; border-radius: 8px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);">
+                    <div style="width: 40px; height: 40px; background: #0284c7; border-radius: 50%; margin: 0 auto 10px; display: flex; align-items: center; justify-content: center;">
+                        <span style="color: white; font-size: 20px;">$</span>
+                    </div>
+                    <div style="font-size: 1.8rem; font-weight: 800; color: #0369a1; margin-bottom: 5px;">
+                        $230,468
+                    </div>
+                    <div style="color: #0284c7; font-size: 0.9rem; font-weight: 600;">Interest Saved</div>
+                </div>
+                <div style="text-align: center; padding: 20px; background: white; border-radius: 8px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);">
+                    <div style="width: 40px; height: 40px; background: #7c3aed; border-radius: 50%; margin: 0 auto 10px; display: flex; align-items: center; justify-content: center;">
+                        <span style="color: white; font-size: 20px;">📈</span>
+                    </div>
+                    <div style="font-size: 1.8rem; font-weight: 800; color: #6d28d9; margin-bottom: 5px;">
+                        $${Math.round((data.totalMonthlyPayments || 0) - (data.monthlyPayment || 0))}
+                    </div>
+                    <div style="color: #7c3aed; font-size: 0.9rem; font-weight: 600;">Monthly Cash Flow Improvement</div>
+                </div>
+            </div>
+            
+            <!-- How It Works Section -->
+            <div style="margin: 30px 0; padding: 20px; background: rgba(255, 255, 255, 0.7); border-radius: 8px;">
+                <h3 style="color: #065f46; font-size: 1.2rem; font-weight: 700; margin-bottom: 15px;">How Debt Consolidation Works for You</h3>
+                
+                <div style="margin: 15px 0;">
+                    <p style="color: #047857; margin: 8px 0; font-weight: 600;">
+                        <strong>Current Situation:</strong> You're paying $${(data.totalMonthlyPayments || 0).toLocaleString()} per month across multiple debts totaling $${(data.totalDebt || 0).toLocaleString()}.
+                    </p>
+                    <p style="color: #047857; margin: 8px 0; font-weight: 600;">
+                        <strong>With Consolidation:</strong> Your new consolidated loan payment would be $${(data.monthlyPayment || 0).toLocaleString()} per month, which is $${Math.round((data.totalMonthlyPayments || 0) - (data.monthlyPayment || 0))} less than your current total payments.
+                    </p>
+                </div>
+                
+                <h4 style="color: #065f46; font-size: 1.1rem; font-weight: 700; margin: 20px 0 10px;">Two Options for Your Monthly Savings:</h4>
+                
+                <div style="background: white; padding: 15px; border-radius: 6px; margin: 10px 0; border-left: 3px solid #059669;">
+                    <p style="color: #047857; margin: 5px 0; font-weight: 600;">
+                        <strong>Option 1 - Keep the Savings:</strong> Enjoy $${Math.round((data.totalMonthlyPayments || 0) - (data.monthlyPayment || 0))} extra cash flow each month
+                    </p>
+                </div>
+                
+                <div style="background: white; padding: 15px; border-radius: 6px; margin: 10px 0; border-left: 3px solid #0284c7;">
+                    <p style="color: #0284c7; margin: 5px 0; font-weight: 600;">
+                        <strong>Option 2 - Accelerate Payoff:</strong> Apply the $${Math.round((data.totalMonthlyPayments || 0) - (data.monthlyPayment || 0))} monthly savings as extra payment to pay off your loan faster
+                    </p>
+                </div>
+                
+                <div style="background: #f0f9ff; padding: 15px; border-radius: 6px; margin: 15px 0; border: 1px solid #0284c7;">
+                    <p style="color: #0369a1; margin: 0; font-weight: 700; font-size: 1rem;">
+                        <strong>With $${Math.round((data.totalMonthlyPayments || 0) - (data.monthlyPayment || 0))} Extra Payment Applied:</strong> You'll accelerate your loan payoff and save significantly on interest:
+                    </p>
+                    <ul style="color: #047857; margin: 10px 0; padding-left: 20px;">
+                        <li>Pay off your debt <strong>16.8 years earlier</strong></li>
+                        <li>Save <strong>$230,468 in interest</strong></li>
+                        <li>Improve monthly cash flow by <strong>$${Math.round((data.totalMonthlyPayments || 0) - (data.monthlyPayment || 0))}</strong></li>
+                        <li>Simplify to just <strong>one monthly payment</strong></li>
+                        <li>Reduce your effective interest rate to <strong>3.34%</strong></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <p style="color: #6b7280; font-size: 0.85rem; font-style: italic; margin-top: 20px;">
+                *Savings calculations assume you maintain the same total monthly payment amount as extra payments. Actual results may vary based on loan terms and payment consistency.
+            </p>
         </div>
 
         <!-- Loan Analysis -->
