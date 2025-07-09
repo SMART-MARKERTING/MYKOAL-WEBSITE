@@ -248,6 +248,412 @@ export const emailTemplates = {
     `
   }),
 
+  debtConsolidationPageEmail: (data: any) => ({
+    subject: `Your Complete Debt Consolidation Analysis - Save $${Math.round((data.totalMonthlyPayments || 0) - (data.monthlyPayment || 0))} Monthly`,
+    html: `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debt Consolidation Analysis - Mykoal DeShazo</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: #1f2937;
+            background: linear-gradient(135deg, #0284c7 0%, #0ea5e9 100%);
+            min-height: 100vh;
+        }
+        .container { 
+            max-width: 1200px; 
+            margin: 0 auto; 
+            padding: 20px;
+        }
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        .hero-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #0284c7, #0ea5e9);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: #64748b;
+            margin-bottom: 20px;
+        }
+        .professional-info {
+            display: inline-block;
+            background: #f8fafc;
+            padding: 15px 25px;
+            border-radius: 8px;
+            border-left: 4px solid #0284c7;
+        }
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .icon {
+            width: 24px;
+            height: 24px;
+            fill: #0284c7;
+        }
+        .debt-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        .debt-table th {
+            background: linear-gradient(135deg, #0284c7, #0ea5e9);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+        .debt-table td {
+            padding: 15px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .debt-table tr:nth-child(even) {
+            background: #f8fafc;
+        }
+        .savings-highlight {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            margin: 30px 0;
+        }
+        .savings-amount {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+        .calculation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        .calc-item {
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #0284c7;
+        }
+        .calc-label {
+            font-size: 0.875rem;
+            color: #64748b;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+        .calc-value {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #1e293b;
+        }
+        .benefits-list {
+            list-style: none;
+            padding: 0;
+        }
+        .benefits-list li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .benefits-list li:last-child {
+            border-bottom: none;
+        }
+        .check-icon {
+            width: 20px;
+            height: 20px;
+            background: #10b981;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 12px;
+        }
+        .cta-section {
+            background: linear-gradient(135deg, #1e293b, #334155);
+            color: white;
+            padding: 40px;
+            border-radius: 12px;
+            text-align: center;
+            margin: 40px 0;
+        }
+        .cta-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            margin: 20px 10px;
+            transition: transform 0.2s;
+        }
+        .equal-housing {
+            text-align: center;
+            padding: 30px;
+            background: #f8fafc;
+            border-radius: 12px;
+            margin-top: 40px;
+        }
+        .equal-housing img {
+            width: 60px;
+            height: auto;
+            margin-bottom: 15px;
+        }
+        .disclaimer {
+            font-size: 0.875rem;
+            color: #64748b;
+            line-height: 1.5;
+        }
+        .contact-info {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin: 30px 0;
+            text-align: center;
+            border: 2px solid #e2e8f0;
+        }
+        .phone-highlight {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #0284c7;
+            margin: 10px 0;
+        }
+        @media (max-width: 768px) {
+            .hero-title { font-size: 2rem; }
+            .calculation-grid { grid-template-columns: 1fr; }
+            .container { padding: 10px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <div class="header">
+            <h1 class="hero-title">Debt Consolidation Analysis</h1>
+            <p class="hero-subtitle">Your Personalized Financial Solution</p>
+            <div class="professional-info">
+                <strong>Mykoal DeShazo</strong> - Executive Loan Officer, NMLS# 1912347<br>
+                <strong>Phone:</strong> (623) 280-8351 | <strong>Email:</strong> mdeshazo@independencehl.com
+            </div>
+        </div>
+
+        <!-- Current Debt Summary -->
+        <div class="card">
+            <h2 class="card-title">
+                <svg class="icon" viewBox="0 0 24 24"><path d="M2 3h20l-2 18H4L2 3zm18 2H4l1.5 14h13L20 5z"/></svg>
+                Your Current Debt Summary
+            </h2>
+            <table class="debt-table">
+                <thead>
+                    <tr>
+                        <th>Creditor</th>
+                        <th>Debt Type</th>
+                        <th>Current Balance</th>
+                        <th>Monthly Payment</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${data.debts ? data.debts.map((debt: any) => `
+                        <tr>
+                            <td><strong>${debt.creditor || 'Not specified'}</strong></td>
+                            <td>${debt.type || 'General Debt'}</td>
+                            <td><strong>$${debt.balance ? parseFloat(debt.balance).toLocaleString() : '0'}</strong></td>
+                            <td>$${debt.currentPayment ? parseFloat(debt.currentPayment).toLocaleString() : '0'}</td>
+                        </tr>
+                    `).join('') : '<tr><td colspan="4">No debt details provided</td></tr>'}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Savings Highlight -->
+        <div class="savings-highlight">
+            <div class="savings-amount">Save $${Math.round((data.totalMonthlyPayments || 0) - (data.monthlyPayment || 0))} Monthly</div>
+            <p>Potential monthly savings with debt consolidation</p>
+        </div>
+
+        <!-- Loan Analysis -->
+        <div class="card">
+            <h2 class="card-title">
+                <svg class="icon" viewBox="0 0 24 24"><path d="M3 3h18v18H3V3zm16 2H5v14h14V5z"/></svg>
+                Your Consolidation Loan Analysis
+            </h2>
+            
+            <div class="calculation-grid">
+                <div class="calc-item">
+                    <div class="calc-label">Total Debt Amount</div>
+                    <div class="calc-value">$${(data.totalDebt || 0).toLocaleString()}</div>
+                </div>
+                <div class="calc-item">
+                    <div class="calc-label">New Monthly Payment</div>
+                    <div class="calc-value">$${(data.monthlyPayment || 0).toLocaleString()}</div>
+                </div>
+                <div class="calc-item">
+                    <div class="calc-label">Current Total Payments</div>
+                    <div class="calc-value">$${(data.totalMonthlyPayments || 0).toLocaleString()}</div>
+                </div>
+                <div class="calc-item">
+                    <div class="calc-label">Interest Rate</div>
+                    <div class="calc-value">${(data.interestRate || 0)}%</div>
+                </div>
+                <div class="calc-item">
+                    <div class="calc-label">Loan Term</div>
+                    <div class="calc-value">${data.loanTerm || 0} years</div>
+                </div>
+                <div class="calc-item">
+                    <div class="calc-label">Total Interest</div>
+                    <div class="calc-value">$${(data.totalInterest || 0).toLocaleString()}</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Benefits Section -->
+        <div class="card">
+            <h2 class="card-title">
+                <svg class="icon" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Debt Consolidation Benefits
+            </h2>
+            <ul class="benefits-list">
+                <li>
+                    <span class="check-icon">✓</span>
+                    <span><strong>Simplified Payments:</strong> Replace multiple payments with one convenient monthly payment</span>
+                </li>
+                <li>
+                    <span class="check-icon">✓</span>
+                    <span><strong>Lower Interest Rate:</strong> Potentially reduce your overall interest rate compared to credit cards</span>
+                </li>
+                <li>
+                    <span class="check-icon">✓</span>
+                    <span><strong>Fixed Monthly Payment:</strong> Predictable payments that fit your budget</span>
+                </li>
+                <li>
+                    <span class="check-icon">✓</span>
+                    <span><strong>Faster Debt Payoff:</strong> Clear path to becoming debt-free with a defined timeline</span>
+                </li>
+                <li>
+                    <span class="check-icon">✓</span>
+                    <span><strong>Improved Credit Score:</strong> Lower credit utilization can boost your credit rating</span>
+                </li>
+                <li>
+                    <span class="check-icon">✓</span>
+                    <span><strong>Stress Reduction:</strong> Eliminate the complexity of managing multiple creditors</span>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Call to Action -->
+        <div class="cta-section">
+            <h2 class="cta-title">Ready to Start Saving?</h2>
+            <p>Let's discuss your debt consolidation options and create a personalized plan that works for your financial goals.</p>
+            <a href="tel:6232808351" class="cta-button">Call (623) 280-8351</a>
+            <a href="mailto:mdeshazo@independencehl.com" class="cta-button">Email Me</a>
+        </div>
+
+        <!-- Contact Information -->
+        <div class="contact-info">
+            <h3>Questions? Let's Talk!</h3>
+            <div class="phone-highlight">(623) 280-8351</div>
+            <p><strong>Email:</strong> mdeshazo@independencehl.com</p>
+            <p><strong>Address:</strong> 4343 North Scottsdale Road, Suite 100, Scottsdale, AZ 85251</p>
+        </div>
+
+        <!-- Equal Housing -->
+        <div class="equal-housing">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Equal_Housing_Opportunity_logo.svg/1200px-Equal_Housing_Opportunity_logo.svg.png" alt="Equal Housing Opportunity" />
+            <div class="disclaimer">
+                <p><strong>Equal Housing Opportunity</strong></p>
+                <p>This analysis is for informational purposes only and does not constitute a loan commitment. Actual loan terms may vary based on credit approval, income verification, and current market conditions. All loans subject to credit approval.</p>
+                <p><strong>NMLS# 1912347</strong> | <strong>Company NMLS# 2524174</strong></p>
+                <p>Arizona Mortgage Banker License# 1048872</p>
+            </div>
+        </div>
+
+        ${PROFESSIONAL_SIGNATURE}
+    </div>
+</body>
+</html>
+    `,
+    text: `
+      DEBT CONSOLIDATION ANALYSIS
+      Mykoal DeShazo - Executive Loan Officer, NMLS# 1912347
+      Phone: (623) 280-8351 | Email: mdeshazo@independencehl.com
+      
+      YOUR POTENTIAL MONTHLY SAVINGS: $${Math.round((data.totalMonthlyPayments || 0) - (data.monthlyPayment || 0))}
+      
+      CURRENT DEBT SUMMARY:
+      ${data.debts ? data.debts.map((debt: any) => `
+      • ${debt.creditor || 'Not specified'} (${debt.type || 'General'}): $${debt.balance ? parseFloat(debt.balance).toLocaleString() : '0'} - $${debt.currentPayment ? parseFloat(debt.currentPayment).toLocaleString() : '0'}/month`).join('\n      ') : 'No debt details provided'}
+      
+      CONSOLIDATION LOAN ANALYSIS:
+      • Total Debt Amount: $${(data.totalDebt || 0).toLocaleString()}
+      • New Monthly Payment: $${(data.monthlyPayment || 0).toLocaleString()}
+      • Current Total Payments: $${(data.totalMonthlyPayments || 0).toLocaleString()}
+      • Interest Rate: ${(data.interestRate || 0)}%
+      • Loan Term: ${data.loanTerm || 0} years
+      • Total Interest: $${(data.totalInterest || 0).toLocaleString()}
+      
+      DEBT CONSOLIDATION BENEFITS:
+      ✓ Simplified Payments - One convenient monthly payment
+      ✓ Lower Interest Rate - Potentially reduce overall interest
+      ✓ Fixed Monthly Payment - Predictable budget planning
+      ✓ Faster Debt Payoff - Clear path to debt freedom
+      ✓ Improved Credit Score - Lower credit utilization
+      ✓ Stress Reduction - Eliminate multiple creditors
+      
+      READY TO START SAVING?
+      Call: (623) 280-8351
+      Email: mdeshazo@independencehl.com
+      Address: 4343 North Scottsdale Road, Suite 100, Scottsdale, AZ 85251
+      
+      Equal Housing Opportunity | NMLS# 1912347 | Company NMLS# 2524174
+      Arizona Mortgage Banker License# 1048872
+      
+      ${PROFESSIONAL_SIGNATURE_TEXT}
+    `
+  }),
+
   debtConsolidationQuote: (data: any) => ({
     subject: `Your Debt Consolidation Analysis - Potential Monthly Savings: $${data.totalPayments - data.totalDebt}`,
     html: `

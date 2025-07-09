@@ -72,8 +72,8 @@ export default function DebtConsolidationPage() {
     },
     onSuccess: () => {
       toast({
-        title: "Quote Emailed Successfully!",
-        description: "Your debt consolidation analysis has been sent to your email.",
+        title: "Complete Analysis Emailed!",
+        description: "Your comprehensive debt consolidation page has been sent to your email with all graphics and calculations.",
       });
       setShowEmailQuote(false);
       setQuoteEmail("");

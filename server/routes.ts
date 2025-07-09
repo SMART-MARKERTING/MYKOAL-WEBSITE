@@ -306,11 +306,16 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const { email, debts, totalDebt, totalPayments } = req.body;
       
-      // Send detailed debt consolidation analysis to user
-      const userEmailTemplate = emailTemplates.debtConsolidationQuote({
+      // Send comprehensive debt consolidation page analysis to user
+      const userEmailTemplate = emailTemplates.debtConsolidationPageEmail({
         debts,
         totalDebt,
-        totalPayments
+        totalMonthlyPayments: totalPayments,
+        monthlyPayment: totalDebt * 0.08 / 12, // Estimated monthly payment
+        totalPayments: totalDebt * 1.3, // Estimated total payments over loan term
+        totalInterest: totalDebt * 0.3, // Estimated total interest
+        interestRate: 8.0,
+        loanTerm: 7
       });
       
       await sendEmail({
@@ -382,7 +387,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         // Continue without failing the request
       }
       
-      res.json({ success: true, message: "Quote sent successfully" });
+      res.json({ success: true, message: "Complete debt consolidation analysis sent successfully" });
     } catch (error: any) {
       console.error("Error sending debt consolidation quote:", error);
       res.status(500).json({ 
@@ -395,17 +400,33 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Email calculation results
   app.post("/api/email-calculation", async (req, res) => {
     try {
-      const { email, calculationType, inputs, results, savingsAnalysis, totalDebtBalance, totalMonthlyPayments } = req.body;
+      const { email, calculationType, inputs, results, savingsAnalysis, totalDebtBalance, totalMonthlyPayments, debts } = req.body;
       
-      // Send detailed calculation results to user
-      const userEmailTemplate = emailTemplates.calculationResults({
-        calculationType,
-        inputs,
-        results,
-        savingsAnalysis,
-        totalDebtBalance,
-        totalMonthlyPayments
-      });
+      let userEmailTemplate;
+      
+      if (calculationType === 'debt-consolidation') {
+        // Send comprehensive debt consolidation page for debt consolidation
+        userEmailTemplate = emailTemplates.debtConsolidationPageEmail({
+          debts: debts || [],
+          totalDebt: totalDebtBalance || 0,
+          totalMonthlyPayments: totalMonthlyPayments || 0,
+          monthlyPayment: results?.monthlyPayment || 0,
+          totalPayments: results?.totalPayments || 0,
+          totalInterest: results?.totalInterest || 0,
+          interestRate: inputs?.interestRate || 8.0,
+          loanTerm: inputs?.loanTerm || 7
+        });
+      } else {
+        // Send detailed calculation results for other calculators
+        userEmailTemplate = emailTemplates.calculationResults({
+          calculationType,
+          inputs,
+          results,
+          savingsAnalysis,
+          totalDebtBalance,
+          totalMonthlyPayments
+        });
+      }
       
       await sendEmail({
         to: email,
