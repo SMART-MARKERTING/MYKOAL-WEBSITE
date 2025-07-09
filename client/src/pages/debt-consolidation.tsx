@@ -393,6 +393,7 @@ export default function DebtConsolidationPage() {
           <DebtConsolidationCalculator 
             totalDebtBalance={getTotalBalance()}
             totalMonthlyPayments={getTotalPayments()}
+            debts={debts}
           />
         </div>
       </section>

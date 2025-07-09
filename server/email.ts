@@ -278,6 +278,32 @@ export const emailTemplates = {
         <p>Hello,</p>
         <p>Here are your detailed calculation results:</p>
         
+        ${data.calculationType === 'debt-consolidation' && data.debts && data.debts.length > 0 ? `
+        <h3>Current Debt Summary</h3>
+        <table style="border-collapse: collapse; width: 100%; margin-bottom: 20px;">
+          <tr style="background-color: #f8f9fa;">
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Creditor</th>
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Balance</th>
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Monthly Payment</th>
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Type</th>
+          </tr>
+          ${data.debts.map((debt: any) => `
+            <tr>
+              <td style="border: 1px solid #ddd; padding: 8px;">${debt.creditor}</td>
+              <td style="border: 1px solid #ddd; padding: 8px;">$${parseFloat(debt.balance || 0).toLocaleString()}</td>
+              <td style="border: 1px solid #ddd; padding: 8px;">$${parseFloat(debt.currentPayment || 0).toLocaleString()}</td>
+              <td style="border: 1px solid #ddd; padding: 8px;">${debt.type}</td>
+            </tr>
+          `).join('')}
+          <tr style="background-color: #e9ecef; font-weight: bold;">
+            <td style="border: 1px solid #ddd; padding: 8px;">TOTALS</td>
+            <td style="border: 1px solid #ddd; padding: 8px;">$${(data.totalDebtBalance || 0).toLocaleString()}</td>
+            <td style="border: 1px solid #ddd; padding: 8px;">$${(data.totalMonthlyPayments || 0).toLocaleString()}</td>
+            <td style="border: 1px solid #ddd; padding: 8px;">-</td>
+          </tr>
+        </table>
+        ` : ''}
+        
         <h3>Loan Details</h3>
         <ul>
           <li><strong>Loan Amount:</strong> $${(inputs.loanAmount || 0).toLocaleString()}</li>
@@ -319,6 +345,14 @@ export const emailTemplates = {
       `,
       text: `
         Your ${data.calculationType === 'debt-consolidation' ? 'Debt Consolidation' : 'Mortgage'} Analysis
+        
+        ${data.calculationType === 'debt-consolidation' && data.debts && data.debts.length > 0 ? `
+        Current Debt Summary:
+        ${data.debts.map((debt: any) => `
+        ${debt.creditor}: $${parseFloat(debt.balance || 0).toLocaleString()} balance, $${parseFloat(debt.currentPayment || 0).toLocaleString()}/month (${debt.type})`).join('')}
+        
+        TOTALS: $${(data.totalDebtBalance || 0).toLocaleString()} total debt, $${(data.totalMonthlyPayments || 0).toLocaleString()} total monthly payments
+        ` : ''}
         
         Loan Details:
         • Loan Amount: $${(inputs.loanAmount || 0).toLocaleString()}

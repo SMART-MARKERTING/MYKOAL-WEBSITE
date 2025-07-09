@@ -11,14 +11,24 @@ import { useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 
+interface Debt {
+  id: number;
+  creditor: string;
+  balance: string;
+  currentPayment: string;
+  type: string;
+}
+
 interface DebtConsolidationCalculatorProps {
   totalDebtBalance: number;
   totalMonthlyPayments: number;
+  debts: Debt[];
 }
 
 export default function DebtConsolidationCalculator({ 
   totalDebtBalance, 
-  totalMonthlyPayments 
+  totalMonthlyPayments,
+  debts 
 }: DebtConsolidationCalculatorProps) {
   const [inputs, setInputs] = useState({
     loanAmount: totalDebtBalance,
@@ -511,7 +521,8 @@ export default function DebtConsolidationCalculator({
                     results,
                     savingsAnalysis,
                     totalDebtBalance,
-                    totalMonthlyPayments
+                    totalMonthlyPayments,
+                    debts
                   });
                 }}>
                   <div className="space-y-4">
