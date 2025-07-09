@@ -19,6 +19,51 @@ interface EmailParams {
 const FROM_EMAIL = "mdeshazo@mykoal.com";
 const TO_EMAIL = "mdeshazo@mykoal.com";
 
+// Professional signature line for all emails
+const PROFESSIONAL_SIGNATURE = `
+<div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #ddd; font-size: 12px; color: #666;">
+  <p><strong>Mykoal DeShazo</strong><br>
+  Executive Loan Officer, NMLS# 1912347<br>
+  <a href="https://www.experience.com/mykoal-deshazo" style="color: #0066cc;">CLICK TO SEE MY REVIEWS</a></p>
+  
+  <p><strong>Phone:</strong> (623) 280-8351 (Direct)<br>
+  <strong>Fax:</strong> (602) 362-5286 (FAX)<br>
+  <strong>Email:</strong> <a href="mailto:mdeshazo@independencehl.com" style="color: #0066cc;">mdeshazo@independencehl.com</a><br>
+  <strong>Website:</strong> <a href="#" style="color: #0066cc;">Apply now here</a><br>
+  <strong>Address:</strong> 4343 North Scottsdale Road, Suite 100, Scottsdale, AZ 85251</p>
+  
+  <p><strong>UWM Breakthrough Award Winner - 2023</strong></p>
+  
+  <p><strong>Company NMLS# 2524174</strong> - For licensing information, go to: <a href="https://www.nmlsconsumeraccess.org" style="color: #0066cc;">www.nmlsconsumeraccess.org</a><br>
+  <strong>Arizona Mortgage Banker License# 1048872</strong><br>
+  4343 North Scottsdale Road, Suite 100, Scottsdale, AZ 85251</p>
+  
+  <p style="font-size: 11px; color: #888;">This is not a commitment to lend. The contents of this message may be confidential. If you are not the intended recipient, do not disseminate, disclose, copy or use this message without the permission of the author. Nothing contained in this message or in any attachment shall satisfy the requirements for a writing, and nothing contained herein shall constitute a contract or electronic signature. If this message has been received in error, please delete it immediately.</p>
+</div>
+`;
+
+const PROFESSIONAL_SIGNATURE_TEXT = `
+
+---
+Mykoal DeShazo
+Executive Loan Officer, NMLS# 1912347
+CLICK TO SEE MY REVIEWS: https://www.experience.com/mykoal-deshazo
+
+Phone: (623) 280-8351 (Direct)
+Fax: (602) 362-5286 (FAX)
+Email: mdeshazo@independencehl.com
+Website: Apply now here
+Address: 4343 North Scottsdale Road, Suite 100, Scottsdale, AZ 85251
+
+UWM Breakthrough Award Winner - 2023
+
+Company NMLS# 2524174 - For licensing information, go to: www.nmlsconsumeraccess.org
+Arizona Mortgage Banker License# 1048872
+4343 North Scottsdale Road, Suite 100, Scottsdale, AZ 85251
+
+This is not a commitment to lend. The contents of this message may be confidential. If you are not the intended recipient, do not disseminate, disclose, copy or use this message without the permission of the author. Nothing contained in this message or in any attachment shall satisfy the requirements for a writing, and nothing contained herein shall constitute a contract or electronic signature. If this message has been received in error, please delete it immediately.
+`;
+
 export async function sendEmail(params: EmailParams): Promise<boolean> {
   try {
     console.log(`Sending email to ${params.to}...`);
@@ -63,6 +108,7 @@ export const emailTemplates = {
       <p><strong>Loan Type:</strong> ${contact.loanType}</p>
       <p><strong>Message:</strong> ${contact.message || 'No message provided'}</p>
       <p><strong>Submitted:</strong> ${new Date().toLocaleString()}</p>
+      ${PROFESSIONAL_SIGNATURE}
     `,
     text: `
       New Contact Form Submission
@@ -73,6 +119,7 @@ export const emailTemplates = {
       Loan Type: ${contact.loanType}
       Message: ${contact.message || 'No message provided'}
       Submitted: ${new Date().toLocaleString()}
+      ${PROFESSIONAL_SIGNATURE_TEXT}
     `
   }),
 
@@ -85,6 +132,7 @@ export const emailTemplates = {
       <p><strong>Credit Score:</strong> ${quote.creditScore}</p>
       <p><strong>Property Type:</strong> ${quote.propertyType}</p>
       <p><strong>Submitted:</strong> ${new Date().toLocaleString()}</p>
+      ${PROFESSIONAL_SIGNATURE}
     `,
     text: `
       New Quick Quote Request
@@ -94,6 +142,7 @@ export const emailTemplates = {
       Credit Score: ${quote.creditScore}
       Property Type: ${quote.propertyType}
       Submitted: ${new Date().toLocaleString()}
+      ${PROFESSIONAL_SIGNATURE_TEXT}
     `
   }),
 
@@ -111,6 +160,7 @@ export const emailTemplates = {
       <p><strong>Loan Term:</strong> ${preQual.loanTerm}</p>
       <p><strong>Notes:</strong> ${preQual.notes || 'No additional notes'}</p>
       <p><strong>Submitted:</strong> ${new Date().toLocaleString()}</p>
+      ${PROFESSIONAL_SIGNATURE}
     `,
     text: `
       New Pre-Qualification Application
@@ -125,6 +175,7 @@ export const emailTemplates = {
       Loan Term: ${preQual.loanTerm}
       Notes: ${preQual.notes || 'No additional notes'}
       Submitted: ${new Date().toLocaleString()}
+      ${PROFESSIONAL_SIGNATURE_TEXT}
     `
   }),
 
@@ -134,12 +185,14 @@ export const emailTemplates = {
       <h2>New Market Updates Subscription</h2>
       <p><strong>Email:</strong> ${subscription.email}</p>
       <p><strong>Subscribed:</strong> ${new Date().toLocaleString()}</p>
+      ${PROFESSIONAL_SIGNATURE}
     `,
     text: `
       New Market Updates Subscription
       
       Email: ${subscription.email}
       Subscribed: ${new Date().toLocaleString()}
+      ${PROFESSIONAL_SIGNATURE_TEXT}
     `
   }),
 
@@ -184,19 +237,10 @@ export const emailTemplates = {
       </ul>
       
       <h3>Next Steps</h3>
-      <p>Contact Mykoal DeShazo to discuss your personalized debt consolidation options:</p>
-      <ul>
-        <li><strong>Phone:</strong> (623) 280-8351</li>
-        <li><strong>Email:</strong> mdeshazo@mykoal.com</li>
-        <li><strong>NMLS:</strong> #1912347</li>
-      </ul>
+      <p>Contact me to discuss your personalized debt consolidation options:</p>
       
       <p>This analysis was generated on ${new Date().toLocaleString()}</p>
-      <hr>
-      <p style="font-size: 12px; color: #666;">
-        Equal Housing Opportunity. All loans subject to credit approval. This is not a commitment to lend. 
-        Rates, terms, and conditions are subject to change without notice. Mykoal DeShazo NMLS #1912347.
-      </p>
+      ${PROFESSIONAL_SIGNATURE}
     `,
     text: `
       Your Personalized Debt Consolidation Analysis
@@ -214,15 +258,10 @@ export const emailTemplates = {
       • Potential Interest Savings: Lower interest rate could save thousands over the loan term
       
       Next Steps:
-      Contact Mykoal DeShazo to discuss your personalized debt consolidation options:
-      Phone: (623) 280-8351
-      Email: mdeshazo@mykoal.com
-      NMLS: #1912347
+      Contact me to discuss your personalized debt consolidation options:
       
       This analysis was generated on ${new Date().toLocaleString()}
-      
-      Equal Housing Opportunity. All loans subject to credit approval. This is not a commitment to lend. 
-      Rates, terms, and conditions are subject to change without notice. Mykoal DeShazo NMLS #1912347.
+      ${PROFESSIONAL_SIGNATURE_TEXT}
     `
   }),
 
@@ -272,20 +311,11 @@ export const emailTemplates = {
         </ul>
         ` : ''}
         
-        <h3>Contact Information</h3>
-        <p>For personalized loan options and next steps, contact Mykoal DeShazo:</p>
-        <ul>
-          <li><strong>Phone:</strong> (623) 280-8351</li>
-          <li><strong>Email:</strong> mdeshazo@mykoal.com</li>
-          <li><strong>NMLS:</strong> #1912347</li>
-        </ul>
+        <h3>Next Steps</h3>
+        <p>For personalized loan options and next steps, contact me:</p>
         
         <p>This calculation was generated on ${new Date().toLocaleString()}</p>
-        <hr>
-        <p style="font-size: 12px; color: #666;">
-          Equal Housing Opportunity. All loans subject to credit approval. This is not a commitment to lend. 
-          Rates, terms, and conditions are subject to change without notice. Mykoal DeShazo NMLS #1912347.
-        </p>
+        ${PROFESSIONAL_SIGNATURE}
       `,
       text: `
         Your ${data.calculationType === 'debt-consolidation' ? 'Debt Consolidation' : 'Mortgage'} Analysis
@@ -315,16 +345,11 @@ export const emailTemplates = {
         ${savingsAnalysis.yearsEarlierPayoff && savingsAnalysis.yearsEarlierPayoff > 0 ? `• Earlier Payoff: ${savingsAnalysis.yearsEarlierPayoff.toFixed(1)} years` : ''}
         ` : ''}
         
-        Contact Information:
-        For personalized loan options and next steps, contact Mykoal DeShazo:
-        Phone: (623) 280-8351
-        Email: mdeshazo@mykoal.com
-        NMLS: #1912347
+        Next Steps:
+        For personalized loan options and next steps, contact me:
         
         This calculation was generated on ${new Date().toLocaleString()}
-        
-        Equal Housing Opportunity. All loans subject to credit approval. This is not a commitment to lend. 
-        Rates, terms, and conditions are subject to change without notice. Mykoal DeShazo NMLS #1912347.
+        ${PROFESSIONAL_SIGNATURE_TEXT}
       `
     };
   }
