@@ -133,13 +133,7 @@ export default function HeroSection() {
                   </Button>
                 </div>
                 
-                {/* Quick stats */}
-                <div className="flex justify-center lg:justify-start">
-                  <div className="text-center lg:text-left">
-                    <div className="text-2xl font-bold text-white">20+</div>
-                    <div className="text-sm text-blue-200">Team Experience</div>
-                  </div>
-                </div>
+
               </div>
             </div>
           </div>
