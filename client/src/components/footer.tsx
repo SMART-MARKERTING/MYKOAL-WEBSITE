@@ -116,9 +116,11 @@ export default function Footer() {
             <h4 className="text-lg font-semibold mb-4">Contact</h4>
             <ul className="space-y-2 text-gray-300">
               <li>(623) 280-8351</li>
+              <li>(480) 805-5574</li>
               <li>mdeshazo@independencehl.com</li>
               <li>
-                Scottsdale, Arizona<br />
+                4343 N Scottsdale Rd<br />
+                Scottsdale, AZ 85251<br />
                 Serving nationwide investors
               </li>
             </ul>
@@ -127,34 +129,43 @@ export default function Footer() {
 
         {/* Legal section */}
         <div className="border-t border-gray-800 mt-12 pt-8">
-          <div className="grid md:grid-cols-2 gap-8 items-center">
-            <div className="text-sm text-gray-400">
-              <p className="mb-2">
-                <strong>Mykoal DeShazo NMLS:</strong> #1912347
+          <div className="space-y-6">
+            {/* Company information */}
+            <div className="text-center">
+              <p className="text-sm text-gray-400 mb-2">
+                <strong>Company NMLS:</strong> 2524174 • <strong>Mykoal DeShazo NMLS:</strong> 1912347
               </p>
-              <p className="mb-2">
-                Licensed Mortgage Professional, Scottsdale, Arizona. Equal Housing Opportunity. 
+              <p className="text-sm text-gray-400 mb-2">
+                4343 N Scottsdale Rd, Scottsdale, AZ 85251 • (480) 805-5574
               </p>
-              <p>
-                All loans subject to credit approval. This is not a commitment to lend.
+              <p className="text-sm text-gray-400">
+                Licensed Mortgage Professional • Equal Housing Opportunity
               </p>
-              <div className="flex items-center justify-center md:justify-start gap-2 mt-3">
+            </div>
+
+            {/* Compliance disclaimer */}
+            <div className="text-center">
+              <p className="text-xs text-gray-500 leading-relaxed max-w-4xl mx-auto">
+                The content provided within this website is presented for information purposes only. This is not a commitment to lend or extend credit. Information and/or dates are subject to change without notice. All loans are subject to credit approval. Other restrictions may apply. Mortgage loans may be arranged through third party providers.
+              </p>
+            </div>
+
+            {/* Links and copyright */}
+            <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+              <div className="flex items-center space-x-4">
                 <img 
                   src={equalHousingLogo} 
                   alt="Equal Housing Opportunity Logo" 
                   className="w-6 h-6 object-contain filter brightness-0 invert"
                 />
-                <span className="text-xs text-gray-400">Equal Housing Opportunity</span>
+                <p className="text-sm text-gray-400">© 2025 Independence Home Loans. All rights reserved.</p>
               </div>
-            </div>
-            
-            <div className="text-sm text-gray-400 md:text-right">
-              <div className="flex md:justify-end space-x-6">
+              
+              <div className="flex space-x-6 text-sm text-gray-400">
                 <Link href="/privacy-policy" className="hover:text-blue-400 transition-colors">Privacy Policy</Link>
                 <Link href="/terms-of-service" className="hover:text-blue-400 transition-colors">Terms of Service</Link>
                 <a href="https://www.nmlsconsumeraccess.org/EntityDetails.aspx/INDIVIDUAL/1912347" target="_blank" rel="noopener noreferrer" className="hover:text-blue-400 transition-colors">Licensing</a>
               </div>
-              <p className="mt-4">© 2025 Mykoal DeShazo. All rights reserved.</p>
             </div>
           </div>
         </div>
