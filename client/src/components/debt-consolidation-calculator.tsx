@@ -60,8 +60,8 @@ export default function DebtConsolidationCalculator({
     onError: (error: any) => {
       console.error("Email calculation error:", error);
       toast({
-        title: "Email Failed",
-        description: "Unable to send calculation. Please try again or contact us directly.",
+        title: "Email Temporarily Unavailable",
+        description: "Email service is temporarily down. Please contact Mykoal directly at (623) 280-8351 or mdeshazo@independencehl.com for your analysis.",
         variant: "destructive",
       });
     },

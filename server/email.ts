@@ -88,8 +88,18 @@ export async function sendEmail(params: EmailParams): Promise<boolean> {
     console.error('SendGrid email error:', {
       message: error.message,
       code: error.code,
-      response: error.response?.body
+      response: error.response?.body || error.response
     });
+    
+    // More detailed error reporting
+    if (error.code === 403) {
+      console.error('SendGrid 403 Forbidden - Check:');
+      console.error('1. API key permissions (needs Mail Send permissions)');
+      console.error('2. From email verification in SendGrid');
+      console.error('3. Domain authentication setup');
+      console.error('4. Account status and billing');
+    }
+    
     throw new Error(`Email delivery failed: ${error.message}`);
   }
 }
