@@ -112,7 +112,6 @@ export default function Footer() {
             <h4 className="text-lg font-semibold mb-4">Contact</h4>
             <ul className="space-y-2 text-gray-300">
               <li>(623) 280-8351</li>
-              <li>(480) 805-5574</li>
               <li>mdeshazo@mykoal.com</li>
               <li>
                 4343 N Scottsdale Rd<br />
@@ -132,7 +131,7 @@ export default function Footer() {
                 <strong>Company NMLS:</strong> 2524174 • <strong>Mykoal DeShazo NMLS:</strong> 1912347
               </p>
               <p className="text-sm text-gray-400 mb-2">
-                4343 N Scottsdale Rd, Scottsdale, AZ 85251 • (480) 805-5574
+                4343 N Scottsdale Rd, Scottsdale, AZ 85251
               </p>
               <p className="text-sm text-gray-400">
                 Licensed Mortgage Professional • Equal Housing Opportunity
@@ -146,15 +145,14 @@ export default function Footer() {
               </p>
             </div>
 
-            {/* Links and copyright */}
+            {/* Links and compliance */}
             <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-              <div className="flex items-center space-x-4">
+              <div className="flex items-center">
                 <img 
                   src={equalHousingLogo} 
                   alt="Equal Housing Opportunity Logo" 
                   className="w-6 h-6 object-contain filter brightness-0 invert"
                 />
-                <p className="text-sm text-gray-400">© 2025 Independence Home Loans. All rights reserved.</p>
               </div>
               
               <div className="flex space-x-6 text-sm text-gray-400">
