@@ -134,14 +134,10 @@ export default function HeroSection() {
                 </div>
                 
                 {/* Quick stats */}
-                <div className="grid grid-cols-2 gap-4 text-center lg:text-left">
-                  <div>
+                <div className="flex justify-center lg:justify-start">
+                  <div className="text-center lg:text-left">
                     <div className="text-2xl font-bold text-white">20+</div>
                     <div className="text-sm text-blue-200">Team Experience</div>
-                  </div>
-                  <div>
-                    <div className="text-2xl font-bold text-white">500+</div>
-                    <div className="text-sm text-blue-200">Loans Funded</div>
                   </div>
                 </div>
               </div>
