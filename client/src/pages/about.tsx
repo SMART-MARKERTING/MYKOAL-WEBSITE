@@ -60,7 +60,7 @@ export default function AboutPage() {
                     </div>
                     <div className="flex items-center text-gray-600">
                       <Mail className="h-5 w-5 mr-3 text-blue-600" />
-                      <span>mdeshazo@mykoal.com</span>
+                      <span>mdeshazo@independencehl.com</span>
                     </div>
                     <div className="flex items-center text-gray-600">
                       <MapPin className="h-5 w-5 mr-3 text-blue-600" />

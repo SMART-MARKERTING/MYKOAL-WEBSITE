@@ -267,7 +267,7 @@ export default function TermsOfServicePage() {
                 <div className="space-y-2 text-gray-700">
                   <p><strong>Mykoal DeShazo</strong></p>
                   <p>NMLS #1912347</p>
-                  <p>Email: mdeshazo@mykoal.com</p>
+                  <p>Email: mdeshazo@independencehl.com</p>
                   <p>Phone: (623) 280-8351</p>
                   <p>Location: Scottsdale, Arizona</p>
                 </div>

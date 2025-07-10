@@ -16,8 +16,8 @@ interface EmailParams {
   html?: string;
 }
 
-export const FROM_EMAIL = "mdeshazo@mykoal.com";
-const TO_EMAIL = "mdeshazo@mykoal.com";
+export const FROM_EMAIL = "mdeshazo@independencehl.com";
+const TO_EMAIL = "mdeshazo@independencehl.com";
 
 // Professional signature line for all emails
 const PROFESSIONAL_SIGNATURE = `

@@ -57,17 +57,9 @@ export default function ResourcesPage() {
       link: "/blog/dscr-guide",
       featured: true
     },
+
     {
       id: 2,
-      title: "Business Loan Fundamentals",
-      description: "Essential guide to securing business financing for startups and growing companies.",
-      category: "Business Loans",
-      readTime: "6 min read",
-      link: "/blog/business-loans",
-      featured: true
-    },
-    {
-      id: 3,
       title: "Personal Loan Best Practices",
       description: "Smart strategies for using personal loans and debt consolidation effectively.",
       category: "Personal Finance",

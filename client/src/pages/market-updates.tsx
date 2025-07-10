@@ -143,7 +143,7 @@ export default function MarketUpdatesPage() {
                 <p className="text-gray-600 mb-6">Mykoal DeShazo • NMLS #1912347 • Scottsdale, Arizona</p>
                 <div className="space-y-2">
                   <p className="text-xl font-semibold text-blue-600">(623) 280-8351</p>
-                  <p className="text-gray-600">mdeshazo@mykoal.com</p>
+                  <p className="text-gray-600">mdeshazo@independencehl.com</p>
                 </div>
               </CardContent>
             </Card>
@@ -374,7 +374,7 @@ export default function MarketUpdatesPage() {
                   <span className="font-semibold">NMLS #1912347</span>
                 </div>
                 <div className="text-lg md:text-xl font-bold">(623) 280-8351</div>
-                <div>mdeshazo@mykoal.com</div>
+                <div>mdeshazo@independencehl.com</div>
               </div>
               <p className="text-xs md:text-sm mt-4 opacity-75">
                 Licensed Mortgage Professional • Scottsdale, Arizona
