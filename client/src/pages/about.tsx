@@ -99,12 +99,9 @@ export default function AboutPage() {
             <div className="lg:col-span-2">
               <div className="prose max-w-none">
                 <div className="bg-blue-50 p-6 rounded-lg mb-8 border-l-4 border-blue-600">
-                  <h2 className="text-2xl font-bold text-gray-900 mb-4">Called to Serve Through Faith</h2>
-                  <div className="text-blue-600 font-medium italic mb-4">
-                    "In all your ways acknowledge Him, and He will make your paths straight" - Proverbs 3:6
-                  </div>
+                  <h2 className="text-2xl font-bold text-gray-900 mb-4">Professional Experience</h2>
                   <p className="text-gray-700 leading-relaxed">
-                    Mykoal DeShazo is a Christ-centered mortgage professional with over half a decade of experience serving clients with integrity, honesty, and biblical values. Guided by his faith in Jesus Christ, he brings transparency and ethical excellence to every transaction. Mykoal believes that his calling is to serve others through mortgage lending, helping families and investors achieve their financial goals while honoring God in every step of the process. He specializes in investment property financing, DSCR loans, and alternative lending solutions, always putting his clients' best interests first as an expression of Christian love and service.
+                    Mykoal DeShazo is a professional mortgage specialist with over half a decade of experience serving clients with integrity, honesty, and ethical business practices. He brings transparency and excellence to every transaction. Mykoal specializes in investment property financing, DSCR loans, and alternative lending solutions, always putting his clients' best interests first. His commitment to professional service has earned him recognition as a UWM Breakthrough Award Winner and maintains a 4.91/5 rating from verified client reviews.
                   </p>
                 </div>
 
@@ -138,9 +135,7 @@ export default function AboutPage() {
                 {/* Faith-Based Career Achievement */}
                 <div className="bg-white border border-gray-200 rounded-lg p-6 mb-8">
                   <h3 className="text-xl font-bold text-gray-900 mb-4">Walking in Faith and Excellence</h3>
-                  <div className="text-blue-600 font-medium italic mb-3">
-                    "Whatever you do, work at it with all your heart, as working for the Lord" - Colossians 3:23
-                  </div>
+
                   <p className="text-gray-700 leading-relaxed mb-4">
                     Throughout his career, Mykoal has consistently delivered results that exceed clients' expectations by applying biblical principles of integrity, honesty, and excellence in all his work. His faith-driven approach to business has earned him recognition as a top producer and UWM Breakthrough Award Winner. He believes that every successful transaction is a testimony to God's faithfulness and an opportunity to serve others with Christian love and transparency.
                   </p>

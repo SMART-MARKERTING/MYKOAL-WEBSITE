@@ -32,7 +32,7 @@ export default function Footer() {
           <div className="md:col-span-2">
             <h3 className="text-2xl font-bold mb-4">Mykoal DeShazo</h3>
             <p className="text-blue-200 mb-2 font-medium italic">
-              "For I know the plans I have for you," declares the Lord - Jeremiah 29:11
+              "Trust in the Lord with all your heart" - Proverbs 3:5
             </p>
             <p className="text-gray-300 mb-6 max-w-md">
               Christ-centered mortgage lending with integrity and excellence. Your trusted investor financing specialist, helping investors and families grow their portfolios while honoring God through honest, transparent service.

@@ -31,9 +31,7 @@ export default function JoinTeamPage() {
             <p className="text-xl text-blue-100 mb-6">
               Build a fulfilling and rewarding mortgage career guided by faith
             </p>
-            <div className="text-lg text-blue-200 italic mb-8">
-              "Whatever you do, work at it with all your heart, as working for the Lord" - Colossians 3:23
-            </div>
+
             <div className="flex justify-center gap-4">
               <Button 
                 onClick={scrollToContact}
