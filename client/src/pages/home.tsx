@@ -1,5 +1,5 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { ExternalLink, Globe, Podcast, Facebook, Instagram, Youtube, Phone, Mail, Building } from "lucide-react";
+import { ExternalLink, Globe, Podcast, Facebook, Instagram, Youtube, Phone, Mail, Building, Star } from "lucide-react";
 import headshotImage from "@assets/IMG_0016_1751000995747.jpeg";
 
 export default function Home() {
@@ -24,6 +24,13 @@ export default function Home() {
       url: "https://unykue.com",
       icon: <Podcast className="h-6 w-6" />,
       color: "bg-purple-600 hover:bg-purple-700"
+    },
+    {
+      title: "Client Reviews",
+      description: "4.91/5 Stars • 54+ Reviews",
+      url: "https://www.experience.com/reviews/mykoal-deshazo",
+      icon: <Star className="h-6 w-6" />,
+      color: "bg-yellow-600 hover:bg-yellow-700"
     }
   ];
 
