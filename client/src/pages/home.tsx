@@ -48,7 +48,7 @@ export default function Home() {
     },
     {
       title: "YouTube",
-      url: "https://youtube.com/@mykoaldeshazo",
+      url: "https://youtube.com/@unykuepodcast?si=UI44_FkB2kCJ5OXM",
       icon: <Youtube className="h-5 w-5" />,
       color: "bg-red-600 hover:bg-red-700"
     }
