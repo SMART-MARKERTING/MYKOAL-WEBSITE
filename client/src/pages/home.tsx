@@ -1,5 +1,5 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { ExternalLink, Globe, Podcast, Facebook, Instagram, Youtube, Phone, Mail, Building, Star } from "lucide-react";
+import { ExternalLink, Globe, Podcast, Facebook, Instagram, Youtube, Phone, Mail, Building, Star, Linkedin } from "lucide-react";
 import headshotImage from "@assets/IMG_0016_1751000995747.jpeg";
 
 export default function Home() {
@@ -28,6 +28,12 @@ export default function Home() {
   ];
 
   const socialLinks = [
+    {
+      title: "LinkedIn",
+      url: "https://www.linkedin.com/in/mykoal-deshazo-48134616a",
+      icon: <Linkedin className="h-5 w-5" />,
+      color: "bg-blue-700 hover:bg-blue-800"
+    },
     {
       title: "Facebook",
       url: "https://www.facebook.com/61577360476457",
@@ -134,9 +140,9 @@ export default function Home() {
               <Phone className="h-5 w-5" />
               <span>(623) 280-8351</span>
             </a>
-            <a href="mailto:mdeshazo@mykoal.com" className="flex items-center space-x-3 text-blue-200 hover:text-white transition-colors">
+            <a href="mailto:mykoal@deshazowealth.com" className="flex items-center space-x-3 text-blue-200 hover:text-white transition-colors">
               <Mail className="h-5 w-5" />
-              <span>mdeshazo@mykoal.com</span>
+              <span>mykoal@deshazowealth.com</span>
             </a>
           </div>
         </div>
