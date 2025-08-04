@@ -36,13 +36,13 @@ export default function Home() {
     },
     {
       title: "Facebook",
-      url: "https://www.facebook.com/61577360476457",
+      url: "https://www.facebook.com/VALoans.FHALoans.DSCRLoans.MortgageLoans/",
       icon: <Facebook className="h-5 w-5" />,
       color: "bg-blue-600 hover:bg-blue-700"
     },
     {
       title: "Instagram",
-      url: "https://www.instagram.com/realmykoal/",
+      url: "https://www.instagram.com/themlomykoal?igsh=MW9sejNyZ3FjMjF0NQ%3D%3D&utm_source=qr",
       icon: <Instagram className="h-5 w-5" />,
       color: "bg-pink-600 hover:bg-pink-700"
     },
