@@ -19,13 +19,6 @@ export default function Home() {
       color: "bg-blue-600 hover:bg-blue-700"
     },
     {
-      title: "Unykue Podcast",
-      description: "Faith-Based Podcast",
-      url: "https://unykue.com",
-      icon: <Podcast className="h-6 w-6" />,
-      color: "bg-purple-600 hover:bg-purple-700"
-    },
-    {
       title: "Apply for Purchase or Refi",
       description: "Start Your Loan Application",
       url: "https://westcaplending.loanzify.io/register/mykoal-deshazo",
@@ -62,7 +55,7 @@ export default function Home() {
     },
     {
       title: "YouTube",
-      url: "https://youtube.com/@unykuepodcast?si=UI44_FkB2kCJ5OXM",
+      url: "https://www.youtube.com/@mykoaldeshazo",
       icon: <Youtube className="h-5 w-5" />,
       color: "bg-red-600 hover:bg-red-700"
     }
