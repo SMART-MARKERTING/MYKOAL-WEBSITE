@@ -1,6 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { ExternalLink, Globe, Podcast, Facebook, Instagram, Youtube, Phone, Mail, Building, Star, Linkedin, FileText, CreditCard } from "lucide-react";
 import headshotImage from "@assets/IMG_0016_1751000995747.jpeg";
+import westCapitalLogo from "@assets/image_1756055687983.png";
 
 export default function Home() {
   const businessLinks = [
@@ -162,6 +163,15 @@ export default function Home() {
               <a href="https://westcapitallending.com" target="_blank" rel="noopener noreferrer" className="text-blue-300 hover:text-white transition-colors">
                 westcapitallending.com
               </a>
+            </div>
+            
+            {/* West Capital Lending Logo */}
+            <div className="mt-4">
+              <img 
+                src={westCapitalLogo} 
+                alt="West Capital Lending Awards and Certifications" 
+                className="w-full max-w-lg mx-auto h-auto"
+              />
             </div>
           </div>
         </div>
