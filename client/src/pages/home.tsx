@@ -12,13 +12,6 @@ export default function Home() {
       color: "bg-yellow-600 hover:bg-yellow-700"
     },
     {
-      title: "Team DeShazo",
-      description: "Full Financial Services",
-      url: "https://deshazowealth.com",
-      icon: <Globe className="h-6 w-6" />,
-      color: "bg-blue-600 hover:bg-blue-700"
-    },
-    {
       title: "Apply for Purchase or Refi",
       description: "Start Your Loan Application",
       url: "https://westcaplending.loanzify.io/register/mykoal-deshazo",
@@ -31,6 +24,13 @@ export default function Home() {
       url: "https://heloc.westcapitallending.com/account/heloc/register?referrer=ba7f666e-030b-496a-bc21-4a7f26c182dd",
       icon: <CreditCard className="h-6 w-6" />,
       color: "bg-teal-600 hover:bg-teal-700"
+    },
+    {
+      title: "Team DeShazo",
+      description: "Full Financial Services",
+      url: "https://deshazowealth.com",
+      icon: <Globe className="h-6 w-6" />,
+      color: "bg-blue-600 hover:bg-blue-700"
     }
   ];
 
