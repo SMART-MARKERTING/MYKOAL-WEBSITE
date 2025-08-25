@@ -1,5 +1,5 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { ExternalLink, Globe, Podcast, Facebook, Instagram, Youtube, Phone, Mail, Building, Star, Linkedin, FileText, CreditCard } from "lucide-react";
+import { ExternalLink, Globe, Podcast, Facebook, Instagram, Youtube, Phone, Mail, Building, Star, Linkedin, FileText, CreditCard, Upload } from "lucide-react";
 import headshotImage from "@assets/IMG_0016_1751000995747.jpeg";
 import westCapitalLogo from "@assets/image_1756055687983.png";
 
@@ -25,6 +25,13 @@ export default function Home() {
       url: "https://heloc.westcapitallending.com/account/heloc/register?referrer=ba7f666e-030b-496a-bc21-4a7f26c182dd",
       icon: <CreditCard className="h-6 w-6" />,
       color: "bg-teal-600 hover:bg-teal-700"
+    },
+    {
+      title: "Upload Documents Securely",
+      description: "Submit Your Loan Documents",
+      url: "https://documentguardian.com/filedrop/Mykoal@westcapitallending.com",
+      icon: <Upload className="h-6 w-6" />,
+      color: "bg-green-600 hover:bg-green-700"
     },
     {
       title: "Team DeShazo",
