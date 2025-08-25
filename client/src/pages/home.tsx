@@ -86,7 +86,7 @@ export default function Home() {
             Mykoal DeShazo
           </h1>
           <p className="text-blue-200 text-lg mb-2">
-            Entrepreneur & Content Creator
+            Branch Manager
           </p>
           <p className="text-blue-300 text-sm">
             NMLS #1912347 | Faith-Based Business
