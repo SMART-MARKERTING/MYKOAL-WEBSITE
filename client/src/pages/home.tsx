@@ -183,6 +183,31 @@ export default function Home() {
           </div>
         </div>
 
+        {/* Required Business Links */}
+        <div className="mt-6 bg-white/5 backdrop-blur-sm rounded-xl p-4 border border-white/10">
+          <div className="text-center space-y-3">
+            <div className="flex flex-wrap justify-center gap-4 text-sm">
+              <a href="https://www.nmlsconsumeraccess.org/" target="_blank" rel="noopener noreferrer" className="text-blue-300 hover:text-white transition-colors underline">
+                NMLS Consumer Access
+              </a>
+              <a href="https://westcapitallending.com/licensing" target="_blank" rel="noopener noreferrer" className="text-blue-300 hover:text-white transition-colors underline">
+                Licensing
+              </a>
+              <a href="https://westcapitallending.com/texas-complaint" target="_blank" rel="noopener noreferrer" className="text-blue-300 hover:text-white transition-colors underline">
+                Texas Complaint
+              </a>
+              <a href="https://westcapitallending.com/" target="_blank" rel="noopener noreferrer" className="text-blue-300 hover:text-white transition-colors underline">
+                West Capital Lending
+              </a>
+            </div>
+            
+            {/* Equal Housing Lender Disclaimer */}
+            <div className="text-xs text-blue-200/80 leading-relaxed mt-4 px-2">
+              WCL is an Equal Housing Lender. As prohibited by federal law, we do not engage in business practices that discriminate based on race, color, religion, national origin, sex, marital status, age (provided you have the capacity to enter into a binding contract) because all or part of your income may be derived from any public assistance program, or because you have, in good faith, exercised any right under the Consumer Credit Protection Act.
+            </div>
+          </div>
+        </div>
+
         {/* Footer Quote */}
         <div className="text-center mt-8 text-blue-300/60 text-sm italic">
           "Trust in the Lord with all your heart" - Proverbs 3:5
