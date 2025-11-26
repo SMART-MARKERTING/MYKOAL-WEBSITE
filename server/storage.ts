@@ -261,7 +261,6 @@ export class MemStorage implements IStorage {
     const id = this.currentQuoteId++;
     const quote: QuickQuote = {
       ...insertQuote,
-      phone: insertQuote.phone ?? null,
       id,
       createdAt: new Date(),
     };
@@ -387,6 +386,7 @@ export class MemStorage implements IStorage {
     try {
       // Use FRED API for current mortgage rates
       const fredApiKey = process.env.FRED_API_KEY;
+      console.log('FRED API Key available:', !!fredApiKey);
       
       if (!fredApiKey) {
         console.log('No FRED API key, falling back to Freddie Mac');
@@ -459,6 +459,7 @@ export class MemStorage implements IStorage {
     
     try {
       const url = `https://api.stlouisfed.org/fred/series/observations?series_id=${seriesId}&api_key=${apiKey}&file_type=json&limit=1&sort_order=desc`;
+      console.log(`Fetching FRED data from: ${url}`);
       const response = await fetch(url);
       const data = await response.json();
       
