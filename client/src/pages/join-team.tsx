@@ -314,7 +314,7 @@ export default function JoinTeamPage() {
             />
             <div className="text-sm text-gray-600">
               <p className="font-semibold mb-1">Equal Housing Opportunity</p>
-              <p>Licensed by NMLS #1912347. Verify license status at <a href="https://www.nmlsconsumeraccess.org/EntityDetails.aspx/INDIVIDUAL/1912347" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">NMLS Consumer Access</a></p>
+              <p>Licensed by NMLS #1912347. Adaxa Home NMLS #2380533. Verify license status at <a href="https://www.nmlsconsumeraccess.org/EntityDetails.aspx/INDIVIDUAL/1912347" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">NMLS Consumer Access</a></p>
             </div>
           </div>
         </div>

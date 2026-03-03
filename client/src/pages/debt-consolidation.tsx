@@ -584,7 +584,7 @@ export default function DebtConsolidationPage() {
             </div>
             <p className="text-xs text-white opacity-80 leading-relaxed max-w-3xl mx-auto">
               Equal Housing Opportunity. All loans subject to credit approval. This is not a commitment to lend. 
-              Rates, terms, and conditions are subject to change without notice. Mykoal DeShazo NMLS #1912347.
+              Rates, terms, and conditions are subject to change without notice. Mykoal DeShazo NMLS #1912347. Adaxa Home NMLS #2380533.
             </p>
           </div>
         </div>

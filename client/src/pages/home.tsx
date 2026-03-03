@@ -99,7 +99,7 @@ export default function Home() {
             Vice President
           </p>
           <p className="text-blue-300 text-sm">
-            NMLS #1912347 | Faith-Based Business
+            NMLS #1912347 | Adaxa Home NMLS #2380533
           </p>
         </div>
 
@@ -197,6 +197,7 @@ export default function Home() {
             <div className="space-y-1 text-blue-200 text-sm">
               <div>16767 N Perimeter Dr., Ste 150 Scottsdale, AZ 85260</div>
               <div>NMLS 1912347</div>
+              <div>Adaxa Home NMLS #2380533</div>
               <a href="https://adaxahome.com/contact/" target="_blank" rel="noopener noreferrer" className="text-blue-300 hover:text-white transition-colors">
                 adaxahome.com
               </a>

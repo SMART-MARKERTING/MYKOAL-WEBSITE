@@ -129,7 +129,7 @@ export default function Footer() {
             {/* Company information */}
             <div className="text-center">
               <p className="text-sm text-gray-400 mb-2">
-                <strong>Mykoal DeShazo NMLS:</strong> 1912347
+                <strong>Mykoal DeShazo NMLS:</strong> 1912347 | <strong>Adaxa Home NMLS:</strong> 2380533
               </p>
               <p className="text-sm text-gray-400 mb-2">
                 16767 N Perimeter Dr., Ste 150 Scottsdale, AZ 85260

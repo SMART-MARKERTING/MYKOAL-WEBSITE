@@ -43,7 +43,7 @@ export default function Capture() {
             Mykoal DeShazo
           </h1>
           <p className="text-blue-200 text-lg mb-1">Vice President</p>
-          <p className="text-blue-300 text-sm">NMLS #1912347</p>
+          <p className="text-blue-300 text-sm">NMLS #1912347 | Adaxa Home NMLS #2380533</p>
         </div>
 
         <Card className="bg-white/10 backdrop-blur-sm border border-white/20">
