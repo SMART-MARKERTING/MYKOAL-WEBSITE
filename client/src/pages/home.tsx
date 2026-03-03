@@ -186,9 +186,9 @@ export default function Home() {
               <Phone className="h-5 w-5" />
               <span>(623) 280-8351</span>
             </a>
-            <a href="mailto:Mykoal@westcapitallending.com" className="flex items-center space-x-3 text-blue-200 hover:text-white transition-colors">
+            <a href="mailto:mykoal@adaxahome.com" className="flex items-center space-x-3 text-blue-200 hover:text-white transition-colors">
               <Mail className="h-5 w-5" />
-              <span>Mykoal@westcapitallending.com</span>
+              <span>mykoal@adaxahome.com</span>
             </a>
           </div>
           
