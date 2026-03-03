@@ -495,6 +495,23 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const validatedData = insertLeadSchema.parse(req.body);
       const lead = await storage.createLead(validatedData);
+
+      try {
+        await sendEmail({
+          to: "Mykoal@adaxahome.com",
+          from: FROM_EMAIL,
+          subject: `New Lead Capture: ${lead.lastName}`,
+          html: `
+            <h2>New Lead Captured</h2>
+            <p><strong>Last Name:</strong> ${lead.lastName}</p>
+            <p><strong>Submitted:</strong> ${new Date().toLocaleString()}</p>
+          `,
+          text: `New Lead Captured\n\nLast Name: ${lead.lastName}\nSubmitted: ${new Date().toLocaleString()}`,
+        });
+      } catch (emailError) {
+        console.error("Lead email notification failed:", emailError);
+      }
+
       res.json({ success: true, lead });
     } catch (error) {
       if (error instanceof z.ZodError) {
