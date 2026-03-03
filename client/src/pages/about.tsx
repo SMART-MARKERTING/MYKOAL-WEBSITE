@@ -1,6 +1,7 @@
 import { Link } from "wouter";
 import Navigation from "@/components/navigation";
 import Footer from "@/components/footer";
+import TeamSection from "@/components/team-section";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -211,6 +212,7 @@ export default function AboutPage() {
         </div>
       </section>
 
+      <TeamSection />
       <Footer />
     </div>
   );

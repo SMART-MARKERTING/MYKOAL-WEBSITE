@@ -3,6 +3,7 @@ import { ExternalLink, Globe, Podcast, Facebook, Instagram, Youtube, Phone, Mail
 import headshotImage from "@assets/IMG_0016_1751000995747.jpeg";
 import westCapitalLogo from "@assets/image_1756055687983.png";
 import equalHousingLogo from "@assets/image_1759164152959.png";
+import TeamSection from "@/components/team-section";
 
 export default function Home() {
   const businessLinks = [
@@ -190,6 +191,8 @@ export default function Home() {
             </div>
           </div>
         </div>
+
+        <TeamSection variant="compact" />
 
         {/* Footer Quote */}
         <div className="text-center mt-8 text-blue-300/60 text-sm italic">
