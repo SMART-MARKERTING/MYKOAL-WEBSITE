@@ -2,13 +2,12 @@ import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { ExternalLink, Globe, Podcast, Facebook, Instagram, Youtube, Phone, Mail, Building, Star, Linkedin, FileText, CreditCard, X } from "lucide-react";
+import { ExternalLink, Podcast, Facebook, Instagram, Youtube, Phone, Mail, Building, Star, Linkedin, FileText, CreditCard, X } from "lucide-react";
 import { useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
 import headshotImage from "@assets/IMG_0016_1751000995747.jpeg";
 import equalHousingLogo from "@assets/Equal-Housing-Logo_1751007456918.png";
 import ecoaLogo from "@assets/image_1772497699846.png";
-import TeamSection from "@/components/team-section";
 
 const LENDING_PAD_URL = "https://prod.lendingpad.com/adaxa-home/pos#/?loid=dabbfd28-9b5f-46b8-9029-aa478433a995";
 
@@ -42,13 +41,6 @@ export default function Home() {
       url: "https://www.experience.com/reviews/mykoal-deshazo",
       icon: <Star className="h-6 w-6" />,
       color: "bg-yellow-600 hover:bg-yellow-700"
-    },
-    {
-      title: "Team DeShazo",
-      description: "Full Financial Services",
-      url: "https://deshazowealth.com",
-      icon: <Globe className="h-6 w-6" />,
-      color: "bg-blue-600 hover:bg-blue-700"
     }
   ];
 
@@ -240,8 +232,6 @@ export default function Home() {
             </div>
           </div>
         </div>
-
-        <TeamSection variant="compact" />
 
         {/* Footer Quote */}
         <div className="text-center mt-8 text-blue-300/60 text-sm italic">
