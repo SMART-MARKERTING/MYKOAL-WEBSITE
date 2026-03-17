@@ -1,0 +1,71 @@
+I need you to update my licensed mortgage website to make it more compliant, clearer, and more conversion-focused without losing a premium personal-brand feel.
+
+Context:
+- Website: mykoal.com
+- Person: Mykoal DeShazo
+- NMLS: 1912347
+- Mortgage services provided through Adaxa Home LLC
+- Adaxa Home LLC NMLS: 2380533
+- Site currently includes my personal brand plus mortgage calls to action
+- I want the mortgage side to be crystal clear, professional, and legally safer
+
+Main goal:
+Turn mykoal.com into a strong personal mortgage website with clear compliance language and a better user path for home-loan leads.
+
+Requirements:
+1. Above the fold, clearly identify:
+   - Mykoal DeShazo
+   - Mortgage Loan Originator
+   - NMLS 1912347
+   - Mortgage services provided through Adaxa Home LLC
+   - Adaxa Home LLC NMLS 2380533
+2. Keep “Vice President” only as secondary branding, not the main compliance title.
+3. Add a strong compliance footer on every page with:
+   - Mykoal DeShazo
+   - Mortgage Loan Originator
+   - NMLS 1912347
+   - Adaxa Home LLC
+   - NMLS 2380533
+   - Equal Housing Opportunity
+   - Licensed states placeholder
+   - Privacy Policy
+   - Terms of Use
+   - NMLS Consumer Access link placeholder
+4. Reorganize the homepage so the mortgage offer is the priority and any other personal business brands are lower on the page.
+5. Create or improve sections/pages for:
+   - Purchase
+   - Refinance
+   - HELOC
+6. Add better CTA structure:
+   - Start Your Loan Consultation
+   - Apply Now
+   - Schedule a Call
+7. Add a brief trust section with:
+   - who I help
+   - types of loan scenarios
+   - why work with me
+8. Keep the tone:
+   - premium
+   - personal
+   - modern
+   - trustworthy
+   - not overly salesy
+9. Add a disclaimer near any lead form:
+   - “By submitting your information, you consent to be contacted regarding mortgage options. Mortgage services are provided through Adaxa Home LLC.”
+10. If phone number collection exists, add text-consent/TCPA style language and link privacy/terms pages.
+11. Keep the site mobile-first and conversion-focused.
+
+Design direction:
+- Clean luxury aesthetic
+- Strong whitespace
+- Clear hierarchy
+- Masculine, modern, premium
+- Personal brand but compliance-aware
+
+Deliverables:
+1. Revised homepage copy
+2. Revised hero section
+3. New page structure/navigation
+4. Compliance footer copy
+5. Lead form disclaimer copy
+6. Exact revised text shown before publishing changes
