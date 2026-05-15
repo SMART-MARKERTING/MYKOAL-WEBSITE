@@ -193,25 +193,45 @@ export default function Home() {
 
         {/* ── Primary CTAs ── */}
         <div className="space-y-3 mb-8">
-          <button
-            onClick={() => setShowApplyModal(true)}
-            className="block w-full text-left"
-          >
-            <Card className="bg-orange-600 hover:bg-orange-700 text-white border-0 shadow-lg hover:shadow-xl transform hover:scale-[1.02] transition-all duration-200">
-              <CardContent className="p-4">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-3">
-                    <FileText className="h-6 w-6 flex-shrink-0" />
-                    <div>
-                      <p className="font-bold text-base leading-tight">Apply Now</p>
-                      <p className="text-white/80 text-sm">Purchase, Refinance, or HELOC</p>
-                    </div>
-                  </div>
-                  <ChevronRight className="h-5 w-5 text-white/60 flex-shrink-0" />
-                </div>
-              </CardContent>
-            </Card>
-          </button>
+          {/* HELOC + Refinance 2-col grid */}
+          <div className="grid grid-cols-2 gap-3">
+            <a
+              href="https://smartr8.com/heloc/instant-options?utm_source=mykoal&utm_medium=hub&utm_campaign=heloc-cta"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Card className="bg-orange-600 hover:bg-orange-700 text-white border-0 shadow-lg hover:shadow-xl transform hover:scale-[1.02] transition-all duration-200 h-full">
+                <CardContent className="p-4 flex flex-col items-start gap-1">
+                  <TrendingUp className="h-5 w-5 mb-1" />
+                  <p className="font-bold text-sm leading-tight">Apply for HELOC</p>
+                  <p className="text-white/75 text-xs">Tap your home equity</p>
+                </CardContent>
+              </Card>
+            </a>
+            <div>
+              <a
+                href="https://smartr8.com/apply/cash-out?utm_source=mykoal&utm_medium=hub&utm_campaign=cashout-cta"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Card className="bg-orange-700 hover:bg-orange-800 text-white border-0 shadow-lg hover:shadow-xl transform hover:scale-[1.02] transition-all duration-200">
+                  <CardContent className="p-4 flex flex-col items-start gap-1">
+                    <RefreshCw className="h-5 w-5 mb-1" />
+                    <p className="font-bold text-sm leading-tight">Apply for Refinance</p>
+                    <p className="text-white/75 text-xs">Cash-out or rate reduction</p>
+                  </CardContent>
+                </Card>
+              </a>
+              <a
+                href="https://smartr8.com/apply/rate-reduction?utm_source=mykoal&utm_medium=hub&utm_campaign=rate-cta"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block text-center text-blue-300/60 hover:text-blue-200 text-xs mt-1.5 transition-colors"
+              >
+                Rate reduction instead →
+              </a>
+            </div>
+          </div>
 
           <button onClick={openCal} className="block w-full text-left">
             <Card className="bg-[#0077a8] hover:bg-[#005f85] text-white border-0 shadow-lg hover:shadow-xl transform hover:scale-[1.02] transition-all duration-200">

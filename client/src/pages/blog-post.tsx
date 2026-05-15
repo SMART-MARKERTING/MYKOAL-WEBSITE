@@ -99,24 +99,38 @@ export default function BlogPost() {
         <div className="bg-[#0077a8]/30 border border-[#00b4d8]/30 rounded-xl p-6 text-center">
           <h3 className="text-white font-bold text-lg mb-2">Have questions about your situation?</h3>
           <p className="text-blue-200/70 text-sm mb-4">
-            Talk it through live or get instant options — your choice.
+            Talk it through live or jump straight into an application.
           </p>
-          <div className="flex gap-3">
-            <Button
-              onClick={openCal}
-              className="flex-1 bg-[#00b4d8] hover:bg-[#0099bb] text-white font-semibold"
-            >
-              Schedule a Call
-            </Button>
+          <Button
+            onClick={openCal}
+            className="w-full bg-[#00b4d8] hover:bg-[#0099bb] text-white font-semibold mb-3"
+          >
+            Schedule a Call
+          </Button>
+          <div className="flex gap-x-4 justify-center text-xs">
             <a
-              href="https://smartr8.com"
+              href="https://smartr8.com/heloc/instant-options?utm_source=mykoal&utm_medium=hub&utm_campaign=heloc-cta"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex-1"
+              className="text-blue-300/70 hover:text-white underline transition-colors"
             >
-              <Button className="w-full bg-orange-600 hover:bg-orange-700 text-white font-semibold">
-                Get Instant Options
-              </Button>
+              Apply for HELOC →
+            </a>
+            <a
+              href="https://smartr8.com/apply/cash-out?utm_source=mykoal&utm_medium=hub&utm_campaign=cashout-cta"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-300/70 hover:text-white underline transition-colors"
+            >
+              Cash-Out Refi →
+            </a>
+            <a
+              href="https://smartr8.com/apply/rate-reduction?utm_source=mykoal&utm_medium=hub&utm_campaign=rate-cta"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-300/70 hover:text-white underline transition-colors"
+            >
+              Rate Reduction →
             </a>
           </div>
         </div>

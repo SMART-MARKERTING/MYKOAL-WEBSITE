@@ -1,0 +1,97 @@
+Add two cross-site CTA buttons to the homepage hero card. These 
+link visitors from mykoal.com to the funnel pages on smartr8.com 
+where they can submit a real lead.
+
+============================================
+LOCATION
+============================================
+
+In the existing hero card on the homepage, currently has three 
+stacked buttons:
+1. Apply Now (orange)
+2. Schedule a Call (light blue)  
+3. Client Reviews (gold/yellow)
+
+REPLACE the current "Apply Now" button with a 2-column grid 
+of two buttons side by side (or stacked on mobile). Keep 
+Schedule a Call and Client Reviews below them as-is.
+
+============================================
+NEW BUTTON 1: APPLY FOR HELOC
+============================================
+
+- Label: "Apply for HELOC"
+- Subtext: "Tap your home equity"
+- Icon: TrendingUp or DollarSign (lucide-react)
+- Background color: Match the orange/coral of the existing 
+  Apply Now button (or use a green if you want differentiation)
+- Action: Opens https://smartr8.com/heloc/instant-options in a 
+  new tab (target="_blank" rel="noopener noreferrer")
+
+============================================
+NEW BUTTON 2: APPLY FOR REFINANCE
+============================================
+
+- Label: "Apply for Refinance"  
+- Subtext: "Cash-out or rate reduction"
+- Icon: RefreshCw or Repeat (lucide-react)
+- Background color: Same orange/coral as HELOC button (or a 
+  blue variant)
+- Action: Opens a small inline dropdown OR modal with two 
+  sub-choices:
+    - "Cash-Out Refinance" → https://smartr8.com/apply/cash-out
+    - "Rate & Term Refinance" → https://smartr8.com/apply/rate-reduction
+  
+  If a dropdown/modal feels too heavy for this hero card, 
+  default to opening https://smartr8.com/apply/cash-out in a 
+  new tab (cash-out is the more common refi entry point). Then 
+  ADD a smaller secondary text link below the button: 
+  "Looking for rate reduction instead? →" linking to 
+  https://smartr8.com/apply/rate-reduction
+
+============================================
+ANALYTICS TAGGING
+============================================
+
+Add UTM parameters to all four smartr8 URLs so we can track 
+where the lead originated:
+
+- HELOC button: 
+  https://smartr8.com/heloc/instant-options?utm_source=mykoal&utm_medium=hub&utm_campaign=heloc-cta
+
+- Cash-out: 
+  https://smartr8.com/apply/cash-out?utm_source=mykoal&utm_medium=hub&utm_campaign=cashout-cta
+
+- Rate reduction: 
+  https://smartr8.com/apply/rate-reduction?utm_source=mykoal&utm_medium=hub&utm_campaign=rate-cta
+
+This way, when leads come into LeadMailbox or LoanOfficer.ai, 
+we can see if they originated from the mykoal.com hub vs. 
+direct smartr8 traffic.
+
+============================================
+ALSO ADD THESE BUTTONS TO
+============================================
+
+- The /about page CTA section (currently shows Apply Now, 
+  Schedule a Call, Client Reviews — replace Apply Now with the 
+  same HELOC + Refinance grid)
+- The blog post CTA card at the bottom of every post (alongside 
+  Schedule a Call, add HELOC + Refinance as small text links)
+- The mobile hamburger nav menu (add as menu items)
+
+============================================
+DO NOT CHANGE
+============================================
+
+- The current "Apply Now" button styling can be reused for the 
+  new HELOC button. Don't reinvent the visual treatment.
+- Don't touch the Schedule a Call or Client Reviews buttons. 
+  They stay exactly as-is.
+- Don't add these to /thank-you or any post-conversion pages.
+
+============================================
+WHEN DONE
+============================================
+
+Run npm run build, confirm clean, send preview URL.
