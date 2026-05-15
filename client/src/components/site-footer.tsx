@@ -1,0 +1,73 @@
+import { Link } from "wouter";
+import equalHousingLogo from "@assets/Equal-Housing-Logo_1751007456918.png";
+import ecoaLogo from "@assets/image_1772497699846.png";
+
+export default function SiteFooter() {
+  return (
+    <footer className="bg-white/5 border-t border-white/10 mt-12">
+      <div className="max-w-md mx-auto px-4 py-8">
+        {/* Two-column nav links */}
+        <div className="grid grid-cols-2 gap-6 mb-8">
+          <div>
+            <p className="text-white text-xs font-semibold uppercase tracking-wider mb-3">Site</p>
+            <ul className="space-y-2">
+              {[
+                { label: "Home", href: "/" },
+                { label: "About", href: "/about" },
+                { label: "Blog", href: "/blog" },
+                { label: "FAQ", href: "/faq" },
+                { label: "Contact", href: "/contact" },
+                { label: "Testimonials", href: "/testimonials" },
+              ].map((l) => (
+                <li key={l.href}>
+                  <Link href={l.href} className="text-blue-300/70 hover:text-white text-sm transition-colors">
+                    {l.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <p className="text-white text-xs font-semibold uppercase tracking-wider mb-3">Compliance</p>
+            <ul className="space-y-2">
+              {[
+                { label: "NMLS Consumer Access", href: "https://www.nmlsconsumeraccess.org/EntityDetails.aspx/INDIVIDUAL/1912347" },
+                { label: "Licensing", href: "https://adaxahome.com/licensing" },
+                { label: "Privacy Policy", href: "https://adaxahome.com/privacy-policy" },
+                { label: "Terms of Use", href: "https://adaxahome.com/terms-of-use" },
+              ].map((l) => (
+                <li key={l.href}>
+                  <a href={l.href} target="_blank" rel="noopener noreferrer" className="text-blue-300/70 hover:text-white text-sm transition-colors">
+                    {l.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        {/* EHO logos */}
+        <div className="flex justify-center items-center gap-4 mb-5">
+          <img src={equalHousingLogo} alt="Equal Housing Lender" className="h-10 w-auto" />
+          <img src={ecoaLogo} alt="Equal Credit Opportunity Act" className="h-10 w-auto" />
+        </div>
+
+        {/* Compliance text */}
+        <div className="text-center space-y-1 mb-4">
+          <p className="text-white text-sm font-semibold">Mykoal DeShazo</p>
+          <p className="text-blue-200 text-xs">Mortgage Loan Originator · NMLS #1912347</p>
+          <p className="text-blue-200 text-xs">Adaxa Home LLC · NMLS #2380533</p>
+          <p className="text-blue-300/60 text-xs">Equal Housing Opportunity · Licensed in AZ and additional states</p>
+        </div>
+
+        <p className="text-blue-200/60 text-xs text-center leading-relaxed mb-4 px-2">
+          Adaxa Home LLC is an Equal Housing Lender. We do not discriminate on the basis of race, color, religion, national origin, sex, marital status, age, or any other characteristic protected by federal law.
+        </p>
+
+        <p className="text-blue-300/40 text-xs text-center italic">
+          "Trust in the Lord with all your heart" — Proverbs 3:5
+        </p>
+      </div>
+    </footer>
+  );
+}

@@ -4,11 +4,25 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Switch, Route } from "wouter";
 import Home from "@/pages/home";
+import About from "@/pages/about";
+import BlogIndex from "@/pages/blog";
+import BlogPost from "@/pages/blog-post";
+import FAQ from "@/pages/faq";
+import Contact from "@/pages/contact";
+import Testimonials from "@/pages/testimonials";
+import NotFound from "@/pages/not-found";
 
 function Router() {
   return (
     <Switch>
       <Route path="/" component={Home} />
+      <Route path="/about" component={About} />
+      <Route path="/blog" component={BlogIndex} />
+      <Route path="/blog/:slug" component={BlogPost} />
+      <Route path="/faq" component={FAQ} />
+      <Route path="/contact" component={Contact} />
+      <Route path="/testimonials" component={Testimonials} />
+      <Route component={NotFound} />
     </Switch>
   );
 }

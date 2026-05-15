@@ -1,0 +1,270 @@
+Update my existing personal hub site mykoal.com. Keep the current 
+Linktree-style homepage intact, fix two critical errors, and add 
+new pages plus AI search optimization. This site is built in 
+Next.js with Tailwind, deployed to Cloudflare Pages.
+
+============================================
+PART 1: FIX TWO ERRORS ON CURRENT HOMEPAGE
+============================================
+
+ERROR 1 — Wrong title:
+Currently displays "MORTGAGE LOAN ORIGINATOR" 
+Change to: "VICE PRESIDENT | SENIOR LOAN OFFICER"
+(Keep the same styling, just swap the text)
+
+ERROR 2 — Wrong phone number:
+Currently displays "(623) 280-8351" in the Get In Touch section
+Change to: "(949) 418-5486"
+Also update any tel: links to tel:+19494185486
+
+============================================
+PART 2: ADD MINIMAL TOP NAV
+============================================
+
+Add a sticky top nav bar that appears on all pages:
+- Transparent background with subtle blur on scroll
+- Mobile: hamburger menu icon (right side)
+- Desktop: text links inline
+- Links: Home | About | Blog | FAQ | Contact
+- Active page link gets a subtle underline or accent color
+- Don't make it visually heavy. The site's identity is the hero card, not the nav.
+
+============================================
+PART 3: BUILD NEW PAGES
+============================================
+
+NEW PAGE 1: /about
+- Hero: large headshot + name + title
+- Section "My Story" with placeholder copy I'll replace later. 
+  Format: 3-4 short paragraphs, warm and personal, written in first person.
+- Section "Credentials & Experience":
+  - 7+ years in mortgage
+  - Vice President | Senior Loan Officer at Adaxa Home
+  - Personal NMLS #1912347
+  - Adaxa Home NMLS #2380533
+  - Licensed in Arizona (and additional states per current footer)
+  - Network of 99+ wholesale lenders including Rocket Mortgage, 
+    loanDepot, Carrington Mortgage, CAKE
+- Section "What I Specialize In":
+  - Refinance (cash-out, rate & term, home equity solutions)
+  - Purchase loans (Conventional, FHA, VA, Jumbo)
+  - HELOC and Home Equity Loans
+  - Investor financing (DSCR, Non-QM, Bank Statement, Hard Money)
+- CTA at bottom: same three buttons from homepage 
+  (Apply Now, Schedule a Call, Client Reviews)
+
+NEW PAGE 2: /blog (index page)
+- Title "Mortgage Insights from Mykoal"
+- Grid of blog post cards (3 columns on desktop, 1 on mobile)
+- Each card: featured image, title, date, 1-line excerpt, "Read more" link
+- Build with markdown files in /content/blog/ folder
+- Each post URL: /blog/[slug]
+
+Build 3 placeholder posts with full structure and dummy copy:
+  1. "Should You Cash-Out Refi or Take a HELOC in 2026?"
+  2. "What Scottsdale Homeowners Need to Know About Home Equity Right Now"
+  3. "VA Loans Explained: A Loan Officer's Honest Breakdown"
+
+Each post page should include:
+- H1 title
+- Author byline with headshot thumbnail + "Mykoal DeShazo, NMLS #1912347"
+- Published date
+- Body content
+- FAQ section at the bottom (Q&A format, 3 questions per post)
+- CTA card: "Have questions about your situation? Schedule a call 
+  with Mykoal" with button linking to your calendar
+
+NEW PAGE 3: /faq
+- Title "Frequently Asked Questions"
+- Accordion-style expandable Q&A
+- Organize into categories: Refinance, Purchase, HELOC, 
+  Credit & Qualifying, Working with a Broker
+- Start with 4-5 placeholder Q&As per category
+- Each answer is 2-4 sentences, plain English
+
+NEW PAGE 4: /contact
+- Title "Get in Touch"
+- Three contact options as cards:
+  1. Phone: (949) 418-5486
+  2. Email: mykoal@adaxahome.com
+  3. Office: 16767 N Perimeter Dr, Ste 150, Scottsdale, AZ 85260
+- Simple contact form below (Name, Email, Phone, Message)
+- Form submits to Formspree or LeadMailbox (use existing 
+  integration from smartr8 if available, otherwise placeholder)
+- Below the form: embedded Google Maps showing the office address
+
+NEW PAGE 5: /testimonials
+- Title "Client Reviews"
+- Pull layout inspiration from Google Business Profile reviews
+- Grid of review cards: 5-star rating, quote, reviewer first name, 
+  date
+- Start with 6 placeholder reviews I'll swap with real Google 
+  reviews later
+- Header section: "4.91 / 5 Stars across 54+ Reviews"
+- Link below: "View all reviews on Google →" (placeholder Google 
+  Business Profile URL)
+
+============================================
+PART 4: ADD "RESOURCES" SECTION TO HOMEPAGE
+============================================
+
+Insert this section ABOVE the footer on the homepage, after the 
+"Get In Touch" section:
+
+- Section title: "Resources & Insights"
+- Three cards in a row (stack on mobile):
+  1. "Read the Blog" → links to /blog
+  2. "Common Questions" → links to /faq
+  3. "Client Reviews" → links to /testimonials
+- Same visual style as the Loan Options cards above
+
+============================================
+PART 5: SCHEMA MARKUP FOR AI SEARCH VISIBILITY
+============================================
+
+This is critical. Add JSON-LD structured data to the <head> of 
+the relevant pages.
+
+ON HOMEPAGE AND /about — add Person schema:
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Mykoal DeShazo",
+  "jobTitle": "Vice President, Senior Loan Officer",
+  "worksFor": {
+    "@type": "Organization",
+    "name": "Adaxa Home LLC",
+    "identifier": "NMLS #2380533"
+  },
+  "identifier": "NMLS #1912347",
+  "telephone": "+19494185486",
+  "email": "mykoal@adaxahome.com",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "16767 N Perimeter Dr, Ste 150",
+    "addressLocality": "Scottsdale",
+    "addressRegion": "AZ",
+    "postalCode": "85260",
+    "addressCountry": "US"
+  },
+  "url": "https://mykoal.com",
+  "sameAs": [
+    "LinkedIn URL",
+    "Facebook URL",
+    "Instagram URL",
+    "YouTube URL"
+  ],
+  "knowsAbout": [
+    "Mortgage refinance",
+    "Cash-out refinance",
+    "HELOC",
+    "Home equity loans",
+    "VA loans",
+    "FHA loans",
+    "Conventional mortgages",
+    "DSCR investor loans",
+    "Bank statement loans",
+    "Jumbo loans"
+  ]
+}
+</script>
+
+ON HOMEPAGE — also add LocalBusiness schema:
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FinancialService",
+  "name": "Mykoal DeShazo at Adaxa Home",
+  "image": "https://mykoal.com/headshot.jpg",
+  "telephone": "+19494185486",
+  "email": "mykoal@adaxahome.com",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "16767 N Perimeter Dr, Ste 150",
+    "addressLocality": "Scottsdale",
+    "addressRegion": "AZ",
+    "postalCode": "85260"
+  },
+  "priceRange": "$$",
+  "areaServed": "Arizona",
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.91",
+    "reviewCount": "54"
+  }
+}
+</script>
+
+ON EACH BLOG POST — add Article schema with author Person object 
+pointing back to Mykoal.
+
+ON /faq — add FAQPage schema with all Q&As included so AI engines 
+can lift them directly.
+
+============================================
+PART 6: META TAGS AND OPEN GRAPH
+============================================
+
+For every page, add proper meta tags:
+- Unique <title> per page
+- Unique meta description (150-160 chars)
+- Open Graph tags (og:title, og:description, og:image, og:url, 
+  og:type)
+- Twitter Card tags
+- Canonical URL
+
+Default OG image: a branded card with the headshot, name, title, 
+and NMLS visible.
+
+============================================
+PART 7: SITEMAP AND ROBOTS
+============================================
+
+- Generate sitemap.xml at /sitemap.xml including all pages 
+  (homepage, /about, /blog, every blog post, /faq, /contact, 
+  /testimonials)
+- Add robots.txt at /robots.txt allowing all crawlers including:
+  User-agent: GPTBot — Allow
+  User-agent: ChatGPT-User — Allow
+  User-agent: PerplexityBot — Allow
+  User-agent: ClaudeBot — Allow
+  User-agent: Google-Extended — Allow
+
+============================================
+PART 8: FOOTER UPDATE
+============================================
+
+Update footer on ALL pages to include navigation:
+- Two columns of links:
+  Column 1 (Site): Home, About, Blog, FAQ, Contact, Testimonials
+  Column 2 (Compliance): NMLS Consumer Access, Licensing, 
+    Privacy Policy, Terms of Use
+- Keep the existing EHO logo, NMLS disclosure, and Adaxa Home 
+  language exactly as-is
+- Keep the Proverbs 3:5 verse at the bottom
+
+============================================
+DO NOT CHANGE
+============================================
+
+- The blue gradient background and overall color palette
+- The hero card with headshot + name (just update title text 
+  per Part 1)
+- The three primary buttons (Apply Now, Schedule a Call, 
+  Client Reviews) — keep their existing links
+- The Loan Options card section
+- The Why Mykoal section (Who I Help, Loan Scenarios, Why 
+  Work With Me)
+- The Connect section (LinkedIn, Facebook, Instagram, YouTube)
+- Any existing form integrations
+
+============================================
+WHEN DONE
+============================================
+
+Run npm run build to confirm no errors. Send me the preview URL 
+and a list of every new page, file, and schema block you added 
+so I can verify before merging.

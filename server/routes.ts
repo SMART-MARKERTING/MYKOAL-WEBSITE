@@ -530,6 +530,62 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // robots.txt
+  app.get("/robots.txt", (_req, res) => {
+    res.type("text/plain").send(
+`User-agent: *
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+Sitemap: https://mykoal.com/sitemap.xml`
+    );
+  });
+
+  // sitemap.xml
+  app.get("/sitemap.xml", (_req, res) => {
+    const base = "https://mykoal.com";
+    const today = new Date().toISOString().split("T")[0];
+    const staticPages = ["/", "/about", "/blog", "/faq", "/contact", "/testimonials"];
+    const blogSlugs = [
+      "cash-out-refi-vs-heloc-2026",
+      "scottsdale-home-equity-2026",
+      "va-loans-explained",
+    ];
+    const urls = [
+      ...staticPages.map((p) => `
+  <url>
+    <loc>${base}${p}</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>${p === "/" ? "weekly" : "monthly"}</changefreq>
+    <priority>${p === "/" ? "1.0" : "0.8"}</priority>
+  </url>`),
+      ...blogSlugs.map((s) => `
+  <url>
+    <loc>${base}/blog/${s}</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>`),
+    ];
+    res.type("application/xml").send(
+      `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${urls.join("")}\n</urlset>`
+    );
+  });
+
   const httpServer = createServer(app);
   return httpServer;
 }

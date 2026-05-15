@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "wouter";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -21,20 +22,23 @@ import {
   CheckCircle,
   Calendar,
   ChevronRight,
+  BookOpen,
+  HelpCircle,
 } from "lucide-react";
 import { useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
+import { useCalModal } from "@/hooks/use-cal";
+import SiteNav from "@/components/site-nav";
+import SiteFooter from "@/components/site-footer";
 import headshotImage from "@assets/IMG_0016_1751000995747.jpeg";
-import equalHousingLogo from "@assets/Equal-Housing-Logo_1751007456918.png";
-import ecoaLogo from "@assets/image_1772497699846.png";
 
 const LENDING_PAD_URL =
   "https://prod.lendingpad.com/adaxa-home/pos#/?loid=dabbfd28-9b5f-46b8-9029-aa478433a995";
-const SCHEDULE_URL = "https://calendly.com/adaxa-mortgage/quote-review";
 
 export default function Home() {
   const [showApplyModal, setShowApplyModal] = useState(false);
   const [applyLastName, setApplyLastName] = useState("");
+  const openCal = useCalModal();
 
   const applyMutation = useMutation({
     mutationFn: async (data: { lastName: string }) => {
@@ -59,17 +63,20 @@ export default function Home() {
     {
       icon: <HomeIcon className="h-7 w-7" />,
       title: "Purchase",
-      description: "Buy your next home with confidence. Conventional, FHA, VA, DSCR, and investor loan options available.",
+      description:
+        "Buy your next home with confidence. Conventional, FHA, VA, DSCR, and investor loan options available.",
     },
     {
       icon: <RefreshCw className="h-7 w-7" />,
       title: "Refinance",
-      description: "Lower your rate, reduce your payment, or access equity. Let's find the right refi strategy for you.",
+      description:
+        "Lower your rate, reduce your payment, or access equity. Let's find the right refi strategy for you.",
     },
     {
       icon: <TrendingUp className="h-7 w-7" />,
       title: "HELOC",
-      description: "Tap into your home's equity for renovations, investments, or debt consolidation.",
+      description:
+        "Tap into your home's equity for renovations, investments, or debt consolidation.",
     },
   ];
 
@@ -136,9 +143,34 @@ export default function Home() {
     },
   ];
 
+  const resourceLinks = [
+    {
+      icon: <BookOpen className="h-6 w-6" />,
+      title: "Read the Blog",
+      description: "Mortgage insights & guides",
+      href: "/blog",
+      color: "bg-[#0077a8] hover:bg-[#005f85]",
+    },
+    {
+      icon: <HelpCircle className="h-6 w-6" />,
+      title: "Common Questions",
+      description: "Browse the FAQ",
+      href: "/faq",
+      color: "bg-slate-700 hover:bg-slate-600",
+    },
+    {
+      icon: <Star className="h-6 w-6" />,
+      title: "Client Reviews",
+      description: "4.91 / 5 Stars",
+      href: "/testimonials",
+      color: "bg-yellow-600 hover:bg-yellow-700",
+    },
+  ];
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800">
-      <div className="container max-w-md mx-auto px-4 pt-10 pb-6">
+      <SiteNav />
+      <div className="container max-w-md mx-auto px-4 pt-20 pb-6">
 
         {/* ── Hero / Profile ── */}
         <div className="text-center mb-8">
@@ -147,13 +179,11 @@ export default function Home() {
             alt="Mykoal DeShazo"
             className="w-32 h-32 rounded-full object-cover shadow-2xl border-4 border-white/20 mx-auto mb-5"
           />
-          <h1 className="text-3xl font-bold text-white mb-1">
-            Mykoal DeShazo
-          </h1>
+          <h1 className="text-3xl font-bold text-white mb-1">Mykoal DeShazo</h1>
           <p className="text-[#00b4d8] font-semibold text-base mb-1 tracking-wide uppercase">
-            Mortgage Loan Originator
+            Vice President | Senior Loan Officer
           </p>
-          <p className="text-white/60 text-xs mb-3">Vice President — Adaxa Home LLC</p>
+          <p className="text-white/50 text-xs mb-3">Mortgage Loan Originator · Adaxa Home LLC</p>
           <div className="inline-block bg-white/10 border border-white/20 rounded-full px-4 py-1.5">
             <p className="text-blue-200 text-xs font-medium">
               NMLS #1912347 &nbsp;|&nbsp; Adaxa Home LLC NMLS #2380533
@@ -183,7 +213,7 @@ export default function Home() {
             </Card>
           </button>
 
-          <a href={SCHEDULE_URL} target="_blank" rel="noopener noreferrer" className="block w-full">
+          <button onClick={openCal} className="block w-full text-left">
             <Card className="bg-[#0077a8] hover:bg-[#005f85] text-white border-0 shadow-lg hover:shadow-xl transform hover:scale-[1.02] transition-all duration-200">
               <CardContent className="p-4">
                 <div className="flex items-center justify-between">
@@ -198,7 +228,7 @@ export default function Home() {
                 </div>
               </CardContent>
             </Card>
-          </a>
+          </button>
 
           <a
             href="https://www.experience.com/reviews/mykoal-deshazo"
@@ -225,9 +255,7 @@ export default function Home() {
 
         {/* ── Loan Types ── */}
         <div className="mb-8">
-          <h2 className="text-white text-xl font-bold text-center mb-5">
-            Loan Options
-          </h2>
+          <h2 className="text-white text-xl font-bold text-center mb-5">Loan Options</h2>
           <div className="space-y-3">
             {loanTypes.map((loan, i) => (
               <button
@@ -235,7 +263,7 @@ export default function Home() {
                 onClick={() => setShowApplyModal(true)}
                 className="block w-full text-left"
               >
-                <div className="bg-white/10 hover:bg-white/15 border border-white/20 rounded-xl p-4 transition-all duration-200 hover:border-white/30">
+                <div className="bg-white/10 hover:bg-white/15 border border-white/20 hover:border-white/30 rounded-xl p-4 transition-all duration-200">
                   <div className="flex items-start space-x-4">
                     <div className="text-[#00b4d8] mt-0.5 flex-shrink-0">{loan.icon}</div>
                     <div>
@@ -251,15 +279,10 @@ export default function Home() {
 
         {/* ── Trust Section ── */}
         <div className="mb-8">
-          <h2 className="text-white text-xl font-bold text-center mb-5">
-            Why Mykoal?
-          </h2>
+          <h2 className="text-white text-xl font-bold text-center mb-5">Why Mykoal?</h2>
           <div className="space-y-4">
             {trustPoints.map((section, i) => (
-              <div
-                key={i}
-                className="bg-white/10 border border-white/20 rounded-xl p-5"
-              >
+              <div key={i} className="bg-white/10 border border-white/20 rounded-xl p-5">
                 <div className="flex items-center space-x-2 mb-3">
                   {section.icon}
                   <h3 className="text-white font-semibold text-sm uppercase tracking-wider">
@@ -291,7 +314,9 @@ export default function Home() {
                 rel="noopener noreferrer"
                 className="block"
               >
-                <div className={`${link.color} text-white rounded-xl p-3 text-center shadow-md hover:shadow-lg transform hover:scale-105 transition-all duration-200`}>
+                <div
+                  className={`${link.color} text-white rounded-xl p-3 text-center shadow-md hover:shadow-lg transform hover:scale-105 transition-all duration-200`}
+                >
                   <div className="flex flex-col items-center space-y-1.5">
                     {link.icon}
                     <span className="text-xs font-medium">{link.title}</span>
@@ -307,11 +332,11 @@ export default function Home() {
           <h2 className="text-white text-lg font-semibold text-center mb-4">Get In Touch</h2>
           <div className="space-y-3 mb-4">
             <a
-              href="tel:623-280-8351"
+              href="tel:+19494185486"
               className="flex items-center space-x-3 text-blue-200 hover:text-white transition-colors"
             >
               <Phone className="h-5 w-5 flex-shrink-0" />
-              <span>(623) 280-8351</span>
+              <span>(949) 418-5486</span>
             </a>
             <a
               href="mailto:mykoal@adaxahome.com"
@@ -327,64 +352,31 @@ export default function Home() {
           </div>
         </div>
 
-        {/* ── Compliance Footer ── */}
-        <div className="bg-white/5 border border-white/10 rounded-xl p-5 text-center">
-          <div className="flex justify-center items-center gap-4 mb-4">
-            <img src={equalHousingLogo} alt="Equal Housing Lender" className="h-10 w-auto" />
-            <img src={ecoaLogo} alt="Equal Credit Opportunity Act" className="h-10 w-auto" />
+        {/* ── Resources & Insights ── */}
+        <div className="mb-6">
+          <h2 className="text-white text-lg font-semibold text-center mb-4">Resources & Insights</h2>
+          <div className="space-y-3">
+            {resourceLinks.map((r, i) => (
+              <Link key={i} href={r.href} className="block w-full">
+                <div
+                  className={`${r.color} text-white rounded-xl p-4 flex items-center justify-between shadow-md hover:shadow-lg transform hover:scale-[1.02] transition-all duration-200`}
+                >
+                  <div className="flex items-center gap-3">
+                    {r.icon}
+                    <div>
+                      <p className="font-bold text-sm">{r.title}</p>
+                      <p className="text-white/75 text-xs">{r.description}</p>
+                    </div>
+                  </div>
+                  <ChevronRight className="h-5 w-5 text-white/60 flex-shrink-0" />
+                </div>
+              </Link>
+            ))}
           </div>
-
-          <p className="text-white text-sm font-semibold mb-0.5">Mykoal DeShazo</p>
-          <p className="text-blue-200 text-xs mb-0.5">Mortgage Loan Originator · NMLS #1912347</p>
-          <p className="text-blue-200 text-xs mb-0.5">Adaxa Home LLC · NMLS #2380533</p>
-          <p className="text-blue-300/60 text-xs mb-4">Equal Housing Opportunity · Licensed in AZ and additional states</p>
-
-          <div className="flex flex-wrap justify-center gap-x-4 gap-y-1 text-xs mb-4">
-            <a
-              href="https://www.nmlsconsumeraccess.org/EntityDetails.aspx/INDIVIDUAL/1912347"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-300 hover:text-white underline transition-colors"
-            >
-              NMLS Consumer Access
-            </a>
-            <a
-              href="https://adaxahome.com/licensing"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-300 hover:text-white underline transition-colors"
-            >
-              Licensing
-            </a>
-            <a
-              href="https://adaxahome.com/privacy-policy"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-300 hover:text-white underline transition-colors"
-            >
-              Privacy Policy
-            </a>
-            <a
-              href="https://adaxahome.com/terms-of-use"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-300 hover:text-white underline transition-colors"
-            >
-              Terms of Use
-            </a>
-          </div>
-
-          <p className="text-blue-200/60 text-xs leading-relaxed px-2 mb-4">
-            Adaxa Home LLC is an Equal Housing Lender. We do not discriminate on the basis of race, color, religion, national origin, sex, marital status, age, or any other characteristic protected by federal law.
-          </p>
-
-          <p className="text-blue-300/50 text-xs italic">
-            "Trust in the Lord with all your heart" — Proverbs 3:5
-          </p>
         </div>
-
-        <div className="h-6" />
       </div>
+
+      <SiteFooter />
 
       {/* ── Apply Modal ── */}
       {showApplyModal && (
@@ -428,7 +420,8 @@ export default function Home() {
             </form>
 
             <p className="text-blue-300/60 text-xs text-center mt-4 leading-relaxed">
-              By submitting your information, you consent to be contacted regarding mortgage options. Mortgage services are provided through Adaxa Home LLC (NMLS #2380533). We respect your privacy —{" "}
+              By submitting, you consent to be contacted regarding mortgage options. Mortgage
+              services are provided through Adaxa Home LLC (NMLS #2380533).{" "}
               <a
                 href="https://adaxahome.com/privacy-policy"
                 target="_blank"
@@ -436,8 +429,8 @@ export default function Home() {
                 className="underline hover:text-blue-200"
               >
                 Privacy Policy
-              </a>
-              {" "}·{" "}
+              </a>{" "}
+              ·{" "}
               <a
                 href="https://adaxahome.com/terms-of-use"
                 target="_blank"
