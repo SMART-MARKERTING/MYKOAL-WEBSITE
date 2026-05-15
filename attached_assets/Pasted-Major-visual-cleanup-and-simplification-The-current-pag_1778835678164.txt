@@ -1,0 +1,182 @@
+Major visual cleanup and simplification. The current page has 
+too many competing colors and redundant elements. Strip it down 
+to one accent color, fix hierarchy, remove duplicates.
+
+============================================
+ESTABLISH SINGLE ACCENT COLOR
+============================================
+
+The site currently uses orange, blue, and gold as different 
+button colors with no system. Replace all CTA button accent 
+colors with a single warm amber/gold:
+
+PRIMARY ACCENT: #D4A857 (warm amber gold)
+ACCENT HOVER: #C19548 (slightly darker on hover)
+ACCENT TEXT: #1A2744 (deep navy for contrast on gold backgrounds)
+
+Apply this single accent color everywhere a "call to action" 
+needs to draw attention. Remove the orange and blue button 
+colors entirely.
+
+============================================
+REBUILD HERO CARD CTA STACK
+============================================
+
+Current state (broken):
+- Orange "Apply for HELOC" button
+- Orange "Apply for Refinance" button  
+- Floating "Rate reduction instead →" link in middle
+- Blue "Schedule a Call" button
+- Gold "Client Reviews" button
+
+New layout (clean):
+
+LAYER 1 — Two PRIMARY action buttons side by side:
+- "Apply for HELOC" — solid amber gold (#D4A857) background, 
+  navy text, rounded corners, icon left of text
+- "Apply for Refinance" — same exact styling as HELOC, side by 
+  side on desktop, stacked on mobile if needed
+
+LAYER 2 — Tiny secondary link UNDER the Refinance button only:
+- "Rate reduction instead →"
+- Style: text-xs, white at 70% opacity, underline on hover
+- Position: directly below Refinance button, centered, mt-1.5
+- Should visually attach to the Refinance button, not float
+
+LAYER 3 — SECONDARY action button:
+- "Schedule a Call"
+- Style: GHOST button (transparent background, 1px white border 
+  at 30% opacity, white text, calendar icon)
+- Full width below the two primary buttons
+- Hover: border becomes white at 60%, slight background tint
+
+LAYER 4 — REPLACE the big gold Client Reviews button entirely.
+Replace with a small subtle inline trust badge:
+- Small pill/badge centered
+- Star icon + "4.91 / 5 · 54+ Google Reviews"
+- Clickable (links to /testimonials or Google Business URL)
+- Style: text-sm, amber gold star icon, white text at 80% opacity, 
+  no background fill, just text with the star
+- Sits BELOW the Schedule a Call button as a soft trust signal
+
+So final hero stack reads:
+1. Headshot
+2. Mykoal DeShazo
+3. VICE PRESIDENT | SENIOR LOAN OFFICER (amber gold accent)
+4. Adaxa Home LLC
+5. NMLS badge
+6. [Apply for HELOC] [Apply for Refinance]
+       (rate reduction instead →)
+7. Schedule a Call (ghost button)
+8. ★ 4.91 / 5 · 54+ Google Reviews (small text trust badge)
+
+============================================
+REMOVE DUPLICATE CLIENT REVIEWS CARD
+============================================
+
+In the "Resources & Insights" section near the bottom, there 
+are currently THREE cards:
+1. Read the Blog
+2. Common Questions  
+3. Client Reviews
+
+REMOVE the Client Reviews card. Reviews are already represented 
+twice on the page (the trust badge in the hero + the "4.91/5 
+stars" line in "Why Work With Me"). Three times is overkill.
+
+Replace with a third card pointing to /about:
+- Icon: User or UserCircle (lucide-react)
+- Title: "About Mykoal"
+- Subtitle: "My story & credentials"
+- Links to /about
+
+============================================
+RESTORE MISSING SOCIAL ICONS
+============================================
+
+The Connect section currently shows ONLY LinkedIn and Facebook. 
+Instagram and YouTube buttons are missing — they were present 
+in the original design and disappeared in the last update.
+
+Restore all FOUR social buttons:
+- LinkedIn
+- Facebook
+- Instagram
+- YouTube
+
+Same styling as currently shown (rounded square buttons with 
+the platform icon). Keep them in a 4-column grid (or 2x2 on 
+narrower screens).
+
+============================================
+ECOA / EQUAL HOUSING LOGO CLEANUP
+============================================
+
+The footer currently shows TWO Equal Housing logos:
+1. Filled black version (REMOVE THIS)
+2. Outlined white version (KEEP THIS)
+
+Remove the filled black logo. Keep only the outlined white 
+version, centered above the Adaxa Home disclosure text. Size: 
+~40-48px tall.
+
+============================================
+FOOTER TITLE FIX (STILL BROKEN)
+============================================
+
+Footer currently says:
+"Mortgage Loan Originator · NMLS #1912347"
+
+Change to:
+"Vice President | Senior Loan Officer · NMLS #1912347"
+
+This was supposed to be fixed in the last update but wasn't.
+
+============================================
+LOAN OPTIONS CARDS — SUBTLE COLOR UNIFICATION
+============================================
+
+The three Loan Options cards (Purchase, Refinance, HELOC) 
+currently use a mix of icon colors (teal, white, green-ish). 
+Unify them.
+
+Change all three card icons to use the amber gold accent 
+(#D4A857) for consistency. Keep the cards themselves with 
+their existing semi-transparent dark background.
+
+============================================
+WHY MYKOAL SECTION — SAME UNIFICATION
+============================================
+
+The three "Why Mykoal" sections (Who I Help, Loan Scenarios, 
+Why Work With Me) currently have section header icons in 
+different colors. Unify all three icon colors to use amber 
+gold (#D4A857).
+
+Keep the bullet point dot indicators their current color — 
+the goal is consistent ACCENT use without making everything 
+look monotone.
+
+============================================
+DO NOT CHANGE
+============================================
+
+- The deep navy/blue gradient background
+- The headshot, name, and title text
+- The card structure and content (Loan Options, Why Mykoal)
+- The "Get In Touch" contact info section
+- The Resources & Insights section layout (just swap Reviews 
+  card for About card)
+- The Proverbs 3:5 verse at the bottom
+- Any schema markup, meta tags, or SEO work from prior prompts
+
+============================================
+WHEN DONE
+============================================
+
+Run npm run build to confirm clean.
+Send preview URL and a fresh screenshot of:
+1. The new hero card with unified gold accent
+2. The cleaned-up footer (single ECOA logo, fixed title)
+3. The updated Resources section (with About card instead of 
+   Reviews)

@@ -10,6 +10,8 @@ import {
   Mail,
   Star,
   Linkedin,
+  Instagram,
+  Youtube,
   FileText,
   X,
   Home as HomeIcon,
@@ -22,6 +24,7 @@ import {
   ChevronRight,
   BookOpen,
   HelpCircle,
+  UserCircle,
 } from "lucide-react";
 import { useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
@@ -80,7 +83,7 @@ export default function Home() {
 
   const trustPoints = [
     {
-      icon: <Users className="h-5 w-5 text-blue-300" />,
+      icon: <Users className="h-5 w-5 text-[#D4A857]" />,
       title: "Who I Help",
       items: [
         "First-time homebuyers",
@@ -91,7 +94,7 @@ export default function Home() {
       ],
     },
     {
-      icon: <CheckCircle className="h-5 w-5 text-blue-300" />,
+      icon: <CheckCircle className="h-5 w-5 text-[#D4A857]" />,
       title: "Loan Scenarios",
       items: [
         "Conventional & Jumbo",
@@ -102,7 +105,7 @@ export default function Home() {
       ],
     },
     {
-      icon: <Shield className="h-5 w-5 text-blue-300" />,
+      icon: <Shield className="h-5 w-5 text-[#D4A857]" />,
       title: "Why Work With Me",
       items: [
         "4.91/5 stars — 54+ verified reviews",
@@ -127,6 +130,18 @@ export default function Home() {
       icon: <Facebook className="h-5 w-5" />,
       color: "bg-blue-600 hover:bg-blue-700",
     },
+    {
+      title: "Instagram",
+      url: "https://www.instagram.com/themlomykoal?igsh=MW9sejNyZ3FjMjF0NQ%3D%3D&utm_source=qr",
+      icon: <Instagram className="h-5 w-5" />,
+      color: "bg-pink-600 hover:bg-pink-700",
+    },
+    {
+      title: "YouTube",
+      url: "https://www.youtube.com/@mykoaldeshazo",
+      icon: <Youtube className="h-5 w-5" />,
+      color: "bg-red-600 hover:bg-red-700",
+    },
   ];
 
   const resourceLinks = [
@@ -145,11 +160,11 @@ export default function Home() {
       color: "bg-slate-700 hover:bg-slate-600",
     },
     {
-      icon: <Star className="h-6 w-6" />,
-      title: "Client Reviews",
-      description: "4.91 / 5 Stars",
-      href: "/testimonials",
-      color: "bg-yellow-600 hover:bg-yellow-700",
+      icon: <UserCircle className="h-6 w-6" />,
+      title: "About Mykoal",
+      description: "My story & credentials",
+      href: "/about",
+      color: "bg-slate-600 hover:bg-slate-500",
     },
   ];
 
@@ -166,7 +181,7 @@ export default function Home() {
             className="w-32 h-32 rounded-full object-cover shadow-2xl border-4 border-white/20 mx-auto mb-5"
           />
           <h1 className="text-3xl font-bold text-white mb-1">Mykoal DeShazo</h1>
-          <p className="text-[#00b4d8] font-semibold text-base mb-1 tracking-wide uppercase">
+          <p className="text-[#D4A857] font-semibold text-base mb-1 tracking-wide uppercase">
             Vice President | Senior Loan Officer
           </p>
           <p className="text-white/50 text-xs mb-3">Adaxa Home LLC</p>
@@ -186,11 +201,11 @@ export default function Home() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Card className="bg-orange-600 hover:bg-orange-700 text-white border-0 shadow-lg hover:shadow-xl transform hover:scale-[1.02] transition-all duration-200 h-full">
+              <Card className="bg-[#D4A857] hover:bg-[#C19548] border-0 shadow-lg hover:shadow-xl transform hover:scale-[1.02] transition-all duration-200 h-full">
                 <CardContent className="p-4 flex flex-col items-start gap-1">
-                  <TrendingUp className="h-5 w-5 mb-1" />
-                  <p className="font-bold text-sm leading-tight">Apply for HELOC</p>
-                  <p className="text-white/75 text-xs">Tap your home equity</p>
+                  <TrendingUp className="h-5 w-5 mb-1 text-[#1A2744]" />
+                  <p className="font-bold text-sm leading-tight text-[#1A2744]">Apply for HELOC</p>
+                  <p className="text-[#1A2744]/70 text-xs">Tap your home equity</p>
                 </CardContent>
               </Card>
             </a>
@@ -201,11 +216,11 @@ export default function Home() {
                 rel="noopener noreferrer"
                 className="flex-1"
               >
-                <Card className="bg-orange-700 hover:bg-orange-800 text-white border-0 shadow-lg hover:shadow-xl transform hover:scale-[1.02] transition-all duration-200 h-full">
+                <Card className="bg-[#D4A857] hover:bg-[#C19548] border-0 shadow-lg hover:shadow-xl transform hover:scale-[1.02] transition-all duration-200 h-full">
                   <CardContent className="p-4 flex flex-col items-start gap-1">
-                    <RefreshCw className="h-5 w-5 mb-1" />
-                    <p className="font-bold text-sm leading-tight">Apply for Refinance</p>
-                    <p className="text-white/75 text-xs">Cash-out or rate reduction</p>
+                    <RefreshCw className="h-5 w-5 mb-1 text-[#1A2744]" />
+                    <p className="font-bold text-sm leading-tight text-[#1A2744]">Apply for Refinance</p>
+                    <p className="text-[#1A2744]/70 text-xs">Cash-out or rate reduction</p>
                   </CardContent>
                 </Card>
               </a>
@@ -220,43 +235,20 @@ export default function Home() {
             </div>
           </div>
 
-          <button onClick={openCal} className="block w-full text-left">
-            <Card className="bg-[#0077a8] hover:bg-[#005f85] text-white border-0 shadow-lg hover:shadow-xl transform hover:scale-[1.02] transition-all duration-200">
-              <CardContent className="p-4">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-3">
-                    <Calendar className="h-6 w-6 flex-shrink-0" />
-                    <div>
-                      <p className="font-bold text-base leading-tight">Schedule a Call</p>
-                      <p className="text-white/80 text-sm">Talk directly with Mykoal</p>
-                    </div>
-                  </div>
-                  <ChevronRight className="h-5 w-5 text-white/60 flex-shrink-0" />
-                </div>
-              </CardContent>
-            </Card>
+          <button
+            onClick={openCal}
+            className="w-full flex items-center justify-center gap-2 border border-white/30 hover:border-white/60 hover:bg-white/5 text-white font-semibold py-3 px-4 rounded-xl transition-all duration-200"
+          >
+            <Calendar className="h-5 w-5" />
+            Schedule a Call
           </button>
 
           <a
-            href="https://www.experience.com/reviews/mykoal-deshazo"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="block w-full"
+            href="/testimonials"
+            className="flex items-center justify-center gap-1.5 text-white/70 hover:text-white transition-colors"
           >
-            <Card className="bg-yellow-600 hover:bg-yellow-700 text-white border-0 shadow-lg hover:shadow-xl transform hover:scale-[1.02] transition-all duration-200">
-              <CardContent className="p-4">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-3">
-                    <Star className="h-6 w-6 flex-shrink-0" />
-                    <div>
-                      <p className="font-bold text-base leading-tight">Client Reviews</p>
-                      <p className="text-white/80 text-sm">4.91 / 5 Stars — 54+ Reviews</p>
-                    </div>
-                  </div>
-                  <ExternalLink className="h-5 w-5 text-white/60 flex-shrink-0" />
-                </div>
-              </CardContent>
-            </Card>
+            <Star className="h-4 w-4 text-[#D4A857] fill-[#D4A857]" />
+            <span className="text-sm">4.91 / 5 · 54+ Google Reviews</span>
           </a>
         </div>
 
@@ -272,7 +264,7 @@ export default function Home() {
               >
                 <div className="bg-white/10 hover:bg-white/15 border border-white/20 hover:border-white/30 rounded-xl p-4 transition-all duration-200">
                   <div className="flex items-start space-x-4">
-                    <div className="text-[#00b4d8] mt-0.5 flex-shrink-0">{loan.icon}</div>
+                    <div className="text-[#D4A857] mt-0.5 flex-shrink-0">{loan.icon}</div>
                     <div>
                       <h3 className="text-white font-semibold text-base mb-1">{loan.title}</h3>
                       <p className="text-blue-200/80 text-sm leading-relaxed">{loan.description}</p>

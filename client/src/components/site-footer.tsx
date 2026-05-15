@@ -1,5 +1,4 @@
 import { Link } from "wouter";
-import equalHousingLogo from "@assets/Equal-Housing-Logo_1751007456918.png";
 import ecoaLogo from "@assets/image_1772497699846.png";
 
 export default function SiteFooter() {
@@ -53,16 +52,15 @@ export default function SiteFooter() {
           </div>
         </div>
 
-        {/* EHO logos */}
-        <div className="flex justify-center items-center gap-4 mb-5">
-          <img src={equalHousingLogo} alt="Equal Housing Lender" className="h-10 w-auto" />
-          <img src={ecoaLogo} alt="Equal Credit Opportunity Act" className="h-10 w-auto" />
+        {/* EHO logo */}
+        <div className="flex justify-center mb-5">
+          <img src={ecoaLogo} alt="Equal Housing Opportunity" className="h-11 w-auto" />
         </div>
 
         {/* Compliance text */}
         <div className="text-center space-y-1 mb-4">
           <p className="text-white text-sm font-semibold">Mykoal DeShazo</p>
-          <p className="text-blue-200 text-xs">Mortgage Loan Originator · NMLS #1912347</p>
+          <p className="text-blue-200 text-xs">Vice President | Senior Loan Officer · NMLS #1912347</p>
           <p className="text-blue-200 text-xs">Adaxa Home LLC · NMLS #2380533</p>
           <p className="text-blue-300/60 text-xs">Equal Housing Opportunity · Licensed in AZ, CO, TX, FL, OR, WA, MN, MI, PA</p>
         </div>
