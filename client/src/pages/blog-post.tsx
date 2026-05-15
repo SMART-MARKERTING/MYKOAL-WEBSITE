@@ -99,14 +99,26 @@ export default function BlogPost() {
         <div className="bg-[#0077a8]/30 border border-[#00b4d8]/30 rounded-xl p-6 text-center">
           <h3 className="text-white font-bold text-lg mb-2">Have questions about your situation?</h3>
           <p className="text-blue-200/70 text-sm mb-4">
-            Schedule a free call with Mykoal — no pressure, just clarity.
+            Talk it through live or get instant options — your choice.
           </p>
-          <Button
-            onClick={openCal}
-            className="bg-[#00b4d8] hover:bg-[#0099bb] text-white font-semibold px-6"
-          >
-            Schedule a Call
-          </Button>
+          <div className="flex gap-3">
+            <Button
+              onClick={openCal}
+              className="flex-1 bg-[#00b4d8] hover:bg-[#0099bb] text-white font-semibold"
+            >
+              Schedule a Call
+            </Button>
+            <a
+              href="https://smartr8.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex-1"
+            >
+              <Button className="w-full bg-orange-600 hover:bg-orange-700 text-white font-semibold">
+                Get Instant Options
+              </Button>
+            </a>
+          </div>
         </div>
       </div>
       <SiteFooter />

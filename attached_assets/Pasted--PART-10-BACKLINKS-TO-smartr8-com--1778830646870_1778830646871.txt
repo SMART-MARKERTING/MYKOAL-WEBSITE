@@ -1,0 +1,73 @@
+============================================
+PART 10: BACKLINKS TO smartr8.com
+============================================
+
+Add references to smartr8.com in three places so AI engines see 
+the two sites as the same business entity.
+
+1. UPDATE THE PERSON SCHEMA (homepage and /about)
+
+In the existing Person schema sameAs array, ADD smartr8.com:
+
+"sameAs": [
+  "https://smartr8.com",
+  "https://www.adaxahome.com",
+  "LinkedIn URL",
+  "Facebook URL", 
+  "Instagram URL",
+  "YouTube URL"
+]
+
+Also add a "owns" property to the Person schema:
+
+"owns": {
+  "@type": "WebSite",
+  "name": "Smartr8",
+  "url": "https://smartr8.com",
+  "description": "Instant mortgage options funnel"
+}
+
+2. UPDATE THE FinancialService SCHEMA (homepage)
+
+Add this property pointing to smartr8 as the application channel:
+
+"potentialAction": {
+  "@type": "ApplyAction",
+  "target": "https://smartr8.com",
+  "name": "Get Instant Mortgage Options"
+}
+
+3. ADD A VISIBLE LINK IN THE FOOTER
+
+In the footer, in the existing site links column, add one more 
+link as the LAST item:
+
+"Get Instant Options →"
+
+Style:
+- Same styling as other footer links
+- Opens https://smartr8.com in a new tab (target="_blank" 
+  rel="noopener noreferrer")
+- Subtle, not flashy. This is for crawlers and serious leads, 
+  not the primary CTA path.
+
+4. ADD A CTA ROTATION IN EACH BLOG POST
+
+At the bottom of each blog post, in the existing CTA card 
+("Have questions about your situation?"), give it TWO buttons 
+side by side instead of one:
+
+Left button: "Schedule a Call" → Cal.com
+Right button: "Get Instant Options" → https://smartr8.com
+
+This way, readers can choose live conversation or self-serve 
+quote, and both paths surface for AI engines reading blog 
+content.
+
+5. ADD smartr8 TO sitemap REFERENCES
+
+In the existing Person schema and FinancialService schema on 
+ALL pages, confirm "url": "https://mykoal.com" stays as the 
+canonical authority URL. smartr8.com is referenced via sameAs 
+and owns, not as the primary URL. mykoal.com is the entity 
+home base. smartr8.com is the conversion arm.

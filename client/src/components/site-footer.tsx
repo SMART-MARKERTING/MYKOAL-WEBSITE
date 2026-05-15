@@ -18,11 +18,18 @@ export default function SiteFooter() {
                 { label: "FAQ", href: "/faq" },
                 { label: "Contact", href: "/contact" },
                 { label: "Testimonials", href: "/testimonials" },
+                { label: "Get Instant Options →", href: "https://smartr8.com", external: true },
               ].map((l) => (
                 <li key={l.href}>
-                  <Link href={l.href} className="text-blue-300/70 hover:text-white text-sm transition-colors">
-                    {l.label}
-                  </Link>
+                  {(l as any).external ? (
+                    <a href={l.href} target="_blank" rel="noopener noreferrer" className="text-blue-300/70 hover:text-white text-sm transition-colors">
+                      {l.label}
+                    </a>
+                  ) : (
+                    <Link href={l.href} className="text-blue-300/70 hover:text-white text-sm transition-colors">
+                      {l.label}
+                    </Link>
+                  )}
                 </li>
               ))}
             </ul>
