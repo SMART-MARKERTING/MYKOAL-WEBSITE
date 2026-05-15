@@ -54,18 +54,21 @@ export default function Home() {
       title: "Purchase",
       description:
         "Buy your next home with confidence. Conventional, FHA, VA, DSCR, and investor loan options available.",
+      href: "https://smartr8.com/apply/purchase?utm_source=mykoal&utm_medium=hub&utm_campaign=purchase-card",
     },
     {
       icon: <RefreshCw className="h-7 w-7" />,
       title: "Refinance",
       description:
         "Lower your rate, reduce your payment, or access equity. Let's find the right refi strategy for you.",
+      href: "https://smartr8.com/apply/cash-out?utm_source=mykoal&utm_medium=hub&utm_campaign=refinance-card",
     },
     {
       icon: <TrendingUp className="h-7 w-7" />,
       title: "HELOC",
       description:
         "Tap into your home's equity for renovations, investments, or debt consolidation.",
+      href: "https://smartr8.com/heloc/instant-options?utm_source=mykoal&utm_medium=hub&utm_campaign=heloc-card",
     },
   ];
 
@@ -245,12 +248,14 @@ export default function Home() {
           <h2 className="text-white text-xl font-bold text-center mb-5">Loan Options</h2>
           <div className="space-y-3">
             {loanTypes.map((loan, i) => (
-              <button
+              <a
                 key={i}
-                onClick={() => setShowApplyModal(true)}
-                className="block w-full text-left"
+                href={loan.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block w-full"
               >
-                <div className="bg-white/10 hover:bg-white/15 border border-white/20 hover:border-white/30 rounded-xl p-4 transition-all duration-200">
+                <div className="bg-white/10 hover:bg-white/15 border border-white/20 hover:border-white/40 hover:shadow-[0_0_16px_rgba(255,255,255,0.08)] rounded-xl p-4 transition-all duration-200 transform hover:scale-[1.02] active:scale-[0.99]">
                   <div className="flex items-start space-x-4">
                     <div className="text-[#D4A857] mt-0.5 flex-shrink-0">{loan.icon}</div>
                     <div>
@@ -259,7 +264,7 @@ export default function Home() {
                     </div>
                   </div>
                 </div>
-              </button>
+              </a>
             ))}
           </div>
         </div>
@@ -399,10 +404,10 @@ export default function Home() {
               />
               <Button
                 type="submit"
-                disabled={applyMutation.isPending || !applyLastName.trim()}
+                disabled={!applyLastName.trim()}
                 className="w-full bg-orange-600 hover:bg-orange-700 text-white font-semibold py-3"
               >
-                {applyMutation.isPending ? "Submitting..." : "Continue to Application"}
+                Continue to Application
               </Button>
             </form>
 

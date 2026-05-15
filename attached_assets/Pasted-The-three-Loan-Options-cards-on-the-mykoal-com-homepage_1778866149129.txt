@@ -1,0 +1,91 @@
+The three "Loan Options" cards on the mykoal.com homepage 
+(Purchase, Refinance, HELOC) are linking to broken internal 
+routes and showing blank white pages.
+
+Fix: make each card link OUT to smartr8.com funnel pages, 
+matching the same UTM tracking pattern used on the hero buttons.
+
+============================================
+UPDATE CARD LINK TARGETS
+============================================
+
+Card 1 — Purchase:
+- Link to: https://smartr8.com/apply/purchase?utm_source=mykoal&utm_medium=hub&utm_campaign=purchase-card
+- Opens in new tab (target="_blank" rel="noopener noreferrer")
+
+Card 2 — Refinance:
+- Link to: https://smartr8.com/apply/cash-out?utm_source=mykoal&utm_medium=hub&utm_campaign=refinance-card
+- Opens in new tab
+- Note: defaulting to cash-out as the main refi entry since 
+  it's the more common path. Same default as the hero button.
+
+Card 3 — HELOC:
+- Link to: https://smartr8.com/heloc/instant-options?utm_source=mykoal&utm_medium=hub&utm_campaign=heloc-card
+- Opens in new tab
+
+============================================
+MAKE THE WHOLE CARD CLICKABLE
+============================================
+
+Currently it looks like the cards may only have the title 
+as the link target. Make the ENTIRE card clickable (wrap the 
+whole card in an <a> tag or add an onClick handler on the 
+outer container). This is standard mobile UX — users tap 
+anywhere on a card and expect it to work.
+
+Add hover/active states:
+- Subtle border glow or shadow on hover
+- Slight scale-up animation (1.02x) on hover for feedback
+- Active state when tapped on mobile
+
+============================================
+WHILE YOU'RE IN THERE — DELETE THE OLD ROUTES
+============================================
+
+The internal /purchase, /refinance, and /heloc routes on 
+mykoal.com need to be deleted (or redirected) because they're 
+either broken or empty. Choose ONE of these approaches:
+
+Option A (preferred): Delete the route components entirely. 
+mykoal.com doesn't need internal product pages — all product 
+applications happen on smartr8.com.
+
+Option B: Add server-side redirects in the _redirects file at 
+the repo root, so anyone landing on /purchase, /refinance, or 
+/heloc gets sent to the right smartr8.com page. Add these lines:
+
+/purchase https://smartr8.com/apply/purchase 301
+/refinance https://smartr8.com/apply/cash-out 301
+/heloc https://smartr8.com/heloc/instant-options 301
+
+Use Option A unless those routes might be linked from somewhere 
+external (old social media posts, business cards, etc). If 
+uncertain, do Option B for safety.
+
+============================================
+ALSO CHECK
+============================================
+
+While you're auditing internal routes, click through every 
+link on the homepage and confirm none of them go to blank 
+pages. Common breakage spots after a backend refactor:
+- Apply buttons (already fixed to go to smartr8)
+- Loan Options cards (this fix)
+- Resources cards (Blog, FAQ, About) — verify these still 
+  work
+- Footer navigation links
+- "Get Instant Options" footer link
+
+Send me a list of any other broken routes you find.
+
+============================================
+WHEN DONE
+============================================
+
+Push to GitHub. Cloudflare will auto-deploy. Send me 
+confirmation of:
+1. All three Loan Options cards now route to smartr8 correctly
+2. Whole card is clickable (not just title)
+3. Any other broken routes found and fixed
+4. Confirmation of approach used for old internal routes 
+   (Option A or B)
