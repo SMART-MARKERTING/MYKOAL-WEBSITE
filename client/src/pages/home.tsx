@@ -6,8 +6,6 @@ import { Input } from "@/components/ui/input";
 import {
   ExternalLink,
   Facebook,
-  Instagram,
-  Youtube,
   Phone,
   Mail,
   Star,
@@ -128,18 +126,6 @@ export default function Home() {
       url: "https://www.facebook.com/VALoans.FHALoans.DSCRLoans.MortgageLoans/",
       icon: <Facebook className="h-5 w-5" />,
       color: "bg-blue-600 hover:bg-blue-700",
-    },
-    {
-      title: "Instagram",
-      url: "https://www.instagram.com/themlomykoal?igsh=MW9sejNyZ3FjMjF0NQ%3D%3D&utm_source=qr",
-      icon: <Instagram className="h-5 w-5" />,
-      color: "bg-pink-600 hover:bg-pink-700",
-    },
-    {
-      title: "YouTube",
-      url: "https://www.youtube.com/@mykoaldeshazo",
-      icon: <Youtube className="h-5 w-5" />,
-      color: "bg-red-600 hover:bg-red-700",
     },
   ];
 
