@@ -26,8 +26,6 @@ import {
   HelpCircle,
   UserCircle,
 } from "lucide-react";
-import { useMutation } from "@tanstack/react-query";
-import { apiRequest } from "@/lib/queryClient";
 import { useCalModal } from "@/hooks/use-cal";
 import SiteNav from "@/components/site-nav";
 import SiteFooter from "@/components/site-footer";
@@ -41,22 +39,12 @@ export default function Home() {
   const [applyLastName, setApplyLastName] = useState("");
   const openCal = useCalModal();
 
-  const applyMutation = useMutation({
-    mutationFn: async (data: { lastName: string }) => {
-      const res = await apiRequest("POST", "/api/leads", data);
-      return res.json();
-    },
-    onSuccess: () => {
-      setShowApplyModal(false);
-      setApplyLastName("");
-      window.open(LENDING_PAD_URL, "_blank");
-    },
-  });
-
   const handleApplySubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (applyLastName.trim()) {
-      applyMutation.mutate({ lastName: applyLastName.trim() });
+      setShowApplyModal(false);
+      setApplyLastName("");
+      window.open(LENDING_PAD_URL, "_blank");
     }
   };
 

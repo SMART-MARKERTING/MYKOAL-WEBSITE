@@ -49,7 +49,7 @@ export default function Contact() {
 
   const mutation = useMutation({
     mutationFn: async (data: typeof form) => {
-      const res = await apiRequest("POST", "/api/contacts", data);
+      const res = await apiRequest("POST", "/api/contact", data);
       return res.json();
     },
     onSuccess: () => {

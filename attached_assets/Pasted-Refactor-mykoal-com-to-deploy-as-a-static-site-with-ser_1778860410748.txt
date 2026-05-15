@@ -1,0 +1,60 @@
+Refactor mykoal.com to deploy as a static site with serverless 
+functions on Cloudflare Pages, matching the smartr8.com hosting 
+setup exactly. Remove all backend pieces that aren't strictly 
+needed for a personal brand and content site.
+
+============================================
+REMOVE
+============================================
+
+1. Express server entirely. No persistent Node.js process.
+2. Neon PostgreSQL database connection. Drop @neondatabase/* 
+   packages. Remove DATABASE_URL dependency.
+3. Session management. Drop express-session, cookies, 
+   SESSION_SECRET. The site has no login or authenticated 
+   routes.
+4. Any server-side rendering middleware that requires Node 
+   runtime.
+5. Any unused npm packages from package.json that were 
+   pulled in for the backend.
+
+============================================
+KEEP
+============================================
+
+1. All static pages: Home, About, Blog, FAQ, Contact, 
+   Testimonials, individual blog post pages
+2. Markdown blog post system reading from /content/blog/
+3. Schema markup (Person, FinancialService, FAQPage, Article) 
+   in <head> on relevant pages
+4. Meta tags, Open Graph, sitemap.xml, robots.txt
+5. All compliance content (NMLS, EHO logo, footer disclosures)
+6. UTM parameter passing on links to smartr8.com
+7. Cal.com integration for Schedule a Call buttons
+
+============================================
+CONTACT FORM
+============================================
+
+Convert the contact form endpoint to a Cloudflare Pages 
+Function:
+- File path: /functions/api/contact.js
+- Method: POST
+- Reads form data (name, email, phone, message)
+- Sends email via Resend API to mykoal@adaxahome.com
+- Returns JSON success/failure
+- Uses env var RESEND_API_KEY from Cloudflare Pages 
+  environment variables (NOT in code)
+
+============================================
+BUILD CONFIG
+============================================
+
+Configure for Cloudflare Pages deployment:
+- Build command: pnpm install && pnpm build
+- Build output directory: dist (or whatever Vite outputs to)
+- Framework preset: detect automatically from package.json
+- Node version: 20
+
+============================================
+GIT​​​​​​​​​​​​​​​​

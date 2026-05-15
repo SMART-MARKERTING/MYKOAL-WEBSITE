@@ -8,7 +8,6 @@ import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
-import type { InsertContact } from "@shared/schema";
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({
@@ -24,8 +23,8 @@ export default function ContactForm() {
   const { toast } = useToast();
 
   const contactMutation = useMutation({
-    mutationFn: async (data: InsertContact) => {
-      const response = await apiRequest("POST", "/api/contacts", data);
+    mutationFn: async (data: typeof formData) => {
+      const response = await apiRequest("POST", "/api/contact", data);
       return response.json();
     },
     onSuccess: () => {

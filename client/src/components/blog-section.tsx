@@ -3,8 +3,6 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import { ArrowRight } from "lucide-react";
-import type { BlogPost } from "@shared/schema";
-
 export default function BlogSection() {
   // Static SEO-optimized content linking to dedicated pages
   const featuredPosts = [

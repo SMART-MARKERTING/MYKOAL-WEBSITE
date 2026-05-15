@@ -10,7 +10,6 @@ import { apiRequest } from "@/lib/queryClient";
 import { Link } from "wouter";
 import { Phone, Mail, Star, CheckCircle } from "lucide-react";
 import headshotImage from "@assets/IMG_0016_1751000995747.jpeg";
-import type { InsertQuickQuote } from "@shared/schema";
 
 export default function HeroSection() {
   const [quickQuoteData, setQuickQuoteData] = useState({
@@ -24,8 +23,8 @@ export default function HeroSection() {
   const { toast } = useToast();
 
   const quickQuoteMutation = useMutation({
-    mutationFn: async (data: InsertQuickQuote) => {
-      const response = await apiRequest("POST", "/api/quick-quotes", data);
+    mutationFn: async (data: typeof quickQuoteData) => {
+      const response = await apiRequest("POST", "/api/contact", data);
       return response.json();
     },
     onSuccess: () => {
