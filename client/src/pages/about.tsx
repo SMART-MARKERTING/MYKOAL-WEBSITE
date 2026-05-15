@@ -117,7 +117,7 @@ export default function About() {
           {/* HELOC + Refinance 2-col grid */}
           <div className="grid grid-cols-2 gap-3">
             <a
-              href="https://smartr8.com/heloc/instant-options?utm_source=mykoal&utm_medium=hub&utm_campaign=heloc-cta"
+              href="https://smartr8.com/heloc"
               target="_blank"
               rel="noopener noreferrer"
               className="block"
@@ -129,7 +129,7 @@ export default function About() {
             </a>
             <div>
               <a
-                href="https://smartr8.com/apply/cash-out?utm_source=mykoal&utm_medium=hub&utm_campaign=cashout-cta"
+                href="https://smartr8.com/apply/cash-out"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="block"
@@ -140,7 +140,7 @@ export default function About() {
                 </Button>
               </a>
               <a
-                href="https://smartr8.com/apply/rate-reduction?utm_source=mykoal&utm_medium=hub&utm_campaign=rate-cta"
+                href="https://smartr8.com/apply/rate-reduction"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="block text-center text-blue-300/60 hover:text-blue-200 text-xs mt-1.5 transition-colors"

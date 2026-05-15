@@ -97,7 +97,7 @@ export default function SiteNav() {
           </button>
           <div className="grid grid-cols-2 gap-2 mt-2">
             <a
-              href="https://smartr8.com/heloc/instant-options?utm_source=mykoal&utm_medium=hub&utm_campaign=heloc-cta"
+              href="https://smartr8.com/heloc"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center justify-center gap-1.5 bg-orange-600 hover:bg-orange-700 text-white text-xs font-semibold px-3 py-2.5 rounded-lg transition-colors"
@@ -106,7 +106,7 @@ export default function SiteNav() {
               Apply for HELOC
             </a>
             <a
-              href="https://smartr8.com/apply/cash-out?utm_source=mykoal&utm_medium=hub&utm_campaign=cashout-cta"
+              href="https://smartr8.com/apply/cash-out"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center justify-center gap-1.5 bg-orange-700 hover:bg-orange-800 text-white text-xs font-semibold px-3 py-2.5 rounded-lg transition-colors"

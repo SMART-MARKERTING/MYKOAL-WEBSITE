@@ -109,7 +109,7 @@ export default function BlogPost() {
           </Button>
           <div className="flex gap-x-4 justify-center text-xs">
             <a
-              href="https://smartr8.com/heloc/instant-options?utm_source=mykoal&utm_medium=hub&utm_campaign=heloc-cta"
+              href="https://smartr8.com/heloc"
               target="_blank"
               rel="noopener noreferrer"
               className="text-blue-300/70 hover:text-white underline transition-colors"
@@ -117,7 +117,7 @@ export default function BlogPost() {
               Apply for HELOC →
             </a>
             <a
-              href="https://smartr8.com/apply/cash-out?utm_source=mykoal&utm_medium=hub&utm_campaign=cashout-cta"
+              href="https://smartr8.com/apply/cash-out"
               target="_blank"
               rel="noopener noreferrer"
               className="text-blue-300/70 hover:text-white underline transition-colors"
@@ -125,7 +125,7 @@ export default function BlogPost() {
               Cash-Out Refi →
             </a>
             <a
-              href="https://smartr8.com/apply/rate-reduction?utm_source=mykoal&utm_medium=hub&utm_campaign=rate-cta"
+              href="https://smartr8.com/apply/rate-reduction"
               target="_blank"
               rel="noopener noreferrer"
               className="text-blue-300/70 hover:text-white underline transition-colors"
