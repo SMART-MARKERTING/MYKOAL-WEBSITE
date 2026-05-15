@@ -183,7 +183,7 @@ export default function Home() {
           <p className="text-[#00b4d8] font-semibold text-base mb-1 tracking-wide uppercase">
             Vice President | Senior Loan Officer
           </p>
-          <p className="text-white/50 text-xs mb-3">Mortgage Loan Originator · Adaxa Home LLC</p>
+          <p className="text-white/50 text-xs mb-3">Adaxa Home LLC</p>
           <div className="inline-block bg-white/10 border border-white/20 rounded-full px-4 py-1.5">
             <p className="text-blue-200 text-xs font-medium">
               NMLS #1912347 &nbsp;|&nbsp; Adaxa Home LLC NMLS #2380533
@@ -208,13 +208,14 @@ export default function Home() {
                 </CardContent>
               </Card>
             </a>
-            <div>
+            <div className="flex flex-col gap-1.5">
               <a
                 href="https://smartr8.com/apply/cash-out?utm_source=mykoal&utm_medium=hub&utm_campaign=cashout-cta"
                 target="_blank"
                 rel="noopener noreferrer"
+                className="flex-1"
               >
-                <Card className="bg-orange-700 hover:bg-orange-800 text-white border-0 shadow-lg hover:shadow-xl transform hover:scale-[1.02] transition-all duration-200">
+                <Card className="bg-orange-700 hover:bg-orange-800 text-white border-0 shadow-lg hover:shadow-xl transform hover:scale-[1.02] transition-all duration-200 h-full">
                   <CardContent className="p-4 flex flex-col items-start gap-1">
                     <RefreshCw className="h-5 w-5 mb-1" />
                     <p className="font-bold text-sm leading-tight">Apply for Refinance</p>
@@ -226,7 +227,7 @@ export default function Home() {
                 href="https://smartr8.com/apply/rate-reduction?utm_source=mykoal&utm_medium=hub&utm_campaign=rate-cta"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block text-center text-blue-300/60 hover:text-blue-200 text-xs mt-1.5 transition-colors"
+                className="block text-center text-blue-300/60 hover:text-blue-200 text-xs transition-colors underline"
               >
                 Rate reduction instead →
               </a>
