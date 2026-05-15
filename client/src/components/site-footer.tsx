@@ -64,7 +64,7 @@ export default function SiteFooter() {
           <p className="text-white text-sm font-semibold">Mykoal DeShazo</p>
           <p className="text-blue-200 text-xs">Mortgage Loan Originator · NMLS #1912347</p>
           <p className="text-blue-200 text-xs">Adaxa Home LLC · NMLS #2380533</p>
-          <p className="text-blue-300/60 text-xs">Equal Housing Opportunity · Licensed in AZ and additional states</p>
+          <p className="text-blue-300/60 text-xs">Equal Housing Opportunity · Licensed in AZ, CO, TX, FL, OR, WA, MN, MI, PA</p>
         </div>
 
         <p className="text-blue-200/60 text-xs text-center leading-relaxed mb-4 px-2">
