@@ -32,7 +32,7 @@ const credentials = [
   "Vice President | Senior Loan Officer at Adaxa Home LLC",
   "Personal NMLS #1912347",
   "Adaxa Home LLC NMLS #2380533",
-  "Licensed in Arizona and additional states",
+  "Licensed in Arizona, Colorado, Connecticut, Florida, Michigan, Minnesota, Oregon, Pennsylvania, Texas, Virginia, and Washington.",
   "Network of 99+ wholesale lenders including Rocket Mortgage, loanDepot, Carrington Mortgage, and CAKE",
 ];
 

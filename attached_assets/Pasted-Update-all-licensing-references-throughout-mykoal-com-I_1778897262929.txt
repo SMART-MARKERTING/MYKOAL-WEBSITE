@@ -1,0 +1,100 @@
+Update all licensing references throughout mykoal.com. I am 
+licensed as a Mortgage Loan Originator in 11 states (not 9 as 
+previously listed). Add Connecticut and Virginia to every 
+schema, footer, page copy, and metadata reference.
+
+============================================
+FULL LIST OF LICENSED STATES (11)
+============================================
+
+Arizona (AZ), Colorado (CO), Connecticut (CT), Florida (FL), 
+Michigan (MI), Minnesota (MN), Oregon (OR), Pennsylvania (PA), 
+Texas (TX), Virginia (VA), Washington (WA)
+
+============================================
+WHAT TO UPDATE
+============================================
+
+1. PERSON SCHEMA — homepage and /about page
+
+In the existing Person schema, update the "workLocation" 
+property to include all 11 states:
+
+"workLocation": [
+  {"@type": "State", "name": "Arizona"},
+  {"@type": "State", "name": "Colorado"},
+  {"@type": "State", "name": "Connecticut"},
+  {"@type": "State", "name": "Florida"},
+  {"@type": "State", "name": "Michigan"},
+  {"@type": "State", "name": "Minnesota"},
+  {"@type": "State", "name": "Oregon"},
+  {"@type": "State", "name": "Pennsylvania"},
+  {"@type": "State", "name": "Texas"},
+  {"@type": "State", "name": "Virginia"},
+  {"@type": "State", "name": "Washington"}
+]
+
+2. FINANCIALSERVICE SCHEMA — homepage
+
+Update "areaServed" property to use the same 11-state array:
+
+"areaServed": [
+  {"@type": "State", "name": "Arizona"},
+  {"@type": "State", "name": "Colorado"},
+  {"@type": "State", "name": "Connecticut"},
+  {"@type": "State", "name": "Florida"},
+  {"@type": "State", "name": "Michigan"},
+  {"@type": "State", "name": "Minnesota"},
+  {"@type": "State", "name": "Oregon"},
+  {"@type": "State", "name": "Pennsylvania"},
+  {"@type": "State", "name": "Texas"},
+  {"@type": "State", "name": "Virginia"},
+  {"@type": "State", "name": "Washington"}
+]
+
+3. FOOTER COMPLIANCE TEXT — every page
+
+Find the existing line that says: "Licensed in AZ, CO, TX, 
+FL, OR, WA, MN, MI, PA"
+
+Replace with: "Licensed in AZ, CO, CT, FL, MI, MN, OR, PA, 
+TX, VA, WA"
+
+(Listed alphabetically by state abbreviation.)
+
+4. /about PAGE — credentials section
+
+Find the line in the credentials/experience section that 
+lists licensed states. Update to: "Licensed in Arizona, 
+Colorado, Connecticut, Florida, Michigan, Minnesota, Oregon, 
+Pennsylvania, Texas, Virginia, and Washington."
+
+5. META DESCRIPTIONS
+
+If any meta descriptions mention specific states or "licensed 
+in 9 states," update to "licensed in 11 states" or remove 
+the count.
+
+============================================
+DOUBLE-CHECK FOR LEFTOVERS
+============================================
+
+Search the entire codebase for these strings and update each 
+one to the new 11-state list:
+
+- "9 states"
+- "AZ, CO, TX, FL, OR, WA, MN, MI, PA"
+- "AZ and additional states"
+- "Arizona and additional states"
+- Any hardcoded list missing CT or VA
+
+============================================
+WHEN DONE
+============================================
+
+Push to GitHub. Cloudflare will auto-deploy. Send me 
+confirmation that all 11 states are reflected in:
+1. JSON-LD schema (Person and FinancialService)
+2. Footer compliance text on every page
+3. /about page credentials section
+4. Any meta descriptions that mention states
