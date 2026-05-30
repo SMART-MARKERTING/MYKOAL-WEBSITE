@@ -170,11 +170,12 @@ export default function Contact() {
               rows={4}
               className="w-full rounded-md border border-white/20 bg-white/10 text-white text-sm px-3 py-2 placeholder:text-blue-300/50 focus:outline-none focus:ring-2 focus:ring-[#00b4d8] resize-none"
             />
-            <p className="text-blue-300/50 text-xs leading-relaxed">
-              By submitting, you consent to be contacted regarding mortgage options. Mortgage services are provided through Adaxa Home LLC (NMLS #2380533).{" "}
+            <p className="text-blue-300/70 text-xs leading-relaxed">
+              By submitting this form, you provide your express written consent to receive marketing and informational text messages (SMS/MMS), phone calls (including those placed using an automatic telephone dialing system or prerecorded/artificial voice), and emails from Mykoal DeShazo (NMLS #1912347) and Adaxa Home LLC (NMLS #2380533) at the phone number and email address you provided, regarding mortgage products, loan options, rates, application status, and related services. Consent is not a condition of any purchase, loan application, or service. Message frequency varies. Message and data rates may apply. Reply STOP to unsubscribe at any time, or HELP for assistance. We do not sell or share your phone number or SMS opt-in information with third parties for their marketing purposes. See our{" "}
               <a href="https://adaxahome.com/privacy-policy" target="_blank" rel="noopener noreferrer" className="underline hover:text-blue-200">Privacy Policy</a>
-              {" "}·{" "}
-              <a href="https://adaxahome.com/terms-of-use" target="_blank" rel="noopener noreferrer" className="underline hover:text-blue-200">Terms of Use</a>.
+              {" "}and{" "}
+              <a href="https://adaxahome.com/terms-of-use" target="_blank" rel="noopener noreferrer" className="underline hover:text-blue-200">Terms of Use</a>
+              {" "}for full details.
             </p>
             <Button
               type="submit"
