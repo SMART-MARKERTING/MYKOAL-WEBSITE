@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "wouter";
 import SiteNav from "@/components/site-nav";
 import SiteFooter from "@/components/site-footer";
 import { Button } from "@/components/ui/button";
@@ -13,8 +14,8 @@ const contactOptions = [
   {
     icon: <Phone className="h-6 w-6" />,
     label: "Phone",
-    value: "(949) 418-5486",
-    href: "tel:+19494185486",
+    value: "(480) 206-9290",
+    href: "tel:+14802069290",
     color: "bg-[#0077a8] hover:bg-[#005f85]",
   },
   {
@@ -46,6 +47,7 @@ export default function Contact() {
     timeline: "Flexible",
     message: "",
   });
+  const [consent, setConsent] = useState(false);
 
   const mutation = useMutation({
     mutationFn: async (data: typeof form) => {
@@ -71,6 +73,7 @@ export default function Contact() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (!consent) return;
     mutation.mutate(form);
   };
 
@@ -170,17 +173,27 @@ export default function Contact() {
               rows={4}
               className="w-full rounded-md border border-white/20 bg-white/10 text-white text-sm px-3 py-2 placeholder:text-blue-300/50 focus:outline-none focus:ring-2 focus:ring-[#00b4d8] resize-none"
             />
-            <p className="text-blue-300/70 text-xs leading-relaxed">
-              By submitting this form, you provide your express written consent to receive marketing and informational text messages (SMS/MMS), phone calls (including those placed using an automatic telephone dialing system or prerecorded/artificial voice), and emails from Mykoal DeShazo (NMLS #1912347) and Adaxa Home LLC (NMLS #2380533) at the phone number and email address you provided, regarding mortgage products, loan options, rates, application status, and related services. Consent is not a condition of any purchase, loan application, or service. Message frequency varies. Message and data rates may apply. Reply STOP to unsubscribe at any time, or HELP for assistance. We do not sell or share your phone number or SMS opt-in information with third parties for their marketing purposes. See our{" "}
-              <a href="https://adaxahome.com/privacy-policy" target="_blank" rel="noopener noreferrer" className="underline hover:text-blue-200">Privacy Policy</a>
-              {" "}and{" "}
-              <a href="https://adaxahome.com/terms-of-use" target="_blank" rel="noopener noreferrer" className="underline hover:text-blue-200">Terms of Use</a>
-              {" "}for full details.
-            </p>
+            <label className="flex items-start gap-3 text-blue-300/80 text-xs leading-relaxed cursor-pointer select-none">
+              <input
+                type="checkbox"
+                name="consent"
+                checked={consent}
+                onChange={(e) => setConsent(e.target.checked)}
+                required
+                className="mt-0.5 h-4 w-4 flex-shrink-0 rounded border-white/30 bg-white/10 text-orange-600 focus:ring-2 focus:ring-orange-500 cursor-pointer"
+              />
+              <span>
+                By checking this box, I provide my express written consent to receive marketing and informational text messages (SMS/MMS), phone calls (including those placed using an automatic telephone dialing system or prerecorded/artificial voice), and emails from Mykoal DeShazo (NMLS #1912347) and Adaxa Home LLC (NMLS #2380533) at the phone number and email address I provided, regarding mortgage products, loan options, rates, application status, and related services. Consent is not a condition of any purchase, loan application, or service. Message frequency varies. Message and data rates may apply. Reply STOP to unsubscribe at any time, or HELP for assistance. Mykoal does not sell or share phone numbers or SMS opt-in information with third parties for their marketing purposes. See the{" "}
+                <Link href="/privacy" className="underline hover:text-blue-200">Privacy Policy</Link>
+                {" "}and{" "}
+                <Link href="/terms-of-use" className="underline hover:text-blue-200">Terms of Use</Link>
+                {" "}for full details.
+              </span>
+            </label>
             <Button
               type="submit"
-              disabled={mutation.isPending}
-              className="w-full bg-orange-600 hover:bg-orange-700 text-white font-semibold py-3"
+              disabled={mutation.isPending || !consent}
+              className="w-full bg-orange-600 hover:bg-orange-700 text-white font-semibold py-3 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {mutation.isPending ? "Sending..." : "Send Message"}
             </Button>

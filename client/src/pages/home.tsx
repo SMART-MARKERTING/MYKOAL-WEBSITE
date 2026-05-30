@@ -324,11 +324,11 @@ export default function Home() {
           <h2 className="text-white text-lg font-semibold text-center mb-4">Get In Touch</h2>
           <div className="space-y-3 mb-4">
             <a
-              href="tel:+19494185486"
+              href="tel:+14802069290"
               className="flex items-center space-x-3 text-blue-200 hover:text-white transition-colors"
             >
               <Phone className="h-5 w-5 flex-shrink-0" />
-              <span>(949) 418-5486</span>
+              <span>(480) 206-9290</span>
             </a>
             <a
               href="mailto:mdeshazo@mykoal.com"
