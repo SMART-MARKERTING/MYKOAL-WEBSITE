@@ -120,14 +120,22 @@ export default function Privacy() {
               <a href="tel:+14802069290" className="underline hover:text-blue-200">(480) 206-9290</a>.
             </p>
 
-            <h3 className="text-white/90 font-semibold mt-5 mb-2">Important SMS Disclosure</h3>
-            <ul className="list-disc list-inside space-y-1 ml-2">
-              <li>
-                <strong className="text-white">We will not share mobile information with third parties for promotional or marketing purposes.</strong>
-              </li>
-              <li>Mobile opt-in data and consent records are not sold, rented, or transferred to third parties for their own marketing.</li>
-              <li>SMS is used for service-related, transactional, and (where you have opted in) marketing communications from Mykoal DeShazo.</li>
-            </ul>
+            <h3 className="text-white/90 font-semibold mt-5 mb-2">Mobile Information &amp; SMS Opt-In Data &mdash; How We Share It</h3>
+            <p>
+              <strong className="text-white">Your mobile information will not be sold or shared with third parties for promotional or marketing purposes.</strong>
+            </p>
+            <p className="mt-3">
+              Text messaging originator opt-in data and consent records are excluded from any other category of information we may otherwise share or disclose; this information will not be shared with any third parties for their own purposes.
+            </p>
+            <p className="mt-3">
+              We will not share your opt-in to an SMS campaign with any third party for purposes unrelated to providing you with the services of that campaign.
+            </p>
+            <p className="mt-3">
+              We may share your personal data, including your SMS opt-in or consent status, only with the third parties that help us actually deliver our messaging services &mdash; for example, our messaging platform provider, the wireless carriers that route the messages, and other vendors that assist in message delivery on our behalf. These vendors are bound to use the data solely to deliver the SMS service to you and not for their own marketing purposes.
+            </p>
+            <p className="mt-3">
+              SMS is used for service-related, transactional, and (where you have opted in) marketing communications from Mykoal DeShazo.
+            </p>
           </section>
 
           <section>
@@ -142,6 +150,9 @@ export default function Privacy() {
             </ul>
             <p className="mt-3">
               <strong className="text-white">We do not sell your personal information.</strong>
+            </p>
+            <p className="mt-3">
+              All of the categories listed above <strong className="text-white">exclude</strong> text messaging originator opt-in data and consent. SMS opt-in information and consent records will not be shared with any third parties, except as expressly described in Section 5 (with the messaging vendors and wireless carriers that deliver the messages on our behalf).
             </p>
           </section>
 
