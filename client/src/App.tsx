@@ -10,6 +10,8 @@ import BlogPost from "@/pages/blog-post";
 import FAQ from "@/pages/faq";
 import Contact from "@/pages/contact";
 import Testimonials from "@/pages/testimonials";
+import TermsOfUse from "@/pages/terms-of-use";
+import Privacy from "@/pages/privacy";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -22,6 +24,8 @@ function Router() {
       <Route path="/faq" component={FAQ} />
       <Route path="/contact" component={Contact} />
       <Route path="/testimonials" component={Testimonials} />
+      <Route path="/terms-of-use" component={TermsOfUse} />
+      <Route path="/privacy" component={Privacy} />
       <Route component={NotFound} />
     </Switch>
   );

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "wouter";
 import SiteNav from "@/components/site-nav";
 import SiteFooter from "@/components/site-footer";
 import { Button } from "@/components/ui/button";
@@ -13,8 +14,8 @@ const contactOptions = [
   {
     icon: <Phone className="h-6 w-6" />,
     label: "Phone",
-    value: "(949) 418-5486",
-    href: "tel:+19494185486",
+    value: "(480) 206-9290",
+    href: "tel:+14802069290",
     color: "bg-[#0077a8] hover:bg-[#005f85]",
   },
   {
@@ -46,15 +47,17 @@ export default function Contact() {
     timeline: "Flexible",
     message: "",
   });
+  const [smsOptIn, setSmsOptIn] = useState(false);
 
   const mutation = useMutation({
-    mutationFn: async (data: typeof form) => {
+    mutationFn: async (data: typeof form & { smsOptIn: string }) => {
       const res = await apiRequest("POST", "/api/contact", data);
       return res.json();
     },
     onSuccess: () => {
       toast({ title: "Message sent!", description: "Mykoal will be in touch shortly." });
       setForm({ firstName: "", lastName: "", email: "", phone: "", loanType: "General Inquiry", timeline: "Flexible", message: "" });
+      setSmsOptIn(false);
     },
     onError: (err: Error) => {
       toast({
@@ -71,7 +74,7 @@ export default function Contact() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    mutation.mutate(form);
+    mutation.mutate({ ...form, smsOptIn: smsOptIn ? "Yes" : "No" });
   };
 
   return (
@@ -170,16 +173,34 @@ export default function Contact() {
               rows={4}
               className="w-full rounded-md border border-white/20 bg-white/10 text-white text-sm px-3 py-2 placeholder:text-blue-300/50 focus:outline-none focus:ring-2 focus:ring-[#00b4d8] resize-none"
             />
-            <p className="text-blue-300/50 text-xs leading-relaxed">
-              By submitting, you consent to be contacted regarding mortgage options. Mortgage services are provided through Adaxa Home LLC (NMLS #2380533).{" "}
-              <a href="https://adaxahome.com/privacy-policy" target="_blank" rel="noopener noreferrer" className="underline hover:text-blue-200">Privacy Policy</a>
-              {" "}·{" "}
-              <a href="https://adaxahome.com/terms-of-use" target="_blank" rel="noopener noreferrer" className="underline hover:text-blue-200">Terms of Use</a>.
+            {/* SMS opt-in — optional, separate from policy agreement (per 10DLC guidance) */}
+            <label className="flex items-start gap-3 bg-white/5 border border-white/15 rounded-lg p-3 cursor-pointer select-none">
+              <input
+                type="checkbox"
+                name="smsOptIn"
+                checked={smsOptIn}
+                onChange={(e) => setSmsOptIn(e.target.checked)}
+                className="mt-0.5 h-4 w-4 flex-shrink-0 rounded border-white/30 bg-white/10 text-orange-600 focus:ring-2 focus:ring-orange-500 cursor-pointer"
+              />
+              <div className="text-blue-300/80 text-xs leading-relaxed">
+                <span className="block text-white text-sm font-semibold mb-1">Text me</span>
+                By providing my phone number and checking this box, I agree to receive recurring SMS messages about my mortgage inquiry, application status, appointment reminders, and marketing offers from DeShazo Wealth LLC d/b/a Mykoal DeShazo. (Mortgage services are provided through Adaxa Home LLC, NMLS #2380533.) You are opting into marketing texts. Consent is not a condition of any purchase or service. Message frequency may vary. Standard message and data rates may apply. Reply STOP to opt out. Reply HELP for help. We will not share mobile information with third parties for promotional or marketing purposes.
+              </div>
+            </label>
+
+            {/* Policy agreement — kept separate from SMS consent */}
+            <p className="text-blue-300/60 text-xs leading-relaxed">
+              By submitting this form, you agree to our{" "}
+              <Link href="/privacy" className="underline hover:text-blue-200">Privacy Policy</Link>
+              {" "}and{" "}
+              <Link href="/terms-of-use" className="underline hover:text-blue-200">Terms of Use</Link>
+              .
             </p>
+
             <Button
               type="submit"
               disabled={mutation.isPending}
-              className="w-full bg-orange-600 hover:bg-orange-700 text-white font-semibold py-3"
+              className="w-full bg-orange-600 hover:bg-orange-700 text-white font-semibold py-3 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {mutation.isPending ? "Sending..." : "Send Message"}
             </Button>

@@ -37,15 +37,21 @@ export default function SiteFooter() {
             <p className="text-white text-xs font-semibold uppercase tracking-wider mb-3">Compliance</p>
             <ul className="space-y-2">
               {[
-                { label: "NMLS Consumer Access", href: "https://www.nmlsconsumeraccess.org/EntityDetails.aspx/INDIVIDUAL/1912347" },
-                { label: "Licensing", href: "https://adaxahome.com/licensing" },
-                { label: "Privacy Policy", href: "https://adaxahome.com/privacy-policy" },
-                { label: "Terms of Use", href: "https://adaxahome.com/terms-of-use" },
+                { label: "NMLS Consumer Access", href: "https://www.nmlsconsumeraccess.org/EntityDetails.aspx/INDIVIDUAL/1912347", external: true },
+                { label: "Licensing", href: "https://adaxahome.com/licensing", external: true },
+                { label: "Privacy Policy", href: "/privacy", external: false },
+                { label: "Terms of Use", href: "/terms-of-use", external: false },
               ].map((l) => (
                 <li key={l.href}>
-                  <a href={l.href} target="_blank" rel="noopener noreferrer" className="text-blue-300/70 hover:text-white text-sm transition-colors">
-                    {l.label}
-                  </a>
+                  {l.external ? (
+                    <a href={l.href} target="_blank" rel="noopener noreferrer" className="text-blue-300/70 hover:text-white text-sm transition-colors">
+                      {l.label}
+                    </a>
+                  ) : (
+                    <Link href={l.href} className="text-blue-300/70 hover:text-white text-sm transition-colors">
+                      {l.label}
+                    </Link>
+                  )}
                 </li>
               ))}
             </ul>
