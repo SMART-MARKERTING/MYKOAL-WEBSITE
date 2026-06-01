@@ -15,7 +15,7 @@ export default function TermsOfUse() {
 
         <div className="bg-white/10 border border-white/20 rounded-xl p-6 md:p-8 space-y-8 text-blue-100/90 text-sm leading-relaxed">
           <p>
-            These Terms of Use govern your access to and use of <strong className="text-white">mykoal.com</strong> (the &ldquo;Site&rdquo;), operated by Mykoal DeShazo (NMLS #1912347), a Vice President and Senior Loan Officer affiliated with Adaxa Home LLC (NMLS #2380533). By using this Site, you agree to these Terms. If you do not agree, please do not use the Site.
+            These Terms of Use govern your access to and use of <strong className="text-white">mykoal.com</strong> (the &ldquo;Site&rdquo;), operated by <strong className="text-white">DeShazo Wealth LLC d/b/a Mykoal DeShazo</strong> (&ldquo;we,&rdquo; &ldquo;us,&rdquo; &ldquo;our&rdquo;) as the public web presence for Mykoal DeShazo (NMLS #1912347), a Vice President and Senior Loan Officer affiliated with Adaxa Home LLC (NMLS #2380533). Mortgage services referenced on this Site are provided through Adaxa Home LLC. By using this Site, you agree to these Terms. If you do not agree, please do not use the Site.
           </p>
 
           <section>
@@ -53,7 +53,7 @@ export default function TermsOfUse() {
 
             <h3 className="text-white/90 font-semibold mt-4 mb-2">Express Consent</h3>
             <p>
-              When you provide a phone number through a form on this Site and check the consent box, you give your express written consent (opt-in) to receive recurring SMS/MMS messages from Mykoal DeShazo regarding:
+              When you provide a phone number through a form on this Site and check the consent box, you give your express written consent (opt-in) to receive recurring SMS/MMS messages from DeShazo Wealth LLC d/b/a Mykoal DeShazo regarding:
             </p>
             <ul className="list-disc list-inside mt-2 space-y-1 ml-2">
               <li>Account and application updates</li>

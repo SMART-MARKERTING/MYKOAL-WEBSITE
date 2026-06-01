@@ -17,8 +17,8 @@ export default function Privacy() {
           <section>
             <h2 className="text-white font-semibold text-lg mb-3">1. Introduction</h2>
             <p>
-              This Privacy Policy explains how Mykoal DeShazo (NMLS #1912347), Vice President and Senior Loan Officer at Adaxa Home LLC (NMLS #2380533), collects, uses, and protects information through{" "}
-              <strong className="text-white">mykoal.com</strong> (the &ldquo;Site&rdquo;).
+              This Privacy Policy explains how <strong className="text-white">DeShazo Wealth LLC d/b/a Mykoal DeShazo</strong> (&ldquo;we,&rdquo; &ldquo;us,&rdquo; &ldquo;our&rdquo;) collects, uses, and protects information through{" "}
+              <strong className="text-white">mykoal.com</strong> (the &ldquo;Site&rdquo;), the public web presence for Mykoal DeShazo (NMLS #1912347), Vice President and Senior Loan Officer affiliated with Adaxa Home LLC (NMLS #2380533). Mortgage services referenced on this Site are provided through Adaxa Home LLC.
             </p>
             <p className="mt-3">
               By using the Site, you agree to the collection, use, and sharing of your information as described in this Policy. If you do not agree, please do not use the Site. Providing personal information is voluntary; however, some features of the Site may not function without it.
@@ -81,7 +81,7 @@ export default function Privacy() {
 
             <h3 className="text-white/90 font-semibold mt-4 mb-2">Consent to Receive SMS</h3>
             <p>
-              When you submit a phone number through a form on this Site and check the consent box, you give your express written consent to receive SMS/MMS messages from Mykoal DeShazo. Examples of message content include:
+              When you submit a phone number through a form on this Site and check the consent box, you give your express written consent to receive SMS/MMS messages from DeShazo Wealth LLC d/b/a Mykoal DeShazo. Examples of message content include:
             </p>
             <ul className="list-disc list-inside mt-2 space-y-1 ml-2">
               <li>Application and loan status updates</li>
@@ -134,7 +134,7 @@ export default function Privacy() {
               We may share your personal data, including your SMS opt-in or consent status, only with the third parties that help us actually deliver our messaging services &mdash; for example, our messaging platform provider, the wireless carriers that route the messages, and other vendors that assist in message delivery on our behalf. These vendors are bound to use the data solely to deliver the SMS service to you and not for their own marketing purposes.
             </p>
             <p className="mt-3">
-              SMS is used for service-related, transactional, and (where you have opted in) marketing communications from Mykoal DeShazo.
+              SMS is used for service-related, transactional, and (where you have opted in) marketing communications from DeShazo Wealth LLC d/b/a Mykoal DeShazo.
             </p>
           </section>
 
