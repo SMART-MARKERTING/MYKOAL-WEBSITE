@@ -24,6 +24,28 @@ export async function onRequestPost(context) {
     });
   };
 
+  // Parse the submission up front so we can forward it to the CRM even when
+  // email delivery isn't configured — a lead should never be silently dropped.
+  let data;
+  try {
+    if (isForm) {
+      const fd = await request.formData();
+      data = Object.fromEntries(fd.entries());
+      // An unchecked checkbox is simply absent from form data — record it explicitly.
+      data.smsOptIn = data.smsOptIn === "Yes" ? "Yes" : "No";
+    } else {
+      data = await request.json();
+    }
+  } catch (err) {
+    console.error("contact function parse error", err);
+    return reply({ success: false, error: "Could not read your submission." }, 400);
+  }
+
+  // Funnel every mykoal.com lead into the CRM (crm.smartr8.com). Best-effort and
+  // non-blocking: a CRM hiccup must never break the visitor's submission, and it
+  // fires regardless of whether Resend email is configured.
+  context.waitUntil(forwardLeadToCrm(data, env));
+
   if (!env.RESEND_API_KEY) {
     return reply(
       {
@@ -35,16 +57,6 @@ export async function onRequestPost(context) {
   }
 
   try {
-    let data;
-    if (isForm) {
-      const fd = await request.formData();
-      data = Object.fromEntries(fd.entries());
-      // An unchecked checkbox is simply absent from form data — record it explicitly.
-      data.smsOptIn = data.smsOptIn === "Yes" ? "Yes" : "No";
-    } else {
-      data = await request.json();
-    }
-
     const {
       firstName, lastName, name,
       email, phone, message,
@@ -139,4 +151,32 @@ function htmlResult(body) {
 </style></head>
 <body><div class="card"><h1>${heading}</h1><p>${detail}</p>
 <a href="/opt-in">Back to the form</a></div></body></html>`;
+}
+
+// Forward a lead to the Smartr8 CRM intake (crm.smartr8.com). The webhook carries
+// its own ?key=; the default below works with zero env setup and matches the key
+// the smartr8.com site already uses, so both sites funnel into the same CRM.
+// Override via env.CRM_LEAD_WEBHOOK to rotate the key without a code change.
+// Best-effort: the CRM dedups by phone/email and any extra fields land in the
+// lead's `custom`, so we just pass the whole submission through.
+async function forwardLeadToCrm(data, env) {
+  const url =
+    env.CRM_LEAD_WEBHOOK ||
+    "https://crm.smartr8.com/webhooks/lead?key=4519413906c139e16484f518fdd8968c";
+
+  // Tag the source so mykoal.com leads are distinguishable from smartr8.com leads.
+  const payload = { ...data, source: "mykoal.com" };
+
+  try {
+    const res = await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+    if (!res.ok) {
+      console.error("CRM lead forward failed", res.status, await res.text());
+    }
+  } catch (err) {
+    console.error("CRM lead forward error", err);
+  }
 }
