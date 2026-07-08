@@ -10,13 +10,32 @@ This repo now supports a scheduled daily SEO blog draft workflow.
 - The script prepends one generated post to `client/src/lib/blog-data.ts`.
 - The script also ensures every `/blog/{slug}` URL is present in `client/public/sitemap.xml`.
 - The workflow runs `npm run check` and `npm run build`.
-- If files changed, the workflow opens a draft PR. It does not auto-publish.
+- If files changed, the workflow opens a draft PR when `BLOG_PR_TOKEN` is configured.
+  If that token is missing, it still pushes the generated branch and prints the PR URL.
+  It does not auto-publish.
 
 ## Required GitHub setup
 
 Add this repository secret:
 
 - `OPENROUTER_API_KEY`: OpenRouter API key used by the scheduled generator.
+
+Add this repository secret if organization Actions settings block `GITHUB_TOKEN` from
+creating pull requests:
+
+- `BLOG_PR_TOKEN`: GitHub personal access token used only to open the draft PR.
+
+Recommended fine-grained token settings:
+
+- Resource owner: `SMART-MARKERTING`
+- Repository access: only `SMART-MARKERTING/mykoal`
+- Repository permissions:
+  - Contents: read and write
+  - Pull requests: read and write
+  - Metadata: read-only
+
+Create it from GitHub account settings:
+`Settings > Developer settings > Personal access tokens > Fine-grained tokens`.
 
 Optional repository variable:
 
