@@ -4,7 +4,6 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
-  ExternalLink,
   Facebook,
   Phone,
   Mail,
@@ -74,6 +73,21 @@ export default function Home() {
       description:
         "Tap into your home's equity for renovations, investments, or debt consolidation.",
       href: "https://smartr8.com/heloc/instant-options?utm_source=mykoal&utm_medium=hub&utm_campaign=heloc-card",
+    },
+  ];
+
+  const otherBusinesses = [
+    {
+      icon: <Megaphone className="h-7 w-7" />,
+      title: "Unykue Marketing",
+      description: "Marketing, SEO, SMS, and iMessage growth tools for businesses.",
+      href: UNYKUE_MARKETING_URL,
+    },
+    {
+      icon: <Scale className="h-7 w-7" />,
+      title: "Smartr8 Legal",
+      description: "LLCs, wills, trusts, and trademarks for business and estate planning.",
+      href: SMARTR8_LEGAL_URL,
     },
   ];
 
@@ -240,40 +254,6 @@ export default function Home() {
           </button>
 
           <a
-            href={UNYKUE_MARKETING_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Visit Unykue Marketing for marketing, SEO, SMS, and iMessage"
-            className="w-full flex items-center justify-between gap-3 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-3 px-4 rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl"
-          >
-            <span className="flex min-w-0 items-center gap-2.5">
-              <Megaphone className="h-5 w-5 flex-shrink-0" />
-              <span className="min-w-0 text-left">
-                <span className="block text-sm leading-tight">Marketing, SEO, SMS & iMessage</span>
-                <span className="block text-xs font-medium text-white/75">Unykue Marketing</span>
-              </span>
-            </span>
-            <ExternalLink className="h-4 w-4 flex-shrink-0 text-white/75" />
-          </a>
-
-          <a
-            href={SMARTR8_LEGAL_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Visit Smartr8 Legal for LLCs, wills, trusts, and trademarks"
-            className="w-full flex items-center justify-between gap-3 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-4 rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl"
-          >
-            <span className="flex min-w-0 items-center gap-2.5">
-              <Scale className="h-5 w-5 flex-shrink-0" />
-              <span className="min-w-0 text-left">
-                <span className="block text-sm leading-tight">LLCs, Wills, Trusts & Trademarks</span>
-                <span className="block text-xs font-medium text-white/75">Smartr8 Legal</span>
-              </span>
-            </span>
-            <ExternalLink className="h-4 w-4 flex-shrink-0 text-white/75" />
-          </a>
-
-          <a
             href="/testimonials"
             className="flex items-center justify-center gap-1.5 text-white/70 hover:text-white transition-colors"
           >
@@ -308,7 +288,33 @@ export default function Home() {
           </div>
         </div>
 
-        {/* ── Trust Section ── */}
+        {/* Other Businesses */}
+        <div className="mb-8">
+          <h2 className="text-white text-xl font-bold text-center mb-5">Mykoal's Other Businesses</h2>
+          <div className="space-y-3">
+            {otherBusinesses.map((business, i) => (
+              <a
+                key={i}
+                href={business.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block w-full"
+              >
+                <div className="bg-white/10 hover:bg-white/15 border border-white/20 hover:border-white/40 hover:shadow-[0_0_16px_rgba(255,255,255,0.08)] rounded-xl p-4 transition-all duration-200 transform hover:scale-[1.02] active:scale-[0.99]">
+                  <div className="flex items-start space-x-4">
+                    <div className="text-[#D4A857] mt-0.5 flex-shrink-0">{business.icon}</div>
+                    <div>
+                      <h3 className="text-white font-semibold text-base mb-1">{business.title}</h3>
+                      <p className="text-blue-200/80 text-sm leading-relaxed">{business.description}</p>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+
+        {/* Trust Section */}
         <div className="mb-8">
           <h2 className="text-white text-xl font-bold text-center mb-5">Why Mykoal?</h2>
           <div className="space-y-4">
