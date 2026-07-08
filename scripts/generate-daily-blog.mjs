@@ -5,7 +5,8 @@ const ROOT = process.cwd();
 const BLOG_DATA_PATH = path.join(ROOT, "client", "src", "lib", "blog-data.ts");
 const SITEMAP_PATH = path.join(ROOT, "client", "public", "sitemap.xml");
 const SITE_URL = "https://mykoal.com";
-const DEFAULT_MODEL = "gpt-5.5";
+const OPENROUTER_API_URL = "https://openrouter.ai/api/v1/chat/completions";
+const DEFAULT_MODEL = "google/gemini-2.5-flash";
 
 const args = new Set(process.argv.slice(2));
 const dryRun = args.has("--dry-run");
@@ -136,6 +137,18 @@ function selectTopic(existingSlugs, isoDate) {
 }
 
 function extractResponseText(responseJson) {
+  const messageContent = responseJson.choices?.[0]?.message?.content;
+  if (typeof messageContent === "string") return messageContent.trim();
+  if (Array.isArray(messageContent)) {
+    return messageContent
+      .map((part) => {
+        if (typeof part === "string") return part;
+        return part?.text ?? part?.content ?? "";
+      })
+      .join("\n")
+      .trim();
+  }
+
   if (typeof responseJson.output_text === "string") return responseJson.output_text;
 
   const chunks = [];
@@ -149,13 +162,31 @@ function extractResponseText(responseJson) {
   return chunks.join("\n").trim();
 }
 
+function parseJsonObject(outputText) {
+  const trimmed = outputText.trim();
+  try {
+    return JSON.parse(trimmed);
+  } catch {
+    const fenced = trimmed.match(/```(?:json)?\s*([\s\S]*?)```/i);
+    if (fenced?.[1]) return JSON.parse(fenced[1].trim());
+
+    const start = trimmed.indexOf("{");
+    const end = trimmed.lastIndexOf("}");
+    if (start !== -1 && end > start) {
+      return JSON.parse(trimmed.slice(start, end + 1));
+    }
+
+    throw new Error("Model response was not valid JSON.");
+  }
+}
+
 async function generatePost({ topic, isoDate, existingSlugs }) {
-  const apiKey = process.env.OPENAI_API_KEY;
+  const apiKey = process.env.OPENROUTER_API_KEY;
   if (!apiKey) {
-    throw new Error("OPENAI_API_KEY is required to generate a daily blog post.");
+    throw new Error("OPENROUTER_API_KEY is required to generate a daily blog post.");
   }
 
-  const model = process.env.OPENAI_MODEL || DEFAULT_MODEL;
+  const model = process.env.OPENROUTER_MODEL || DEFAULT_MODEL;
   const prompt = {
     task: "Generate one SEO blog post for mykoal.com.",
     site_context:
@@ -178,16 +209,17 @@ async function generatePost({ topic, isoDate, existingSlugs }) {
     ],
   };
 
-  const response = await fetch("https://api.openai.com/v1/responses", {
+  const response = await fetch(OPENROUTER_API_URL, {
     method: "POST",
     headers: {
       Authorization: `Bearer ${apiKey}`,
       "Content-Type": "application/json",
+      "HTTP-Referer": SITE_URL,
+      "X-OpenRouter-Title": "MyKoal Daily SEO Blog",
     },
     body: JSON.stringify({
       model,
-      store: false,
-      input: [
+      messages: [
         {
           role: "system",
           content:
@@ -195,10 +227,11 @@ async function generatePost({ topic, isoDate, existingSlugs }) {
         },
         { role: "user", content: JSON.stringify(prompt) },
       ],
-      text: {
-        verbosity: "medium",
-        format: {
-          type: "json_schema",
+      temperature: 0.65,
+      max_tokens: 3000,
+      response_format: {
+        type: "json_schema",
+        json_schema: {
           name: "daily_blog_post",
           strict: true,
           schema: BLOG_POST_SCHEMA,
@@ -208,15 +241,15 @@ async function generatePost({ topic, isoDate, existingSlugs }) {
   });
 
   if (!response.ok) {
-    throw new Error(`OpenAI API request failed: ${response.status} ${await response.text()}`);
+    throw new Error(`OpenRouter API request failed: ${response.status} ${await response.text()}`);
   }
 
   const responseJson = await response.json();
   const outputText = extractResponseText(responseJson);
   if (!outputText) {
-    throw new Error("OpenAI response did not include output text.");
+    throw new Error("OpenRouter response did not include output text.");
   }
-  return JSON.parse(outputText);
+  return parseJsonObject(outputText);
 }
 
 function normalizeAndValidatePost(post, { topic, isoDate, existingSlugs }) {
@@ -351,7 +384,8 @@ async function main() {
           selectedTopic: topic,
           date: displayDate(isoDate),
           existingPostCount: existingSlugs.length,
-          wouldUseModel: process.env.OPENAI_MODEL || DEFAULT_MODEL,
+          wouldUseProvider: "OpenRouter",
+          wouldUseModel: process.env.OPENROUTER_MODEL || DEFAULT_MODEL,
         },
         null,
         2,

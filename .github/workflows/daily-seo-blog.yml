@@ -18,14 +18,14 @@ jobs:
   generate:
     runs-on: ubuntu-latest
     env:
-      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-      OPENAI_MODEL: ${{ vars.OPENAI_MODEL || 'gpt-5.5' }}
+      OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY || secrets.OPENAI_API_KEY }}
+      OPENROUTER_MODEL: ${{ vars.OPENROUTER_MODEL || 'google/gemini-2.5-flash' }}
       GH_TOKEN: ${{ github.token }}
     steps:
       - name: Check required secrets
         run: |
-          if [ -z "$OPENAI_API_KEY" ]; then
-            echo "::error::Missing repository secret OPENAI_API_KEY."
+          if [ -z "$OPENROUTER_API_KEY" ]; then
+            echo "::error::Missing repository secret OPENROUTER_API_KEY."
             exit 1
           fi
 
