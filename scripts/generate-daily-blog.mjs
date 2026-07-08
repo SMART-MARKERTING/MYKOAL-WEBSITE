@@ -162,6 +162,10 @@ function extractResponseText(responseJson) {
   return chunks.join("\n").trim();
 }
 
+function normalizeApiKey(value) {
+  return value?.trim().replace(/^Bearer\s+/i, "");
+}
+
 function parseJsonObject(outputText) {
   const trimmed = outputText.trim();
   try {
@@ -181,7 +185,7 @@ function parseJsonObject(outputText) {
 }
 
 async function generatePost({ topic, isoDate, existingSlugs }) {
-  const apiKey = process.env.OPENROUTER_API_KEY;
+  const apiKey = normalizeApiKey(process.env.OPENROUTER_API_KEY);
   if (!apiKey) {
     throw new Error("OPENROUTER_API_KEY is required to generate a daily blog post.");
   }

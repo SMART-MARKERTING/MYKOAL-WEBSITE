@@ -18,9 +18,6 @@ Add this repository secret:
 
 - `OPENROUTER_API_KEY`: OpenRouter API key used by the scheduled generator.
 
-The workflow also accepts the old `OPENAI_API_KEY` secret as a temporary fallback if an
-OpenRouter key was already pasted there, but `OPENROUTER_API_KEY` is the intended name.
-
 Optional repository variable:
 
 - `OPENROUTER_MODEL`: Defaults to `google/gemini-2.5-flash` if unset.
