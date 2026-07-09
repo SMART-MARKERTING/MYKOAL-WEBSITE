@@ -137,7 +137,7 @@ export default function Home() {
     },
     {
       title: "Facebook",
-      url: "https://www.facebook.com/VALoans.FHALoans.DSCRLoans.MortgageLoans/",
+      url: "https://www.facebook.com/share/1ATEKADEzk/?mibextid=wwXIfr",
       icon: <Facebook className="h-5 w-5" />,
       color: "bg-blue-600 hover:bg-blue-700",
     },
