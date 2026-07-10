@@ -1,14 +1,21 @@
 import { Link, useParams } from "wouter";
 import SiteNav from "@/components/site-nav";
 import SiteFooter from "@/components/site-footer";
-import { getPostBySlug } from "@/lib/blog-data";
+import { getPostBySlug, type BlogPost as BlogPostData } from "@/lib/blog-data";
 import SeoHead from "@/components/seo-head";
 import { getArticleSchema, getBreadcrumbSchema, getFaqPageSchema } from "@/lib/schema";
-import { Calendar, ChevronLeft, ChevronDown, ChevronUp } from "lucide-react";
+import { Calendar, ChevronLeft, ChevronDown, ChevronUp, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import headshotImage from "@assets/IMG_0016_1751000995747.jpeg";
 import { useCalModal } from "@/hooks/use-cal";
 import { useState } from "react";
+import { funnelUrl, withUtm } from "@/lib/site-config";
+
+type RelatedResource = {
+  label: string;
+  href: string;
+  external?: boolean;
+};
 
 function isoDateFromDisplayDate(date: string): string {
   const parsed = new Date(date);
@@ -16,6 +23,75 @@ function isoDateFromDisplayDate(date: string): string {
     return new Date().toISOString().slice(0, 10);
   }
   return parsed.toISOString().slice(0, 10);
+}
+
+function getPrimarySmartr8Link(post: BlogPostData): RelatedResource {
+  const text = `${post.title} ${post.excerpt}`.toLowerCase();
+
+  if (text.includes("va ")) {
+    return {
+      label: "Explore VA loan options on Smartr8",
+      href: funnelUrl("va"),
+      external: true,
+    };
+  }
+
+  if (text.includes("dscr") || text.includes("investor") || text.includes("investment")) {
+    return {
+      label: "Explore investor loan options on Smartr8",
+      href: funnelUrl("dscr"),
+      external: true,
+    };
+  }
+
+  if (text.includes("heloc") || text.includes("equity")) {
+    return {
+      label: "Explore HELOC options on Smartr8",
+      href: funnelUrl("heloc"),
+      external: true,
+    };
+  }
+
+  if (text.includes("cash-out")) {
+    return {
+      label: "Explore cash-out refinance options on Smartr8",
+      href: funnelUrl("cashOut"),
+      external: true,
+    };
+  }
+
+  if (text.includes("refinance") || text.includes("rate")) {
+    return {
+      label: "Explore refinance options on Smartr8",
+      href: funnelUrl("refinance"),
+      external: true,
+    };
+  }
+
+  return {
+    label: "Explore mortgage options on Smartr8",
+    href: withUtm("https://smartr8.com"),
+    external: true,
+  };
+}
+
+function getRelatedResources(post: BlogPostData): RelatedResource[] {
+  return [
+    {
+      label: "Start at the MyKoal mortgage hub",
+      href: "/",
+    },
+    {
+      label: "Read more MyKoal mortgage insights",
+      href: "/blog",
+    },
+    getPrimarySmartr8Link(post),
+    {
+      label: "LLCs, wills, trusts, and trademarks through Smartr8",
+      href: withUtm("https://smartr8.com/legal"),
+      external: true,
+    },
+  ];
 }
 
 export default function BlogPost() {
@@ -56,6 +132,7 @@ export default function BlogPost() {
       { name: post.title, path },
     ]),
   ];
+  const relatedResources = getRelatedResources(post);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800">
@@ -99,6 +176,44 @@ export default function BlogPost() {
             </p>
           ))}
         </div>
+
+        {/* Related resources */}
+        <section className="mb-10">
+          <h2 className="text-white text-lg font-bold mb-4">Related Resources</h2>
+          <div className="space-y-2">
+            {relatedResources.map((resource) => {
+              const content = (
+                <div className="flex items-center justify-between gap-3 bg-white/10 hover:bg-white/15 border border-white/20 hover:border-white/30 rounded-xl px-4 py-3 transition-all">
+                  <span className="text-blue-100/85 text-sm font-medium">{resource.label}</span>
+                  {resource.external ? (
+                    <ExternalLink className="h-4 w-4 text-[#00b4d8] flex-shrink-0" />
+                  ) : (
+                    <ChevronLeft className="h-4 w-4 text-[#00b4d8] flex-shrink-0 rotate-180" />
+                  )}
+                </div>
+              );
+
+              if (resource.external) {
+                return (
+                  <a
+                    key={resource.href}
+                    href={resource.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {content}
+                  </a>
+                );
+              }
+
+              return (
+                <Link key={resource.href} href={resource.href}>
+                  {content}
+                </Link>
+              );
+            })}
+          </div>
+        </section>
 
         {/* FAQ */}
         <section className="mb-10">

@@ -1,4 +1,4 @@
-name: Daily SEO Blog Draft
+name: Daily SEO Blog Publish
 
 on:
   workflow_dispatch:
@@ -8,7 +8,6 @@ on:
 
 permissions:
   contents: write
-  pull-requests: write
 
 concurrency:
   group: daily-seo-blog
@@ -20,8 +19,6 @@ jobs:
     env:
       OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
       OPENROUTER_MODEL: ${{ vars.OPENROUTER_MODEL || 'google/gemini-2.5-flash' }}
-      BLOG_PR_TOKEN: ${{ secrets.BLOG_PR_TOKEN }}
-      GH_TOKEN: ${{ github.token }}
     steps:
       - name: Check required secrets
         run: |
@@ -51,38 +48,16 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Create draft pull request
+      - name: Publish daily blog post
         run: |
           if git diff --quiet -- client/src/lib/blog-data.ts client/public/sitemap.xml; then
             echo "No blog changes generated."
             exit 0
           fi
 
-          BRANCH="automation/daily-seo-blog-$(date -u +%Y%m%d)-${GITHUB_RUN_ID}"
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git checkout -b "$BRANCH"
           git add client/src/lib/blog-data.ts client/public/sitemap.xml
-          git commit -m "Add daily SEO blog draft"
-          git push --set-upstream origin "$BRANCH"
-
-          PR_URL="https://github.com/${GITHUB_REPOSITORY}/pull/new/${BRANCH}"
-          if [ -z "$BLOG_PR_TOKEN" ]; then
-            echo "::notice::Branch pushed. Add the BLOG_PR_TOKEN secret to create draft PRs automatically, or open this URL: $PR_URL"
-            exit 0
-          fi
-
-          GH_TOKEN="$BLOG_PR_TOKEN" gh pr create \
-            --draft \
-            --title "Daily SEO blog draft - $(date -u +%Y-%m-%d)" \
-            --body "Automated SEO blog draft generated from the scheduled workflow.
-
-          Review before merging:
-          - Compliance-safe mortgage language
-          - No rate, APR, payment, fee, approval, or savings guarantees
-          - Correct funnel fit and internal linking
-          - Sitemap entry added
-
-          Checks run:
-          - npm run check
-          - npm run build"
+          git commit -m "Publish daily SEO blog - $(date -u +%Y-%m-%d)"
+          git pull --rebase origin main
+          git push origin HEAD:main

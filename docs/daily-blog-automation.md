@@ -1,6 +1,6 @@
 # Daily Blog Automation
 
-This repo now supports a scheduled daily SEO blog draft workflow.
+This repo supports a scheduled daily SEO blog publishing workflow.
 
 ## How it works
 
@@ -10,32 +10,15 @@ This repo now supports a scheduled daily SEO blog draft workflow.
 - The script prepends one generated post to `client/src/lib/blog-data.ts`.
 - The script also ensures every `/blog/{slug}` URL is present in `client/public/sitemap.xml`.
 - The workflow runs `npm run check` and `npm run build`.
-- If files changed, the workflow opens a draft PR when `BLOG_PR_TOKEN` is configured.
-  If that token is missing, it still pushes the generated branch and prints the PR URL.
-  It does not auto-publish.
+- If files changed, the workflow commits directly to `main`. Cloudflare then deploys the new post.
+- Blog post URLs are date-stamped so each daily post gets a unique URL.
+- The blog template renders related resources on every post, including internal MyKoal links and Smartr8 links.
 
 ## Required GitHub setup
 
 Add this repository secret:
 
 - `OPENROUTER_API_KEY`: OpenRouter API key used by the scheduled generator.
-
-Add this repository secret if organization Actions settings block `GITHUB_TOKEN` from
-creating pull requests:
-
-- `BLOG_PR_TOKEN`: GitHub personal access token used only to open the draft PR.
-
-Recommended fine-grained token settings:
-
-- Resource owner: `SMART-MARKERTING`
-- Repository access: only `SMART-MARKERTING/mykoal`
-- Repository permissions:
-  - Contents: read and write
-  - Pull requests: read and write
-  - Metadata: read-only
-
-Create it from GitHub account settings:
-`Settings > Developer settings > Personal access tokens > Fine-grained tokens`.
 
 Optional repository variable:
 
@@ -44,19 +27,20 @@ Optional repository variable:
 Use a model that supports structured outputs. Good OpenRouter options include
 `google/gemini-2.5-flash`, `openai/gpt-5-chat`, or `~openai/gpt-latest`.
 
-## Why draft PRs
+## Compliance Notes
 
-Mortgage content needs review before it goes live. The generator prompt blocks rates, APRs,
-payments, fees, guarantees, and approval claims, but a human should still review each post for:
+Mortgage content needs conservative language. The generator prompt blocks rates, APRs,
+payments, fees, guarantees, and approval claims. Periodically review posts for:
 
 - compliance language,
 - factual accuracy,
 - local-market references,
 - tone,
 - CTA fit,
-- duplicate topic risk.
+- duplicate topic risk,
+- link relevance.
 
-Merging the draft PR triggers the normal Cloudflare Pages deployment from `main`.
+Cloudflare Pages deploys after the workflow pushes to `main`.
 
 ## Manual test
 

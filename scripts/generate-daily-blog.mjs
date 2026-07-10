@@ -136,6 +136,15 @@ function selectTopic(existingSlugs, isoDate) {
   return TOPICS[daySeed % TOPICS.length];
 }
 
+function dailySlug(value, topic, isoDate) {
+  const year = isoDate.slice(0, 4);
+  const dateSuffix = isoDate;
+  const raw = slugify(value || topic.keyword);
+  if (raw.endsWith(`-${dateSuffix}`)) return raw;
+  const base = raw.replace(new RegExp(`-${year}$`), "");
+  return slugify(`${base}-${dateSuffix}`);
+}
+
 function extractResponseText(responseJson) {
   const messageContent = responseJson.choices?.[0]?.message?.content;
   if (typeof messageContent === "string") return messageContent.trim();
@@ -203,6 +212,7 @@ async function generatePost({ topic, isoDate, existingSlugs }) {
       "Return only the JSON object matching the schema.",
       "Use ASCII punctuation.",
       "Use a clear, search-oriented title.",
+      "Do not include raw URLs or markdown links in content. The site template renders related links.",
       "Write 5 to 7 concise paragraphs in content.",
       "Write exactly 3 FAQs.",
       "Do not quote specific rates, APRs, payments, fees, or market statistics.",
@@ -259,14 +269,19 @@ async function generatePost({ topic, isoDate, existingSlugs }) {
 function normalizeAndValidatePost(post, { topic, isoDate, existingSlugs }) {
   const normalized = {
     ...post,
-    slug: slugify(post.slug || post.title || topic.keyword),
+    slug: dailySlug(post.slug || post.title || topic.keyword, topic, isoDate),
     date: post.date || displayDate(isoDate),
     datePublished: post.datePublished || isoDate,
     dateModified: post.dateModified || isoDate,
   };
 
+  const baseSlug = normalized.slug;
+  let nextSuffix = 2;
   if (!normalized.slug || existingSlugs.includes(normalized.slug)) {
-    normalized.slug = slugify(`${topic.keyword}-${isoDate}`);
+    while (existingSlugs.includes(normalized.slug)) {
+      normalized.slug = `${baseSlug}-${nextSuffix}`;
+      nextSuffix += 1;
+    }
   }
 
   const failures = [];
