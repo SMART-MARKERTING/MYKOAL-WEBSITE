@@ -11,6 +11,38 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "self-employed-mortgage-income-documentation-2026-07-10",
+    title: "Self-Employed Mortgage: Preparing Your Income Documentation",
+    date: "July 10, 2026",
+    datePublished: "2026-07-10",
+    dateModified: "2026-07-10",
+    excerpt:
+      "Learn how self-employed borrowers can prepare clear income documentation to streamline their mortgage application process.",
+    content: [
+      "Applying for a mortgage when you are self-employed can involve different documentation compared to traditional W-2 employees. Lenders need to understand the stability and consistency of your income, which often means reviewing several years of business and personal financial records. Preparing these documents thoroughly and accurately before you apply can help make the process smoother.",
+      "One of the primary documents requested will be your tax returns. Lenders typically look for two years of personal federal tax returns (Form 1040) and, if applicable, two years of business tax returns (such as Schedule C, Form 1120, or Form 1065). These returns provide a comprehensive overview of your declared income, deductions, and overall financial health.",
+      "Beyond tax returns, be ready to provide profit and loss (P&L) statements, especially if your tax returns are not recent. P&L statements, ideally prepared by an accountant or tax professional, offer a current snapshot of your business's financial performance. Some lenders may also request a balance sheet to assess your business's assets and liabilities.",
+      "Bank statements for both your personal and business accounts are also essential. Lenders will often review several months of statements to verify income deposits, assess cash flow, and ensure sufficient funds for down payments and reserves. Maintaining clear separation between business and personal finances in your bank accounts can simplify this review.",
+      "It's also beneficial to have a letter from your accountant confirming your self-employment status and detailing your income. This can provide additional assurance to lenders about the nature and consistency of your earnings. Ensuring all your financial records are organized, up-to-date, and easily accessible will be a significant advantage.",
+      "Remember that each mortgage application is unique, and specific documentation requirements can vary based on your individual business structure, income patterns, and the loan program you pursue. Working with an experienced loan officer can help you understand exactly what is needed for your situation.",
+      "Preparing your income documentation diligently as a self-employed borrower can set a strong foundation for your mortgage application. While specific options depend on your full application, credit, income, and program guidelines, being organized is always a good start."
+    ],
+    faqs: [
+      {
+        question: "What tax documents do self-employed borrowers typically need for a mortgage?",
+        answer: "Self-employed borrowers generally need two years of personal federal tax returns (Form 1040) and, if applicable, two years of business tax returns (e.g., Schedule C, Form 1120, or Form 1065) to apply for a mortgage.",
+      },
+      {
+        question: "Why do lenders ask for profit and loss statements?",
+        answer: "Lenders request profit and loss (P&L) statements to get an up-to-date view of your business's financial performance, especially if your most recent tax returns do not reflect your current income. It helps assess income consistency.",
+      },
+      {
+        question: "How can I make my bank statements clearer for a mortgage application?",
+        answer: "To make bank statements clearer, maintain separate accounts for personal and business finances. Ensure regular income deposits are identifiable, and keep records organized. Lenders typically review several months of statements.",
+      }
+    ],
+  },
+  {
     slug: "va-cash-out-refinance-considerations-2026",
     title: "VA Cash-Out Refinance: When Tapping Home Equity May or May Not Fit",
     date: "July 8, 2026",
