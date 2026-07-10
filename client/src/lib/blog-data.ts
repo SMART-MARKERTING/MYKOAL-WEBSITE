@@ -11,6 +11,38 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "self-employed-mortgage-documentation-preparation-2026",
+    title: "Self-Employed Mortgage: Preparing Income Documentation for Your Loan Application",
+    date: "2026-07-10",
+    datePublished: "2026-07-10",
+    dateModified: "2026-07-10",
+    excerpt:
+      "Learn how self-employed borrowers can organize income documentation to streamline their mortgage application process.",
+    content: [
+      "Applying for a mortgage when you're self-employed requires careful preparation, especially concerning income documentation. Unlike W-2 employees, your income may fluctuate, and lenders need a clear, consistent picture of your financial stability. Proactive organization of your financial records can help make your application process smoother.",
+      "Lenders typically require a minimum of two years of personal and business tax returns to assess your income. It's important that these returns are complete, including all schedules and statements. Ensure that your tax preparer has accurately reported all income and deductions, as this will be the primary source for verifying your qualifying income.",
+      "Beyond tax returns, be prepared to provide recent bank statements for both your business and personal accounts. These statements help verify cash flow and demonstrate the separation (or commingling) of business and personal finances. Maintaining clear distinctions between these accounts can simplify the review process.",
+      "Profit and Loss (P&L) statements are often requested, especially if your tax returns are not recent. These statements, ideally prepared by an accountant, provide an interim view of your business's financial performance. Having up-to-date and professionally prepared P&Ls can be beneficial.",
+      "For business owners, a current balance sheet may also be required. This document offers a snapshot of your business's assets, liabilities, and equity. A well-maintained balance sheet, along with your P&Ls, helps lenders understand the overall health of your business.",
+      "Other documents that may be requested include business licenses, articles of incorporation, and letters from your accountant confirming your self-employment status and income. The more organized and complete your documentation is from the outset, the more efficiently your loan officer can work with you.",
+      "Remember, specific documentation requirements can vary based on the loan program, lender, and your individual financial situation. Discussing your self-employment income with a loan officer early in the process can help you understand exactly what will be needed for your application."
+    ],
+    faqs: [
+      {
+        question: "What is the most important document for self-employed mortgage applicants?",
+        answer: "For self-employed mortgage applicants, two years of complete personal and business tax returns are generally the most critical documents for income verification.",
+      },
+      {
+        question: "Do I need to separate my business and personal bank accounts?",
+        answer: "While not always strictly required, maintaining separate business and personal bank accounts can make it easier for lenders to assess your income and financial stability, potentially streamlining the documentation review.",
+      },
+      {
+        question: "What if my business income has fluctuated recently?",
+        answer: "If your business income has fluctuated, lenders will typically review multiple years of tax returns and may request current Profit and Loss statements to understand your income trend and current financial standing. Discussing this with your loan officer early is advisable.",
+      }
+    ],
+  },
+  {
     slug: "va-cash-out-refinance-considerations-2026",
     title: "VA Cash-Out Refinance: When Tapping Home Equity May or May Not Fit",
     date: "July 8, 2026",
