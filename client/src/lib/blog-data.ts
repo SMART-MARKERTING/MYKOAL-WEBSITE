@@ -11,6 +11,38 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "investment-property-mortgage-options-2026-07-12",
+    title: "Investment Property Mortgage Options: Conventional, DSCR, and Other Investor Programs",
+    date: "July 12, 2026",
+    datePublished: "2026-07-12",
+    dateModified: "2026-07-12",
+    excerpt:
+      "Exploring investment property mortgage options can be complex for both new and experienced rental property buyers. This guide outlines the key differences between conventional, DSCR, and other investor-focused mortgage programs.",
+    content: [
+      "For those looking to purchase rental properties, understanding the various investment property mortgage options is crucial. Whether you're a new investor or expanding an existing portfolio, the right financing can significantly impact your venture. While many are familiar with conventional loans for primary residences, investor programs often have distinct requirements and benefits.",
+      "Conventional loans for investment properties typically follow stricter guidelines than those for owner-occupied homes. You might expect higher down payment requirements and potentially different interest rates. These loans often consider your personal income and debt-to-income ratio, similar to a primary residence mortgage, but with an added focus on the property's income potential.",
+      "A Debt Service Coverage Ratio (DSCR) loan is a popular option among real estate investors. Unlike conventional loans, DSCR loans primarily focus on the property's income-generating ability to cover its mortgage payments. Lenders evaluate the property's projected rental income against the proposed mortgage payment to determine eligibility, often requiring little to no personal income documentation from the borrower. This can be particularly appealing for self-employed individuals or those with complex income structures.",
+      "Beyond conventional and DSCR loans, other investor programs exist, each with unique features. Some programs cater to specific property types, such as multi-unit dwellings, or to investors with particular financial profiles. These specialized options might offer different underwriting criteria, allowing for more flexibility in certain situations.",
+      "When considering investment property mortgage options, it's important to evaluate your financial situation, investment goals, and the specifics of the property you intend to purchase. Each loan type has its own set of eligibility criteria, including credit score requirements, down payment percentages, and property condition standards. Understanding these differences can help you choose a program that aligns with your strategy.",
+      "Ultimately, the best investment property mortgage option for you will depend on a thorough review of your application, credit, income, and the property itself. Loan programs and guidelines can vary, so consulting with a qualified loan officer is recommended to explore what options might be available to you. Mykoal DeShazo, a Vice President and Senior Loan Officer at Adaxa Home LLC, can help guide you through these considerations.",
+      "It's always advisable to gather all necessary financial documentation and be prepared to discuss your investment objectives in detail. This proactive approach can streamline the process and help you make informed decisions about your rental property financing."
+    ],
+    faqs: [
+      {
+        question: "What is the main difference between a conventional loan and a DSCR loan for investment properties?",
+        answer: "A conventional loan for an investment property typically assesses the borrower's personal income and debt-to-income ratio, similar to a primary residence loan. A DSCR loan, however, primarily evaluates the investment property's projected rental income to ensure it can cover the mortgage payments, often requiring less personal income documentation from the borrower.",
+      },
+      {
+        question: "Are down payments higher for investment property mortgages?",
+        answer: "Generally, down payment requirements for investment property mortgages, including conventional loans, tend to be higher than those for owner-occupied primary residences. The exact percentage can vary based on the loan program, lender, and borrower's qualifications.",
+      },
+      {
+        question: "Who might benefit most from a DSCR loan?",
+        answer: "DSCR loans can be particularly beneficial for real estate investors who prefer not to use their personal income for qualification, such as self-employed individuals, or those with multiple properties where documenting personal income for each new loan might be complex. It focuses on the property's ability to generate income.",
+      }
+    ],
+  },
+  {
     slug: "rate-and-term-refinance-worth-it-2026-07-11",
     title: "Is a Rate-and-Term Refinance Worth It for Your Monthly Cash Flow?",
     date: "July 11, 2026",
