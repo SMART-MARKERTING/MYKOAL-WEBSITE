@@ -11,6 +11,38 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "fha-vs-conventional-loans-beyond-down-payment-2026-07-13",
+    title: "FHA vs. Conventional Loans: Beyond the Down Payment for First-Time Buyers",
+    date: "July 13, 2026",
+    datePublished: "2026-07-13",
+    dateModified: "2026-07-13",
+    excerpt:
+      "When comparing FHA vs. conventional loans, many first-time and move-up homebuyers focus primarily on the down payment. While important, it's just one factor. Understanding the nuances of each program can help determine which loan type might be a better fit for your specific circumstances.",
+    content: [
+      "For first-time and move-up homebuyers, choosing between an FHA loan and a conventional loan is a common decision. While FHA loans are often known for their lower down payment requirements, a comprehensive comparison involves looking at several other key aspects that can impact your long-term homeownership experience.",
+      "FHA loans are government-insured mortgages that can offer more flexible credit score requirements compared to conventional loans. This can be a significant advantage for borrowers who may not have perfect credit histories. However, FHA loans typically require both an upfront mortgage insurance premium (UFMIP) and an annual mortgage insurance premium (MIP) for the life of the loan or until specific conditions are met.",
+      "Conventional loans are not government-insured and generally have stricter credit score and debt-to-income ratio requirements. While they may require a higher down payment for some borrowers, private mortgage insurance (PMI) on conventional loans can often be canceled once you reach sufficient equity in your home, which is a key difference from FHA's MIP.",
+      "The type of property you intend to purchase can also influence your loan choice. FHA loans have specific property standards that must be met, focusing on the home's safety, soundness, and security. Conventional loans also have appraisal requirements, but they may offer more flexibility for certain property types.",
+      "Consider your long-term financial goals. If you anticipate building equity quickly or refinancing in a few years, the ability to cancel PMI on a conventional loan might be appealing. If credit flexibility and a lower initial cash outlay are priorities, an FHA loan could be a strong contender.",
+      "Ultimately, the best loan program for you depends on a variety of factors including your credit profile, financial situation, down payment availability, and the specific property you wish to buy. It's important to evaluate all these elements, not just the down payment, to make an informed decision.",
+      "Mykoal DeShazo, Vice President and Senior Loan Officer at Adaxa Home LLC, NMLS #2380533, can help you explore your options and understand the details of FHA vs. conventional loans based on your individual application and current program guidelines."
+    ],
+    faqs: [
+      {
+        question: "Can I switch from an FHA loan to a conventional loan?",
+        answer: "Yes, it is generally possible to refinance an FHA loan into a conventional loan. This might be considered if you have built sufficient equity and your credit profile has improved, potentially allowing you to cancel mortgage insurance.",
+      },
+      {
+        question: "Are there income limits for FHA or conventional loans?",
+        answer: "FHA loans do not have specific income limits. Conventional loans also typically do not have income limits, although certain conventional loan programs designed for low-to-moderate income borrowers may have specific income requirements.",
+      },
+      {
+        question: "How do credit scores impact FHA vs. conventional loan eligibility?",
+        answer: "FHA loans generally offer more leniency for lower credit scores compared to conventional loans. Conventional loans typically require higher credit scores to qualify for the most favorable terms and rates.",
+      }
+    ],
+  },
+  {
     slug: "investment-property-mortgage-options-2026-07-12",
     title: "Investment Property Mortgage Options: Conventional, DSCR, and Other Investor Programs",
     date: "July 12, 2026",
