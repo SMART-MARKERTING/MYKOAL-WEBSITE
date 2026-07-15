@@ -232,7 +232,11 @@ function writeText(filePath, value) {
 }
 
 function todayIso() {
-  return process.env.BLOG_DATE || new Date().toISOString().slice(0, 10);
+  const isoDate = process.env.BLOG_DATE || new Date().toISOString().slice(0, 10);
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(isoDate)) {
+    throw new Error("BLOG_DATE must use YYYY-MM-DD format.");
+  }
+  return isoDate;
 }
 
 function displayDate(isoDate) {
