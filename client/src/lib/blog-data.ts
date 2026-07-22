@@ -11,6 +11,36 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "apr-vs-interest-rate-understanding-your-loan-estimate-2026-07-22",
+    title: "APR vs. Interest Rate: Understanding Your Loan Estimate",
+    date: "July 22, 2026",
+    datePublished: "2026-07-22",
+    dateModified: "2026-07-22",
+    excerpt:
+      "When comparing loan offers, you'll encounter two key terms: interest rate and APR. While related, they represent different aspects of your loan's cost. Understanding the difference between APR vs. interest rate is crucial for making informed decisions about your mortgage.",
+    content: [
+      "When you receive a Loan Estimate for a mortgage, you'll notice both an interest rate and an Annual Percentage Rate (APR). These two numbers are fundamental to understanding the cost of borrowing, but they are not interchangeable. The interest rate is the percentage charged by the lender for the use of the principal loan amount, directly impacting your monthly principal and interest payment. It's the core cost of the money you borrow, expressed as a simple percentage.",
+      "The APR, on the other hand, provides a more comprehensive measure of the total cost of your mortgage over the life of the loan. It includes not only the interest rate but also certain other costs and fees associated with the loan, such as origination fees, discount points, and some closing costs. Because the APR incorporates these additional expenses, it is typically higher than the stated interest rate. This makes the APR a valuable tool for comparing different loan offers, as it aims to standardize the total cost.",
+      "Think of the interest rate as the price tag for the money itself, while the APR is more like the total cost of ownership, including some of the initial setup expenses. When evaluating different loan estimates, comparing the APR can give you a clearer picture of which loan might be more expensive overall, especially if one loan has a lower interest rate but higher fees. It helps borrowers look beyond just the monthly payment and consider the broader financial implications.",
+      "The calculation of APR is standardized by federal regulations, which helps ensure that lenders present this information consistently. This standardization is particularly helpful for consumers who are trying to make an informed decision between various mortgage products. However, it's important to remember that not all fees are included in the APR calculation, so reviewing the entire Loan Estimate document for all costs is always a good practice.",
+      "Ultimately, understanding the distinction between the interest rate and the APR empowers you to analyze your mortgage options more effectively. While a lower interest rate might seem appealing, a higher APR could indicate significant upfront costs that increase the overall expense of the loan. Always review both figures carefully and ask your loan officer to clarify any questions you have about the fees and charges included in each. Your specific loan options will depend on factors like your application, underwriting, property, credit, income, and program guidelines."
+    ],
+    faqs: [
+      {
+        question: "What is the main difference between interest rate and APR?",
+        answer: "The interest rate is the percentage charged on the principal loan amount, directly affecting your monthly payment. The APR (Annual Percentage Rate) includes the interest rate plus certain other loan costs and fees, providing a more comprehensive measure of the total cost of the loan over its term.",
+      },
+      {
+        question: "Why is APR usually higher than the interest rate?",
+        answer: "APR is typically higher than the interest rate because it incorporates additional costs beyond just the interest. These can include fees like loan origination fees, discount points, and some closing costs, which are spread out over the life of the loan in the APR calculation.",
+      },
+      {
+        question: "Which number should I focus on when comparing mortgage offers?",
+        answer: "While both are important, the APR is often considered a better tool for comparing the overall cost of different mortgage offers because it includes more of the associated fees. However, you should always review the entire Loan Estimate to understand all costs involved, not just the APR.",
+      }
+    ],
+  },
+  {
     slug: "when-a-bridge-loan-or-swing-loan-may-be-considered-2026-07-19",
     title: "When a Bridge Loan or Swing Loan May Be Considered for Transition Financing",
     date: "2026-07-19",
